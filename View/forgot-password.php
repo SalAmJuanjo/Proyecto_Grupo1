@@ -23,7 +23,7 @@
           <h1 class="h3 mb-1">Recuperar cuenta</h1>
           <p class="text-muted mb-0">Ingrese su correo electrónico para recibir un enlace de recuperación.</p>
         </div>
-        <div class="mb-4"><label class="form-label" for="forgotEmail">Correo electrónico</label><input class="form-control" id="forgotEmail" type="email" required><div class="invalid-feedback">Enter a valid email.</div></div>
+        <div class="mb-4"><label class="form-label" for="forgotEmail">Correo electrónico</label><input class="form-control" id="forgotEmail" type="email" required><div class="invalid-feedback">Ingrese un correo válido.</div></div>
         <button class="btn btn-primary w-100" type="submit"><i class="bi bi-envelope-arrow-up" aria-hidden="true"></i> Enviar enlace de recuperación</button>
       </form>
       <p class="text-muted small mt-3 mb-0">Revise su bandeja de entrada y la carpeta de spam después de enviar la solicitud.</p>
