@@ -32,7 +32,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutExterno.php
         <button class="btn btn-primary w-100" type="submit"><i class="bi bi-person-plus" aria-hidden="true"></i> Crear cuenta</button>
       </form>
 
-      <div class="auth-footer">¿Ya tienes una cuenta? <a href="login.php">Iniciar sesión</a></div>
+      <div class="auth-footer">¿Ya tienes una cuenta? <a href="IniciarSesion.php">Iniciar sesión</a></div>
     </section>
   </main>
 

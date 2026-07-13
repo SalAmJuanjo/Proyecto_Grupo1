@@ -23,7 +23,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutExterno.php
         </div>
         <div class="mb-3">
           <div class="d-flex justify-content-between"><label class="form-label" for="loginPassword">Contraseña</label><a
-              class="small fw-semibold" href="forgot-password.php">Olvidé mi contraseña</a></div><input
+              class="small fw-semibold" href="RecuperarContrasenna.php">Olvidé mi contraseña</a></div><input
             class="form-control" id="loginPassword" type="password" minlength="6" required>
           <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
         </div>
