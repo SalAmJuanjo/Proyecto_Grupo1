@@ -1,21 +1,13 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutExterno.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-   content="Registro de usuarios para el sistema del Grupo 1. Ingrese sus credenciales para crear su cuenta de manera eficiente.">
-  <title>Iniciar sesión | Grupo 1</title>
-
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
+<?php ImportCSS(); ?>
 
 <body class="auth-body">
-  <button class="icon-button theme-toggle auth-theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
-    <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
-  </button>
+  <?php ThemeToggleButton(); ?>
   <main class="auth-page">
     <section class="auth-card">
       <a class="auth-brand" href="index.php"><span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span><span><strong>Bienvenido</strong><small>Crea tu cuenta.</small></span></a>
@@ -44,8 +36,8 @@
     </section>
   </main>
 
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="../js/main.js"></script>
+  <?php ImportJS(); ?>
 </body>
 
 </html>

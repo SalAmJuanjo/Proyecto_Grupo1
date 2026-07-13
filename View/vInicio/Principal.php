@@ -21,60 +21,13 @@
                     <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
                     <span class="brand-copy">
                         <span class="brand-title">Grupo 1</span>
-                        <span class="brand-subtitle">Tarea 1</span>
+                        <span class="brand-subtitle">Proyecto</span>
                     </span>
                 </a>
             </div>
 
             <nav class="sidebar-nav">
-                <a class="nav-link active" href="index.html" aria-current="page">
-                    <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
-                    <span class="nav-text">Panel</span>
-                </a>
-                <a class="nav-link" href="users.html">
-                    <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
-                    <span class="nav-text">Usuarios</span>
-                </a>
-                <a class="nav-link" href="add-user.html">
-                    <span class="nav-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
-                    <span class="nav-text">Agregar Usuario</span>
-                </a>
-                <a class="nav-link" href="profile.html">
-                    <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
-                    <span class="nav-text">Perfil</span>
-                </a>
-                <a class="nav-link" href="charts.html">
-                    <span class="nav-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>
-                    <span class="nav-text">Gráficos</span>
-                </a>
-                <a class="nav-link" href="tables.html">
-                    <span class="nav-icon"><i class="bi bi-table" aria-hidden="true"></i></span>
-                    <span class="nav-text">Tablas</span>
-                </a>
-                <a class="nav-link" href="forms.html">
-                    <span class="nav-icon"><i class="bi bi-ui-checks-grid" aria-hidden="true"></i></span>
-                    <span class="nav-text">Formas</span>
-                </a>
-                <a class="nav-link" href="components.html">
-                    <span class="nav-icon"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i></span>
-                    <span class="nav-text">Componentes</span>
-                </a>
-                <a class="nav-link" href="alerts.html">
-                    <span class="nav-icon"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i></span>
-                    <span class="nav-text">Alertas</span>
-                </a>
-                <a class="nav-link" href="modals.html">
-                    <span class="nav-icon"><i class="bi bi-window-stack" aria-hidden="true"></i></span>
-                    <span class="nav-text">Modales</span>
-                </a>
-                <a class="nav-link" href="settings.html">
-                    <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
-                    <span class="nav-text">Configuración</span>
-                </a>
-                <a class="nav-link" href="blank.html">
-                    <span class="nav-icon"><i class="bi bi-file-earmark" aria-hidden="true"></i></span>
-                    <span class="nav-text">Página en blanco</span>
-                </a>
+                
             </nav>
 
             <div class="sidebar-user">
@@ -207,14 +160,7 @@
                                     <a class="btn btn-light btn-sm" href="charts.html">View Details</a>
                                 </div>
 
-                                <div class="chart-bars" aria-label="Sales performance chart">
-                                    <div class="chart-column bar-42"><span></span><small>Jan</small></div>
-                                    <div class="chart-column bar-58"><span></span><small>Feb</small></div>
-                                    <div class="chart-column bar-51"><span></span><small>Mar</small></div>
-                                    <div class="chart-column bar-72"><span></span><small>Apr</small></div>
-                                    <div class="chart-column bar-66"><span></span><small>May</small></div>
-                                    <div class="chart-column bar-83"><span></span><small>Jun</small></div>
-                                </div>
+                                
                             </div>
                         </div>
 
@@ -272,86 +218,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="avatar-img avatar-sm" src="images/avatar/avatar-1.jpg" alt="Sarah Ahmed">
-                                                <div>
-                                                    <p class="fw-semibold mb-0">Sarah Ahmed</p>
-                                                    <p class="text-muted small mb-0">sarah@example.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Admin</td>
-                                        <td>Operations</td>
-                                        <td><span class="badge text-bg-success">Active</span></td>
-                                        <td>Jan 12, 2026</td>
-                                        <td class="text-end"><a class="btn btn-light btn-sm" href="user-details.html">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="avatar-img avatar-sm" src="images/avatar/avatar-2.jpg" alt="Rafi Khan">
-                                                <div>
-                                                    <p class="fw-semibold mb-0">Rafi Khan</p>
-                                                    <p class="text-muted small mb-0">rafi@example.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Manager</td>
-                                        <td>Sales</td>
-                                        <td><span class="badge text-bg-success">Active</span></td>
-                                        <td>Feb 03, 2026</td>
-                                        <td class="text-end"><a class="btn btn-light btn-sm" href="user-details.html">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="avatar-img avatar-sm" src="images/avatar/avatar-3.jpg" alt="Nadia Islam">
-                                                <div>
-                                                    <p class="fw-semibold mb-0">Nadia Islam</p>
-                                                    <p class="text-muted small mb-0">nadia@example.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Editor</td>
-                                        <td>Content</td>
-                                        <td><span class="badge text-bg-warning">Pending</span></td>
-                                        <td>Mar 18, 2026</td>
-                                        <td class="text-end"><a class="btn btn-light btn-sm" href="user-details.html">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="avatar-img avatar-sm" src="images/avatar/avatar-4.jpg" alt="Mina Torres">
-                                                <div>
-                                                    <p class="fw-semibold mb-0">Mina Torres</p>
-                                                    <p class="text-muted small mb-0">mina@example.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Viewer</td>
-                                        <td>Finance</td>
-                                        <td><span class="badge text-bg-secondary">Suspended</span></td>
-                                        <td>Apr 07, 2026</td>
-                                        <td class="text-end"><a class="btn btn-light btn-sm" href="user-details.html">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="avatar-img avatar-sm" src="images/avatar/avatar-5.jpg" alt="Jon Oliver">
-                                                <div>
-                                                    <p class="fw-semibold mb-0">Jon Oliver</p>
-                                                    <p class="text-muted small mb-0">jon@example.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Analyst</td>
-                                        <td>Data</td>
-                                        <td><span class="badge text-bg-success">Active</span></td>
-                                        <td>Apr 22, 2026</td>
-                                        <td class="text-end"><a class="btn btn-light btn-sm" href="user-details.html">View</a></td>
-                                    </tr>
+                                    
+                                   
+                                    
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -361,7 +231,7 @@
 
             <footer class="Grupo1-footer">
                 <div class="container-fluid px-3 px-lg-4">
-                    <span>Copyright 2026 Grupo 1. <br> Developed by <a target="_blank" class="fw-bold text-success">Juan José Salas Amador</a> • Distributed by <a target="_blank" class="fw-bold text-success" href="https://themewagon.com">Ambiente Web Cliente/Servidor</a> </span>
+                    <span>Copyright 2026 Grupo 1. <br> Developed by <a target="_blank" class="fw-bold text-success">Grupo 1</a> • Distributed by <a target="_blank" class="fw-bold text-success" href="https://themewagon.com">Ambiente Web Cliente/Servidor</a> </span>
 
                 </div>
             </footer>
