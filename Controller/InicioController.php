@@ -18,3 +18,22 @@ if(isset($_POST["btnRegistrar"]))
 
         $_POST["Mensaje"] = "No se ha podido registrar su información correctamente";
     }
+
+if(isset($_POST["btnIniciarSesion"]))        
+    {
+        $correoElectronico = $_POST["correoElectronico"];
+        $contrasenna = $_POST["contrasenna"];
+
+        $datos = IniciarSesionModel($correoElectronico,$contrasenna);
+
+        if($datos)
+        {
+            $_SESSION["NombreUsuario"] = $datos["Nombre"];
+            $_SESSION["ConsecutivoUsuario"] = $datos["Consecutivo"];
+
+            header("Location: ../../View/vInicio/Principal.php");
+            exit();
+        }
+
+        $_POST["Mensaje"] = "No se ha podido autenticar su información correctamente";
+    }

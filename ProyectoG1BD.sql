@@ -31,7 +31,7 @@ CREATE TABLE `tb_usuario` (
   `Contrasenna` varchar(45) NOT NULL,
   `Estado` bit(1) NOT NULL,
   PRIMARY KEY (`Consecutivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,13 +40,44 @@ CREATE TABLE `tb_usuario` (
 
 LOCK TABLES `tb_usuario` WRITE;
 /*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
-INSERT INTO `tb_usuario` VALUES (1,'Juan José Salas Amador','jsalas80222@ufide.ac.cr','contrasenna123',_binary '');
+INSERT INTO `tb_usuario` VALUES (1,'Juan José Salas Amador','jsalas80222@ufide.ac.cr','contrasenna123',_binary ''),(2,'Cristal Rodriguez','crodriguez60420@ufide.ac.cr','contrasenna123',_binary '');
 /*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'proyectogrupo1'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `spIniciarSesionUsuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spIniciarSesionUsuario`(
+    IN pCorreoElectronico VARCHAR(100),
+    IN pContrasenna VARCHAR(45)
+)
+BEGIN
+
+    SELECT  Consecutivo,
+            Nombre,
+            CorreoElectronico,
+            Estado
+    FROM tb_usuario
+    WHERE CorreoElectronico = pCorreoElectronico
+      AND Contrasenna = pContrasenna
+      AND Estado = 1;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `spRegistrarUsuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -83,4 +114,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-14 23:52:14
+-- Dump completed on 2026-07-15 12:49:57

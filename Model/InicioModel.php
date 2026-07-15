@@ -19,4 +19,29 @@
             return false;
         }
     }
-    
+
+    function IniciarSesionModel($correoElectronico,$contrasenna)
+    {
+        try
+        {
+            $conn = OpenDB();
+
+            $sql = "CALL spIniciarSesionUsuario('$correoElectronico','$contrasenna')";
+            $response = $conn -> query($sql);
+
+            //Se guarda el resultado en una variable nueva
+            $datos = null;
+            while($fila = $response -> fetch_assoc())
+            {
+                $datos = $fila;
+            }
+
+            CloseDB($conn);
+            return $datos;
+        }
+        catch(Exception $e)
+        {
+            //AddError($e, 'IniciarSesionModel');
+            return null;
+        }
+    }
