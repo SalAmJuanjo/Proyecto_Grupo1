@@ -1,5 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutExterno.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/Controller/InicioController.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,33 +11,35 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutExterno.php
   <?php ThemeToggleButton(); ?>
   <main class="auth-page">
     <section class="auth-card">
-      <a class="auth-brand" href="index.php"><span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span><span><strong>Bienvenido</strong><small>Crea tu cuenta.</small></span></a>
-      <form class="needs-validation" novalidate>
+      <form action="" method="post" class="needs-validation mt-3" id="formRegistrarUsuarios">
         <div class="mb-4">
-          <p class="eyebrow mb-1">Acceso seguro</p>
-          <h1 class="h3 mb-1">Registrar</h1>
-          <p class="text-muted mb-0">Crea tu cuenta de manera eficiente.</p>
+          <h1 class="h3 mb-2">Registrar</h1>
+          <p class="eyebrow mb-1">Ingresa tus datos para registrar tu cuenta.</p>
         </div>
-        <div class="mb-3"><label class="form-label" for="registerName">Nombre completo</label><input class="form-control" id="registerName" type="text" required>
+
+        <div class="mb-3">
+          <label class="form-label" for="nombre">Nombre completo</label>
+          <input class="form-control" id="nombre" name="nombre" type="text" required>
           <div class="invalid-feedback">El nombre completo es requerido.</div>
         </div>
-        <div class="mb-3"><label class="form-label" for="registerEmail">Correo electrónico</label><input class="form-control" id="registerEmail" type="email" required>
+
+        <div class="mb-3">
+          <label class="form-label" for="correoElectronico">Correo electrónico</label>
+          <input class="form-control" id="correoElectronico" name="correoElectronico" type="email" required>
           <div class="invalid-feedback">Ingrese un correo electrónico válido.</div>
         </div>
-        <div class="mb-3"><label class="form-label" for="registerPassword">Contraseña</label><input class="form-control" id="registerPassword" type="password" minlength="6" required>
+
+        <div class="mb-3">
+          <label class="form-label" for="contrasenna">Contraseña</label>
+          <input class="form-control" id="contrasenna" name="contrasenna" type="password" minlength="6" required>
           <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
         </div>
-        <div class="form-check mb-4"><input class="form-check-input" type="checkbox" id="terms" required><label class="form-check-label" for="terms">Estoy de acuerdo con los términos y condiciones</label>
-          <div class="invalid-feedback">Debes aceptar los términos antes de continuar.</div>
-        </div>
-        <button class="btn btn-primary w-100" type="submit"><i class="bi bi-person-plus" aria-hidden="true"></i> Crear cuenta</button>
-      </form>
 
+        <button id="btnRegistrar" name="btnRegistrar" class="btn btn-primary w-100" type="submit"><i class="bi bi-person-plus" aria-hidden="true"></i> Crear cuenta</button>
+      </form>
       <div class="auth-footer">¿Ya tienes una cuenta? <a href="IniciarSesion.php">Iniciar sesión</a></div>
     </section>
   </main>
-
-  <script src="../js/main.js"></script>
   <?php ImportJS(); ?>
 </body>
 
