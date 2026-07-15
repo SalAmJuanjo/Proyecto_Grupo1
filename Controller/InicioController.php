@@ -37,3 +37,30 @@ if(isset($_POST["btnIniciarSesion"]))
 
         $_POST["Mensaje"] = "No se ha podido autenticar su información correctamente";
     }
+
+    if(isset($_POST["btnRecuperarAcceso"]))
+    {
+        $correoElectronico = $_POST["correoElectronico"];
+
+        $datos = ValidarCorreoModel($correoElectronico);
+        
+        if($datos)
+        {
+            $temporal = generarContrasena();            
+            $actualizacion = ActualizarContrasennaModel($datos['Consecutivo'], $temporal);
+
+            if($actualizacion)
+            {
+                $plantilla = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/templates/Recuperacion.html');
+                $plantilla = str_replace("{{TEMPORAL}}", $temporal, $plantilla);
+                $plantilla = str_replace("{{NOMBRE}}", $datos['Nombre'], $plantilla);
+
+                EnviarCorreo("Recuperación de acceso", $plantilla, $datos['CorreoElectronico']);
+
+                header("Location: ../../View/vInicio/IniciarSesion.php");
+                exit();
+            }
+        }
+
+        $_POST["Mensaje"] = "No se ha podido recuperar su acceso correctamente";
+    }
