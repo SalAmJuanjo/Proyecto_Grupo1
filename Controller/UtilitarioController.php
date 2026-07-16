@@ -21,8 +21,8 @@ function EnviarCorreo($asunto, $contenido, $destinatario)
         require 'PHPMailer/src/SMTP.php';
 
         //Eliminé el mío (juanjo), pero si me funcionó
-        $correoSalida = "abc@gmail.com";
-        $contrasennaSalida = "abc123";
+        $correoSalida = "juanjosama0627@gmail.com";
+        $contrasennaSalida = "xjbq wdmq wpcb juuv";
 
         if ($contrasennaSalida == "") {
             return true; // Simulación de envío exitoso

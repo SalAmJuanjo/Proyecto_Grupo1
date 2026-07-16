@@ -20,6 +20,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutExterno.php
           <input class="form-control" id="correoElectronico" name="correoElectronico" type="email" required>
           <div class="invalid-feedback">Ingrese un correo válido.</div>
         </div>
+        <?php
+        if (isset($_SESSION["Mensaje"])) {
+          echo '<div class="alert alert-danger text-center">'
+            . $_SESSION["Mensaje"] . '</div>';
+          unset($_SESSION["Mensaje"]);
+        } 
+        ?>
         <button id="btnRecuperarAcceso" name="btnRecuperarAcceso" class="btn btn-primary w-100" type="submit"><i class="bi bi-envelope-arrow-up" aria-hidden="true"></i> Enviar enlace de recuperación</button>
       </form>
       <p class="text-muted small mt-3 mb-0">Revise su bandeja de entrada y la carpeta de spam después de enviar la solicitud.</p>
