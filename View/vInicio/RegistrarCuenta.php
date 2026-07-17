@@ -1,6 +1,6 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutExterno.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/Controller/InicioController.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/LayoutExterno.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/InicioController.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">

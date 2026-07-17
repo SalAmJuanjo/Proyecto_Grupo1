@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/LayoutInterno.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">

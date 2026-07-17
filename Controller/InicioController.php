@@ -3,8 +3,8 @@
         session_start();
     }
 
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/Controller/UtilitarioController.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/Model/InicioModel.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/UtilitarioController.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Model/InicioModel.php';
 
 if(isset($_POST["btnRegistrar"]))
     {
@@ -55,7 +55,7 @@ if(isset($_POST["btnIniciarSesion"]))
 
             if($actualizacion)
             {
-                $plantilla = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/templates/Recuperacion.html');
+                $plantilla = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/templates/Recuperacion.html');
                 $plantilla = str_replace("{{TEMPORAL}}", $temporal, $plantilla);
                 $plantilla = str_replace("{{NOMBRE}}", $datos['Nombre'], $plantilla);
 
