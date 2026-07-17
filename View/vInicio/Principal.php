@@ -7,6 +7,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php
 <!DOCTYPE html>
 <html lang="es">
 <?php ImportCSS(); ?>
+
 <body>
     <div class="admin-shell">
         <div class="sidebar-backdrop" data-sidebar-close></div>
@@ -16,18 +17,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php
                 <h5 class="text-center mt-3">Centro de gestión</h5>
             </div>
 
-            <nav class="sidebar-nav">
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Registrar puente</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Nueva inspección</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-                </ul>
-            </nav>
+            <?php Navbar(); ?>
 
             <div class="sidebar-user">
-                
-            </div>      
+
+            </div>
         </aside>
 
         <div class="admin-main">
@@ -46,7 +40,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item">Perfil</a></li>
                                 <li><a class="dropdown-item">Configuración de cuenta</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -79,7 +75,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php
                             <button class="btn btn-info w-100">Realizar inspección</button>
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-warning w-100">Analizar la red</button>
+                            <button class="btn btn-warning w-100">Herramienta de priorización</button>
                         </div>
                     </div>
 
@@ -88,7 +84,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php
                         <div class="card-header">Puentes registrados recientemente</div>
                         <div class="card-body">
                             <table class="table table-striped">
-                                
+
                             </table>
                         </div>
                     </div>
@@ -102,6 +98,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php
             </footer>
         </div>
     </div>
-    <?php ImportJS(); ?> 
+    <?php ImportJS(); ?>
 </body>
+
 </html>
