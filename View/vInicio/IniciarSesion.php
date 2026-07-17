@@ -6,11 +6,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/Controller/InicioContr
 <html lang="es">
 <?php ImportCSS(); ?>
 
+
 <body class="auth-body">
+  <?php Titulo(); ?>
   <?php ThemeToggleButton(); ?>
-  <main class="auth-page">
-    <section class="auth-card">
-      <form action="" method="post" class="needs-validation mt-3" id="formIniciarSesion">
+  <main class="auth-page" style="align-items: start; justify-items: center; padding-top: 2rem;">
+    <section class="auth-card" style="margin-top: 0;">
+      <form action="" method="post" class="needs-validation mt-2" id="formIniciarSesion">
         <div class="mb-4">
           <h1 class="h3 mb-2">Iniciar sesión</h1>
           <p class="eyebrow mb-1">Ingresa tus datos para iniciar sesión en tu cuenta.</p>
@@ -44,4 +46,5 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/Controller/InicioContr
   </main>
   <?php ImportJS(); ?>
 </body>
+
 </html>

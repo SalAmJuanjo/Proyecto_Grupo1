@@ -33,4 +33,21 @@ function ThemeToggleButton()
     ';
 }
 
+function Titulo()
+{
+    echo '
+        <div class="text-center mb-3">
+            <div class="mb-1"
+                style="width:72px;height:72px; margin: 0 auto;">
+                <i class="bi bi-diagram-3-fill text-primary fs-2"></i>
+            </div>
+
+            <h1 class="fw-bold h1 mb-0 text-dark">
+                Smart<span class="text-primary">Bridge</span>
+            </h1>
+            <p class="text-muted mt-1 mb-0">Gestión de puentes</p>
+        </div>
+    ';
+    
+}
 
