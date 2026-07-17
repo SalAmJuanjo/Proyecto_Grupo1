@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php';
 ?>
 <!DOCTYPE html>
@@ -10,47 +13,40 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php
 
         <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
             <div class="sidebar-header">
-                
+                <h5 class="text-center mt-3">Centro de gestión</h5>
             </div>
 
             <nav class="sidebar-nav">
-                
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Registrar puente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Nueva inspección</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                </ul>
             </nav>
 
             <div class="sidebar-user">
-                <strong>PuenTech</strong>
-                <small>Zona de trabajo</small>
-            </div>
-
-            
+                
+            </div>      
         </aside>
 
         <div class="admin-main">
             <nav class="navbar admin-navbar navbar-expand bg-white">
                 <div class="container-fluid px-3 px-lg-4">
-                    <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-
                     <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
                         <input class="form-control search-input" type="search" placeholder="Buscar reportes de puentes" aria-label="Search">
                     </form>
+
                     <div class="navbar-actions ms-auto">
-                        <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
-                            <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
-                        </button>
+                        <?php ThemeToggleButton(); ?>
                         <div class="dropdown">
-                            <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="profile-name d-none d-sm-inline">Admin Grupo 1</span>
+                            <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <span class=""><?php echo isset($_SESSION['NombreUsuario']) ? htmlspecialchars($_SESSION['NombreUsuario'], ENT_QUOTES, 'UTF-8') : 'Usuario'; ?></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item">Perfil</a></li>
                                 <li><a class="dropdown-item">Configuración de cuenta</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
+                                <li><hr class="dropdown-divider"></li>
                             </ul>
                         </div>
                     </div>
@@ -61,22 +57,47 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Avance2_Grupo1/View/LayoutInterno.php
                 <div class="container-fluid px-3 px-lg-4 py-4">
                     <div class="page-heading">
                         <div class="page-heading-copy">
-                            <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+                            <span class="page-icon"><i class="bi bi-speedometer2"></i></span>
                             <div>
-                                <p class="eyebrow mb-1">Proyecto Grupo 1</p>
-                                <h1 class="h3 mb-1">PuenTech</h1>
-                                <p class="text-muted mb-0">Puentes.</p>
+                                <p class="eyebrow mb-1">SmartBridge – Gestión de puentes</p>
+                                <h1 class="h3 mb-1">Centro de gestión</h1>
+                                <p class="text-muted mb-0">Bienvenido, <?php echo isset($_SESSION['NombreUsuario']) ? htmlspecialchars($_SESSION['NombreUsuario'], ENT_QUOTES, 'UTF-8') : 'Usuario'; ?></p>
                             </div>
                         </div>
-                        <div class="heading-actions"><button class="btn btn-outline-secondary btn-sm" type="button"><i class="bi bi-download" aria-hidden="true"></i> Export</button><button class="btn btn-primary btn-sm" type="button"><i class="bi bi-file-earmark-plus" aria-hidden="true"></i> Create Report</button></div>
+                        <div class="heading-actions">
+                            <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-download"></i> Exportar</button>
+                            <button class="btn btn-primary btn-sm"><i cla0ss="bi bi-file-earmark-plus"></i> Crear reporte</button>
+                        </div>
                     </div>
-                    
+
+                    <!-- Acciones principales -->
+                    <div class="row my-4">
+                        <div class="col-md-4">
+                            <button class="btn btn-success w-100">Registrar un puente</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-info w-100">Realizar inspección</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-warning w-100">Analizar la red</button>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de puentes -->
+                    <div class="card">
+                        <div class="card-header">Puentes registrados recientemente</div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </main>
+
             <footer class="Grupo1-footer">
                 <div class="container-fluid px-3 px-lg-4">
-                    <span>Copyright 2026 Grupo 1. <br> Developed by <a target="_blank" class="fw-bold text-success">Grupo 1</a> • Distributed by <a target="_blank" class="fw-bold text-success" href="https://themewagon.com">Ambiente Web Cliente/Servidor</a> </span>
-
+                    <span>Copyright 2026 Grupo 1. <br> Developed by <a target="_blank" class="fw-bold text-success">Grupo 1</a> • Distributed by <a target="_blank" class="fw-bold text-success" href="https://themewagon.com">Ambiente Web Cliente/Servidor</a></span>
                 </div>
             </footer>
         </div>

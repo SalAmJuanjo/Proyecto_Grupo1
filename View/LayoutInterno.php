@@ -21,3 +21,12 @@ function ImportJS()
         <script src="../js/main.js"></script>
     ';
 }
+
+function ThemeToggleButton()
+{
+    echo '
+        <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">
+            <i class="bi bi-moon-stars" data-theme-icon></i>
+        </button>
+    ';
+}
