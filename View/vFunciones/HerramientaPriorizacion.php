@@ -13,7 +13,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/LayoutInterno.ph
         <div class="sidebar-backdrop" data-sidebar-close></div>
 
         <?php aside(); ?>
-
         <div class="admin-main">
             <?php navbar(); ?>
             <main class="dashboard-content">
@@ -36,15 +35,16 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/LayoutInterno.ph
                     <!-- Acciones principales -->
                     <div class="row my-4">
                         <div class="col-md-4">
-                            <a href="/Proyecto_Grupo1/View/vFunciones/RegistrarPuente.php" class="btn btn-success w-100">Registrar un puente</a>
+                            <button class="btn btn-success w-100">Registrar un puente</button>
                         </div>
                         <div class="col-md-4">
-                            <a href="/Proyecto_Grupo1/View/vFunciones/RealizarInspeccion.php" class="btn btn-info w-100">Realizar inspección</a>
+                            <button class="btn btn-info w-100">Realizar inspección</button>
                         </div>
                         <div class="col-md-4">
-                            <a href="/Proyecto_Grupo1/View/vFunciones/HerramientaPriorizacion.php" class="btn btn-warning w-100">Herramienta de priorización</a>
+                            <button class="btn btn-warning w-100">Herramienta de priorización</button>
                         </div>
                     </div>
+
                     <!-- Tabla de puentes -->
                     <div class="card">
                         <div class="card-header">Puentes registrados recientemente</div>
@@ -57,7 +57,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/LayoutInterno.ph
                 </div>
             </main>
 
-            <?php footer(); ?>
+            <footer class="Grupo1-footer">
+                <div class="container-fluid px-3 px-lg-4">
+                    <span>Copyright 2026 Grupo 1. <br> Developed by <a target="_blank" class="fw-bold text-success">Grupo 1</a> • Distributed by <a target="_blank" class="fw-bold text-success" href="https://themewagon.com">Ambiente Web Cliente/Servidor</a></span>
+                </div>
+            </footer>
         </div>
     </div>
     <?php ImportJS(); ?>
