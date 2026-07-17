@@ -42,7 +42,6 @@ function navbar()
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item">Perfil</a></li>
                             <li><a class="dropdown-item">Configuración de cuenta</a></li>
-                            <li><a class="dropdown-item">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
