@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `proyectogrupo1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `proyectogrupo1`;
--- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.46, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: proyectogrupo1
 -- ------------------------------------------------------
@@ -18,6 +18,25 @@ USE `proyectogrupo1`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `registrarpuente`
+--
+
+DROP TABLE IF EXISTS `registrarpuente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `registrarpuente` (
+  `codigo` varchar(20) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `ruta` varchar(255) NOT NULL,
+  `ubicacion` varchar(100) NOT NULL,
+  `longitud` decimal(10,6) NOT NULL,
+  `fecha` date DEFAULT NULL,
+  `calificacion` tinyint(4) DEFAULT NULL CHECK (`calificacion` between 1 and 5),
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `tb_usuario`
 --
 
@@ -31,18 +50,8 @@ CREATE TABLE `tb_usuario` (
   `Contrasenna` varchar(45) NOT NULL,
   `Estado` bit(1) NOT NULL,
   PRIMARY KEY (`Consecutivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tb_usuario`
---
-
-LOCK TABLES `tb_usuario` WRITE;
-/*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
-INSERT INTO `tb_usuario` VALUES (1,'Juan José Salas Amador','jsalas80222@ufide.ac.cr','GW1FWWZN',_binary ''),(2,'Cristal Rodriguez','crodriguez60420@ufide.ac.cr','contrasenna123',_binary '');
-/*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'proyectogrupo1'
@@ -98,6 +107,34 @@ BEGIN
       AND Contrasenna = pContrasenna
       AND Estado = 1;
 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spRegistrarPuente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spRegistrarPuente`(
+    p_codigo VARCHAR(20),
+    p_nombre VARCHAR(100),
+    p_ruta VARCHAR(255),
+    p_ubicacion VARCHAR(100),
+    p_longitud DECIMAL(10,6),
+    p_fecha DATE,
+    p_calificacion TINYINT
+)
+BEGIN
+    INSERT INTO RegistrarPuente (codigo, nombre, ruta, ubicacion, longitud, fecha, calificacion)
+    VALUES (p_codigo, p_nombre, p_ruta, p_ubicacion, p_longitud, p_fecha, p_calificacion);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -168,4 +205,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-15 17:18:47
+-- Dump completed on 2026-07-18  8:31:37
