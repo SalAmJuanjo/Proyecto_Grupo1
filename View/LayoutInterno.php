@@ -1,4 +1,5 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/InicioController.php';
 
 function ImportCSS()
 {
@@ -24,6 +25,14 @@ function ImportJS()
 
 function navbar()
 {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    $nombreUsuario = isset($_SESSION['NombreUsuario'])
+        ? htmlspecialchars($_SESSION['NombreUsuario'], ENT_QUOTES, 'UTF-8')
+        : 'Usuario';
+
     echo '
         <nav class="navbar admin-navbar navbar-expand bg-white">
             <div class="container-fluid px-3 px-lg-4">
@@ -33,16 +42,21 @@ function navbar()
 
                 <div class="navbar-actions ms-auto">
                     <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">
-            <i class="bi bi-moon-stars" data-theme-icon></i>
-        </button>
+                        <i class="bi bi-moon-stars" data-theme-icon></i>
+                    </button>
                     <div class="dropdown">
                         <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <span class="">Usuario</span>
+                            <span class="">' . $nombreUsuario . '</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item">Perfil</a></li>
                             <li><a class="dropdown-item">Configuración de cuenta</a></li>
-                            <li><a class="dropdown-item">Cerrar sesión</a></li>
+                            <form action="" method="POST">
+                                <button id="btnSalir" name="btnSalir" type="submit" class="btn btn-sm bg-transparent border-0 text-start py-1 fs-6">
+                                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                        Salir
+                                </button>
+                            </form>
                         </ul>
                     </div>
                 </div>
