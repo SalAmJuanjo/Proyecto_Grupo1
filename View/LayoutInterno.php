@@ -1,4 +1,5 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/InicioController.php';
 
 function ImportCSS()
 {
@@ -50,6 +51,12 @@ function navbar()
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item">Perfil</a></li>
                             <li><a class="dropdown-item">Configuración de cuenta</a></li>
+                            <form action="" method="POST">
+                                <button id="btnSalir" name="btnSalir" type="submit" class="btn btn-sm bg-transparent border-0 text-start py-1 fs-6">
+                                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                        Salir
+                                </button>
+                            </form>
                         </ul>
                     </div>
                 </div>

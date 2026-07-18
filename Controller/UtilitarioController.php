@@ -51,3 +51,11 @@ function EnviarCorreo($asunto, $contenido, $destinatario)
         return false;
     }
 }
+
+function CerrarSesion()
+{
+    session_start();
+    session_destroy();
+    header("Location: ../../View/vInicio/IniciarSesion.php");
+    exit();
+}
