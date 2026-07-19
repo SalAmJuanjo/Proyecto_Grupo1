@@ -27,14 +27,34 @@ DROP TABLE IF EXISTS `registrarpuente`;
 CREATE TABLE `registrarpuente` (
   `codigo` varchar(20) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `ruta` varchar(255) NOT NULL,
-  `ubicacion` varchar(100) NOT NULL,
-  `longitud` decimal(10,6) NOT NULL,
-  `fecha` date DEFAULT NULL,
-  `calificacion` tinyint(4) DEFAULT NULL CHECK (`calificacion` between 1 and 5),
+  `numero_ruta` int(11) NOT NULL,
+  `clasificacion_ruta` enum('nacional primaria','nacional secundaria','nacional terciaria','cantonal','otra') NOT NULL,
+  `provincia` enum('San José','Alajuela','Cartago','Heredia','Guanacaste','Puntarenas','Limón') NOT NULL,
+  `canton` varchar(100) NOT NULL,
+  `coordenadas` decimal(9,6) NOT NULL,
+  `tipo_estructura` enum('vigas','cercha','arco','marco rígido','colgante','atirantado','modular provisional','otra') NOT NULL,
+  `material_principal` enum('concreto reforzado','concreto preesforzado','acero','madera','mampostería','mixto') NOT NULL,
+  `longitud_total` decimal(10,2) NOT NULL,
+  `numero_tramos` int(11) NOT NULL,
+  `numero_superestructuras` int(11) NOT NULL,
+  `fecha_construccion` date DEFAULT NULL,
+  `importancia` enum('puente crítico','puente esencial','puente convencional','otro puente') NOT NULL,
+  `servicios_publicos` set('agua potable','alcantarillado','electricidad','telecomunicaciones','tubería de combustible','otros','ninguno') DEFAULT NULL,
+  `restriccion_peso` decimal(5,1) DEFAULT NULL,
+  `restriccion_altura` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `registrarpuente`
+--
+
+LOCK TABLES `registrarpuente` WRITE;
+/*!40000 ALTER TABLE `registrarpuente` DISABLE KEYS */;
+INSERT INTO `registrarpuente` VALUES ('P09','Santa Cruz',5,'nacional secundaria','Cartago','puriscal',12.000000,'modular provisional','acero',89.00,7,2,'2026-07-13','puente esencial','alcantarillado',0.0,0.00),('P9UY','Santa',3,'nacional secundaria','Guanacaste','M',12.000000,'atirantado','concreto preesforzado',0.09,1,3,'2026-06-19','puente esencial','electricidad',0.1,0.04),('Po7','Etse',4,'nacional secundaria','Guanacaste','p',12.000000,'atirantado','acero',0.01,2,3,'2026-06-30','puente convencional','agua potable',0.0,0.02);
+/*!40000 ALTER TABLE `registrarpuente` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tb_usuario`
@@ -52,6 +72,16 @@ CREATE TABLE `tb_usuario` (
   PRIMARY KEY (`Consecutivo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_usuario`
+--
+
+LOCK TABLES `tb_usuario` WRITE;
+/*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
+INSERT INTO `tb_usuario` VALUES (1,'Juan José Salas Amador','jsalas80222@ufide.ac.cr','GW1FWWZN',_binary ''),(2,'Cristal Rodriguez','crodriguez60420@ufide.ac.cr','contrasenna123',_binary ''),(3,'Sofia','svarg@gmail.com','vargassalas',_binary '');
+/*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'proyectogrupo1'
@@ -124,17 +154,106 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spRegistrarPuente`(
-    p_codigo VARCHAR(20),
-    p_nombre VARCHAR(100),
-    p_ruta VARCHAR(255),
-    p_ubicacion VARCHAR(100),
-    p_longitud DECIMAL(10,6),
-    p_fecha DATE,
-    p_calificacion TINYINT
+    IN p_codigo VARCHAR(20),
+    IN p_nombre VARCHAR(100),
+    IN p_numero_ruta INT,
+    IN p_clasificacion_ruta ENUM(
+        'nacional primaria',
+        'nacional secundaria',
+        'nacional terciaria',
+        'cantonal',
+        'otra'
+    ),
+    IN p_provincia ENUM(
+        'San José',
+        'Alajuela',
+        'Cartago',
+        'Heredia',
+        'Guanacaste',
+        'Puntarenas',
+        'Limón'
+    ),
+    IN p_canton VARCHAR(100),
+    IN p_coordenadas DECIMAL(9,6),
+    IN p_tipo_estructura ENUM(
+        'vigas',
+        'cercha',
+        'arco',
+        'marco rígido',
+        'colgante',
+        'atirantado',
+        'modular provisional',
+        'otra'
+    ),
+    IN p_material_principal ENUM(
+        'concreto reforzado',
+        'concreto preesforzado',
+        'acero',
+        'madera',
+        'mampostería',
+        'mixto'
+    ),
+    IN p_longitud_total DECIMAL(10,2),
+    IN p_numero_tramos INT,
+    IN p_numero_superestructuras INT,
+    IN p_fecha_construccion DATE,
+    IN p_importancia ENUM(
+        'puente crítico',
+        'puente esencial',
+        'puente convencional',
+        'otro puente'
+    ),
+    IN p_servicios_publicos SET(
+        'agua potable',
+        'alcantarillado',
+        'electricidad',
+        'telecomunicaciones',
+        'tubería de combustible',
+        'otros',
+        'ninguno'
+    ),
+    IN p_restriccion_peso DECIMAL(5,1),
+    IN p_restriccion_altura DECIMAL(5,2)
 )
 BEGIN
-    INSERT INTO RegistrarPuente (codigo, nombre, ruta, ubicacion, longitud, fecha, calificacion)
-    VALUES (p_codigo, p_nombre, p_ruta, p_ubicacion, p_longitud, p_fecha, p_calificacion);
+    INSERT INTO registrarpuente (
+        codigo,
+        nombre,
+        numero_ruta,
+        clasificacion_ruta,
+        provincia,
+        canton,
+        coordenadas,
+        tipo_estructura,
+        material_principal,
+        longitud_total,
+        numero_tramos,
+        numero_superestructuras,
+        fecha_construccion,
+        importancia,
+        servicios_publicos,
+        restriccion_peso,
+        restriccion_altura
+    )
+    VALUES (
+        p_codigo,
+        p_nombre,
+        p_numero_ruta,
+        p_clasificacion_ruta,
+        p_provincia,
+        p_canton,
+        p_coordenadas,
+        p_tipo_estructura,
+        p_material_principal,
+        p_longitud_total,
+        p_numero_tramos,
+        p_numero_superestructuras,
+        p_fecha_construccion,
+        p_importancia,
+        p_servicios_publicos,
+        p_restriccion_peso,
+        p_restriccion_altura
+    );
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -205,4 +324,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-18  8:31:37
+-- Dump completed on 2026-07-19  9:41:18
