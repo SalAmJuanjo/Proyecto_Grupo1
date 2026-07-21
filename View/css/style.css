@@ -1661,3 +1661,169 @@ html[data-theme="dark"] {
   border-top-color: var(--admin-sidebar-border);
   color: var(--admin-sidebar-text);
 }
+
+/* =========================================================
+   DASHBOARD SMARTBRIDGE
+   ========================================================= */
+
+.dashboard-update {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    background: var(--admin-surface);
+    box-shadow: var(--admin-shadow-sm);
+    text-align: right;
+}
+
+.dashboard-update span {
+    color: var(--admin-muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.dashboard-update strong {
+    font-size: 0.94rem;
+}
+
+.dashboard-chart-container {
+    position: relative;
+    width: 100%;
+    height: 320px;
+}
+
+.dashboard-chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.dashboard-table-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dashboard-table-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.dashboard-table-actions .table-search {
+    min-width: 240px;
+}
+
+.dashboard-empty {
+    min-height: 220px;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 0.4rem;
+    padding: 2rem;
+    border: 1px dashed var(--admin-border);
+    border-radius: 8px;
+    background: var(--admin-surface-soft);
+    color: var(--admin-muted);
+    text-align: center;
+}
+
+.dashboard-empty strong {
+    color: var(--admin-text);
+    font-size: 1rem;
+}
+
+.dashboard-empty span {
+    max-width: 420px;
+    font-size: 0.9rem;
+}
+
+.dashboard-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    padding: 0.42rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.79rem;
+    font-weight: 800;
+}
+
+.dashboard-badge-buena {
+    background: rgba(25, 135, 84, 0.14);
+    color: #146c43;
+}
+
+.dashboard-badge-regular {
+    background: rgba(255, 193, 7, 0.18);
+    color: #8a6600;
+}
+
+.dashboard-badge-deficiente {
+    background: rgba(253, 126, 20, 0.16);
+    color: #b45309;
+}
+
+.dashboard-badge-critica {
+    background: rgba(220, 53, 69, 0.15);
+    color: #b02a37;
+}
+
+.dashboard-badge-neutral {
+    background: rgba(108, 117, 125, 0.14);
+    color: #5c636a;
+}
+
+html[data-theme="dark"] .dashboard-badge-buena {
+    color: #75d6a0;
+}
+
+html[data-theme="dark"] .dashboard-badge-regular {
+    color: #ffda6a;
+}
+
+html[data-theme="dark"] .dashboard-badge-deficiente {
+    color: #ffad66;
+}
+
+html[data-theme="dark"] .dashboard-badge-critica {
+    color: #ff8c98;
+}
+
+html[data-theme="dark"] .dashboard-badge-neutral {
+    color: #ced4da;
+}
+
+@media (max-width: 767.98px) {
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .dashboard-update {
+        width: 100%;
+        text-align: left;
+    }
+
+    .dashboard-table-heading {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .dashboard-table-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .dashboard-table-actions .table-search {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .dashboard-chart-container {
+        height: 280px;
+    }
+}
