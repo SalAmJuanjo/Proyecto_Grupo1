@@ -279,21 +279,18 @@ $elementos = ConsultarElementosInspeccionController();
                                                         echo $codigoPuenteSeleccionado === $puente["codigo"]
                                                             ? "selected"
                                                             : "";
-                                                        ?>>
-
+                                                        ?>
+                                                    >
                                                         <?php
                                                         echo htmlspecialchars(
                                                             "Ruta "
-                                                            . $puente["ruta"]
-                                                            . " | km "
-                                                            . $puente["ubicacion"]
+                                                            . $puente["numero_ruta"]
                                                             . " | "
                                                             . $puente["nombre"]
                                                             . " | "
                                                             . $puente["codigo"]
                                                         );
                                                         ?>
-
                                                     </option>
 
                                                 <?php } ?>
