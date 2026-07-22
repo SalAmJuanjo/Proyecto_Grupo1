@@ -1,97 +1,22 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($_SESSION["ConsecutivoUsuario"])) {
-    header(
-        "Location: /Proyecto_Grupo1/View/vInicio/IniciarSesion.php"
-    );
-    exit();
-}
-
-include_once $_SERVER['DOCUMENT_ROOT']
-    . '/Proyecto_Grupo1/View/LayoutInterno.php';
-
-include_once $_SERVER['DOCUMENT_ROOT']
+require_once $_SERVER['DOCUMENT_ROOT']
     . '/Proyecto_Grupo1/Controller/DashboardController.php';
 
+ValidarAccesoDashboardController();
+
+require_once $_SERVER['DOCUMENT_ROOT']
+    . '/Proyecto_Grupo1/View/LayoutInterno.php';
 
 $dashboard = ConsultarDashboardController();
 
-$resumen = isset($dashboard["resumen"])
-    ? $dashboard["resumen"]
-    : array();
-
-$condiciones = isset($dashboard["condiciones"])
-    ? $dashboard["condiciones"]
-    : array();
-
-$rutas = isset($dashboard["rutas"])
-    ? $dashboard["rutas"]
-    : array();
-
-$calificaciones = isset($dashboard["calificaciones"])
-    ? $dashboard["calificaciones"]
-    : array();
-
-$importancias = isset($dashboard["importancias"])
-    ? $dashboard["importancias"]
-    : array();
-
-$prioridades = isset($dashboard["prioridades"])
-    ? $dashboard["prioridades"]
-    : array();
-
-$errorDashboard = isset($dashboard["error"])
-    ? $dashboard["error"]
-    : "";
-
-
-function ObtenerClaseCondicionDashboard($condicion)
-{
-    $normalizada = strtolower(
-        str_replace(
-            array("í", "Í"),
-            "i",
-            trim($condicion)
-        )
-    );
-
-    switch ($normalizada) {
-        case "buena":
-            return "dashboard-badge-buena";
-
-        case "regular":
-            return "dashboard-badge-regular";
-
-        case "deficiente":
-            return "dashboard-badge-deficiente";
-
-        case "critica":
-            return "dashboard-badge-critica";
-
-        default:
-            return "dashboard-badge-neutral";
-    }
-}
-
-
-function FormatearFechaDashboard($fecha)
-{
-    if (empty($fecha)) {
-        return "Sin fecha";
-    }
-
-    $marcaTiempo = strtotime($fecha);
-
-    if (!$marcaTiempo) {
-        return htmlspecialchars($fecha);
-    }
-
-    return date("d/m/Y", $marcaTiempo);
-}
+$resumen = $dashboard["resumen"];
+$condiciones = $dashboard["condiciones"];
+$rutas = $dashboard["rutas"];
+$calificaciones = $dashboard["calificaciones"];
+$importancias = $dashboard["importancias"];
+$prioridades = $dashboard["prioridades"];
+$errorDashboard = $dashboard["error"];
 
 ?>
 
@@ -104,9 +29,7 @@ function FormatearFechaDashboard($fecha)
 
     <div class="admin-shell">
 
-        <div
-            class="sidebar-backdrop"
-            data-sidebar-close>
+        <div class="sidebar-backdrop" data-sidebar-close>
         </div>
 
         <?php aside(); ?>
@@ -118,6 +41,8 @@ function FormatearFechaDashboard($fecha)
             <main class="dashboard-content">
 
                 <div class="container-fluid px-3 px-lg-4 py-4">
+
+                    <!-- Encabezado -->
 
                     <div class="page-heading">
 
@@ -156,15 +81,17 @@ function FormatearFechaDashboard($fecha)
 
                     </div>
 
+                    <!-- Mensaje de error -->
+
                     <?php if ($errorDashboard !== "") { ?>
 
-                        <div
-                            class="alert alert-danger"
-                            role="alert">
+                        <div class="alert alert-danger" role="alert">
 
                             <?php
                             echo htmlspecialchars(
-                                $errorDashboard
+                                $errorDashboard,
+                                ENT_QUOTES,
+                                "UTF-8"
                             );
                             ?>
 
@@ -172,35 +99,29 @@ function FormatearFechaDashboard($fecha)
 
                     <?php } ?>
 
-                    <?php
-                    $totalInspecciones =
-                        isset($resumen["totalInspecciones"])
-                            ? (int) $resumen["totalInspecciones"]
-                            : 0;
-                    ?>
+                    <!-- Mensaje cuando no hay inspecciones -->
 
-                    <?php if ($totalInspecciones === 0) { ?>
+                    <?php if ($resumen["totalInspecciones"] === 0) { ?>
 
-                        <div
-                            class="alert alert-info"
-                            role="alert">
+                        <div class="alert alert-info" role="alert">
 
                             Todavía no hay inspecciones registradas.
                             Los gráficos se actualizarán automáticamente
-                            cuando se registren inspecciones.
+                            cuando se registren nuevas inspecciones.
 
                         </div>
 
                     <?php } ?>
 
-                    <!-- Indicadores -->
+                    <!-- Tarjetas de indicadores -->
 
                     <div class="row g-3 mb-4">
 
+                        <!-- Total de puentes -->
+
                         <div class="col-12 col-sm-6 col-xl-3">
 
-                            <article
-                                class="metric-card metric-primary h-100">
+                            <article class="metric-card metric-primary h-100">
 
                                 <div class="metric-top">
 
@@ -208,10 +129,10 @@ function FormatearFechaDashboard($fecha)
                                         Total de puentes
                                     </span>
 
-                                    <span
-                                        class="metric-icon"
-                                        aria-hidden="true">
+                                    <span class="metric-icon" aria-hidden="true">
+
                                         P
+
                                     </span>
 
                                 </div>
@@ -219,11 +140,7 @@ function FormatearFechaDashboard($fecha)
                                 <div class="metric-value">
 
                                     <?php
-                                    echo isset(
-                                        $resumen["totalPuentes"]
-                                    )
-                                        ? (int) $resumen["totalPuentes"]
-                                        : 0;
+                                    echo $resumen["totalPuentes"];
                                     ?>
 
                                 </div>
@@ -236,10 +153,11 @@ function FormatearFechaDashboard($fecha)
 
                         </div>
 
+                        <!-- Total de inspecciones -->
+
                         <div class="col-12 col-sm-6 col-xl-3">
 
-                            <article
-                                class="metric-card metric-success h-100">
+                            <article class="metric-card metric-success h-100">
 
                                 <div class="metric-top">
 
@@ -247,10 +165,10 @@ function FormatearFechaDashboard($fecha)
                                         Inspecciones
                                     </span>
 
-                                    <span
-                                        class="metric-icon"
-                                        aria-hidden="true">
+                                    <span class="metric-icon" aria-hidden="true">
+
                                         I
+
                                     </span>
 
                                 </div>
@@ -258,13 +176,7 @@ function FormatearFechaDashboard($fecha)
                                 <div class="metric-value">
 
                                     <?php
-                                    echo isset(
-                                        $resumen["totalInspecciones"]
-                                    )
-                                        ? (int) $resumen[
-                                            "totalInspecciones"
-                                        ]
-                                        : 0;
+                                    echo $resumen["totalInspecciones"];
                                     ?>
 
                                 </div>
@@ -277,10 +189,11 @@ function FormatearFechaDashboard($fecha)
 
                         </div>
 
+                        <!-- Puentes críticos -->
+
                         <div class="col-12 col-sm-6 col-xl-3">
 
-                            <article
-                                class="metric-card metric-danger h-100">
+                            <article class="metric-card metric-danger h-100">
 
                                 <div class="metric-top">
 
@@ -288,10 +201,10 @@ function FormatearFechaDashboard($fecha)
                                         Puentes críticos
                                     </span>
 
-                                    <span
-                                        class="metric-icon"
-                                        aria-hidden="true">
+                                    <span class="metric-icon" aria-hidden="true">
+
                                         C
+
                                     </span>
 
                                 </div>
@@ -299,13 +212,7 @@ function FormatearFechaDashboard($fecha)
                                 <div class="metric-value">
 
                                     <?php
-                                    echo isset(
-                                        $resumen["puentesCriticos"]
-                                    )
-                                        ? (int) $resumen[
-                                            "puentesCriticos"
-                                        ]
-                                        : 0;
+                                    echo $resumen["puentesCriticos"];
                                     ?>
 
                                 </div>
@@ -318,10 +225,11 @@ function FormatearFechaDashboard($fecha)
 
                         </div>
 
+                        <!-- Rutas afectadas -->
+
                         <div class="col-12 col-sm-6 col-xl-3">
 
-                            <article
-                                class="metric-card metric-warning h-100">
+                            <article class="metric-card metric-warning h-100">
 
                                 <div class="metric-top">
 
@@ -329,10 +237,10 @@ function FormatearFechaDashboard($fecha)
                                         Rutas afectadas
                                     </span>
 
-                                    <span
-                                        class="metric-icon"
-                                        aria-hidden="true">
+                                    <span class="metric-icon" aria-hidden="true">
+
                                         R
+
                                     </span>
 
                                 </div>
@@ -340,13 +248,7 @@ function FormatearFechaDashboard($fecha)
                                 <div class="metric-value">
 
                                     <?php
-                                    echo isset(
-                                        $resumen["rutasAfectadas"]
-                                    )
-                                        ? (int) $resumen[
-                                            "rutasAfectadas"
-                                        ]
-                                        : 0;
+                                    echo $resumen["rutasAfectadas"];
                                     ?>
 
                                 </div>
@@ -365,6 +267,8 @@ function FormatearFechaDashboard($fecha)
 
                     <div class="row g-4 mb-4">
 
+                        <!-- Condición de los puentes -->
+
                         <div class="col-12 col-xl-5">
 
                             <section class="panel h-100">
@@ -379,23 +283,19 @@ function FormatearFechaDashboard($fecha)
 
                                         <p class="text-muted mb-0">
                                             Última inspección registrada
-                                            por puente.
+                                            por cada puente.
                                         </p>
 
                                     </div>
 
                                 </div>
 
-                                <div
-                                    class="dashboard-chart-container"
-                                    id="contenedorCondiciones">
+                                <div class="dashboard-chart-container" id="contenedorCondiciones">
 
-                                    <canvas
-                                        id="graficoCondiciones"
-                                        aria-label="
-                                            Distribución de puentes
-                                            por condición
-                                        ">
+                                    <canvas id="graficoCondiciones" aria-label="
+                            Distribución de los puentes
+                            por condición
+                        ">
                                     </canvas>
 
                                 </div>
@@ -403,6 +303,8 @@ function FormatearFechaDashboard($fecha)
                             </section>
 
                         </div>
+
+                        <!-- Rutas afectadas -->
 
                         <div class="col-12 col-xl-7">
 
@@ -417,7 +319,7 @@ function FormatearFechaDashboard($fecha)
                                         </h2>
 
                                         <p class="text-muted mb-0">
-                                            Puentes en condición
+                                            Puentes con condición
                                             deficiente o crítica.
                                         </p>
 
@@ -425,16 +327,11 @@ function FormatearFechaDashboard($fecha)
 
                                 </div>
 
-                                <div
-                                    class="dashboard-chart-container"
-                                    id="contenedorRutas">
+                                <div class="dashboard-chart-container" id="contenedorRutas">
 
-                                    <canvas
-                                        id="graficoRutas"
-                                        aria-label="
-                                            Rutas con mayor cantidad
-                                            de puentes afectados
-                                        ">
+                                    <canvas id="graficoRutas" aria-label="
+                            Rutas con más puentes afectados
+                        ">
                                     </canvas>
 
                                 </div>
@@ -448,6 +345,8 @@ function FormatearFechaDashboard($fecha)
                     <!-- Segunda fila de gráficos -->
 
                     <div class="row g-4 mb-4">
+
+                        <!-- Calificaciones -->
 
                         <div class="col-12 col-xl-7">
 
@@ -470,16 +369,11 @@ function FormatearFechaDashboard($fecha)
 
                                 </div>
 
-                                <div
-                                    class="dashboard-chart-container"
-                                    id="contenedorCalificaciones">
+                                <div class="dashboard-chart-container" id="contenedorCalificaciones">
 
-                                    <canvas
-                                        id="graficoCalificaciones"
-                                        aria-label="
-                                            Distribución de
-                                            calificaciones
-                                        ">
+                                    <canvas id="graficoCalificaciones" aria-label="
+                            Distribución de calificaciones
+                        ">
                                     </canvas>
 
                                 </div>
@@ -487,6 +381,8 @@ function FormatearFechaDashboard($fecha)
                             </section>
 
                         </div>
+
+                        <!-- Importancia -->
 
                         <div class="col-12 col-xl-5">
 
@@ -502,23 +398,19 @@ function FormatearFechaDashboard($fecha)
 
                                         <p class="text-muted mb-0">
                                             Clasificación asignada
-                                            al registrar el puente.
+                                            al registrar cada puente.
                                         </p>
 
                                     </div>
 
                                 </div>
 
-                                <div
-                                    class="dashboard-chart-container"
-                                    id="contenedorImportancias">
+                                <div class="dashboard-chart-container" id="contenedorImportancias">
 
-                                    <canvas
-                                        id="graficoImportancias"
-                                        aria-label="
-                                            Distribución de puentes
-                                            por importancia
-                                        ">
+                                    <canvas id="graficoImportancias" aria-label="
+                            Puentes clasificados
+                            por importancia
+                        ">
                                     </canvas>
 
                                 </div>
@@ -529,15 +421,11 @@ function FormatearFechaDashboard($fecha)
 
                     </div>
 
-                    <!-- Tabla de prioridades -->
+                    <!-- Tabla de puentes prioritarios -->
 
                     <section class="panel">
 
-                        <div
-                            class="
-                                dashboard-table-heading
-                                mb-3
-                            ">
+                        <div class="dashboard-table-heading mb-3">
 
                             <div>
 
@@ -554,23 +442,12 @@ function FormatearFechaDashboard($fecha)
 
                             <div class="dashboard-table-actions">
 
-                                <input
-                                    type="search"
-                                    class="form-control table-search"
-                                    placeholder="
-                                        Buscar puente o ruta
-                                    "
-                                    aria-label="
-                                        Buscar en tabla de prioridades
-                                    "
-                                    data-table-search="
-                                        tablaPrioridades
-                                    ">
+                                <input type="search" class="form-control table-search"
+                                    placeholder="Buscar puente o ruta" aria-label="
+                        Buscar en la tabla de prioridades
+                    " data-table-search="tablaPrioridades">
 
-                                <button
-                                    type="button"
-                                    class="btn btn-outline-primary"
-                                    id="btnExportarPrioridades">
+                                <button type="button" class="btn btn-outline-primary" id="btnExportarPrioridades">
 
                                     Exportar CSV
 
@@ -599,13 +476,7 @@ function FormatearFechaDashboard($fecha)
 
                             <div class="table-responsive">
 
-                                <table
-                                    class="
-                                        table
-                                        table-hover
-                                        align-middle
-                                    "
-                                    id="tablaPrioridades">
+                                <table class="table table-hover align-middle" id="tablaPrioridades">
 
                                     <thead>
 
@@ -653,73 +524,92 @@ function FormatearFechaDashboard($fecha)
                                         $posicion = 1;
 
                                         foreach (
-                                            $prioridades
-                                            as $puente
+                                            $prioridades as $puente
                                         ) {
-                                        ?>
+                                            ?>
 
                                             <tr>
 
                                                 <td>
+
                                                     <strong>
-                                                        <?php
-                                                        echo $posicion;
-                                                        ?>
+                                                        <?php echo $posicion; ?>
                                                     </strong>
+
                                                 </td>
 
                                                 <td>
+
                                                     <?php
                                                     echo htmlspecialchars(
-                                                        $puente["codigo"]
+                                                        $puente["codigo"],
+                                                        ENT_QUOTES,
+                                                        "UTF-8"
                                                     );
                                                     ?>
+
                                                 </td>
 
                                                 <td>
+
                                                     <strong>
+
                                                         <?php
                                                         echo htmlspecialchars(
-                                                            $puente["nombre"]
+                                                            $puente["nombre"],
+                                                            ENT_QUOTES,
+                                                            "UTF-8"
                                                         );
                                                         ?>
+
                                                     </strong>
+
                                                 </td>
 
                                                 <td>
+
                                                     Ruta
+
                                                     <?php
                                                     echo htmlspecialchars(
-                                                        $puente[
-                                                            "numero_ruta"
-                                                        ]
+                                                        $puente["numero_ruta"],
+                                                        ENT_QUOTES,
+                                                        "UTF-8"
                                                     );
                                                     ?>
+
                                                 </td>
 
                                                 <td>
+
                                                     <?php
                                                     echo htmlspecialchars(
-                                                        $puente[
-                                                            "provincia"
-                                                        ]
+                                                        $puente["provincia"],
+                                                        ENT_QUOTES,
+                                                        "UTF-8"
                                                     );
                                                     ?>,
+
                                                     <?php
                                                     echo htmlspecialchars(
-                                                        $puente["canton"]
+                                                        $puente["canton"],
+                                                        ENT_QUOTES,
+                                                        "UTF-8"
                                                     );
                                                     ?>
+
                                                 </td>
 
                                                 <td>
+
                                                     <?php
-                                                    echo FormatearFechaDashboard(
-                                                        $puente[
-                                                            "FechaInspeccion"
-                                                        ]
+                                                    echo htmlspecialchars(
+                                                        $puente["FechaFormateada"],
+                                                        ENT_QUOTES,
+                                                        "UTF-8"
                                                     );
                                                     ?>
+
                                                 </td>
 
                                                 <td>
@@ -727,11 +617,10 @@ function FormatearFechaDashboard($fecha)
                                                     <strong>
 
                                                         <?php
-                                                        echo number_format(
-                                                            (float) $puente[
-                                                                "IndiceDeterioro"
-                                                            ],
-                                                            2
+                                                        echo htmlspecialchars(
+                                                            $puente["IndiceFormateado"],
+                                                            ENT_QUOTES,
+                                                            "UTF-8"
                                                         );
                                                         ?>
 
@@ -741,29 +630,26 @@ function FormatearFechaDashboard($fecha)
 
                                                 <td>
 
-                                                    <?php
-                                                    $condicion =
-                                                        $puente[
-                                                            "CondicionPreliminar"
-                                                        ];
-
-                                                    $claseCondicion =
-                                                        ObtenerClaseCondicionDashboard(
-                                                            $condicion
-                                                        );
-                                                    ?>
-
-                                                    <span
-                                                        class="
-                                                            dashboard-badge
-                                                            <?php
-                                                            echo $claseCondicion;
-                                                            ?>
-                                                        ">
+                                                    <span class="
+                                            dashboard-badge
+                                            <?php
+                                            echo htmlspecialchars(
+                                                $puente[
+                                                    "ClaseCondicion"
+                                                ],
+                                                ENT_QUOTES,
+                                                "UTF-8"
+                                            );
+                                            ?>
+                                        ">
 
                                                         <?php
                                                         echo htmlspecialchars(
-                                                            $condicion
+                                                            $puente[
+                                                                "CondicionPreliminar"
+                                                            ],
+                                                            ENT_QUOTES,
+                                                            "UTF-8"
                                                         );
                                                         ?>
 
@@ -773,7 +659,7 @@ function FormatearFechaDashboard($fecha)
 
                                             </tr>
 
-                                        <?php
+                                            <?php
                                             $posicion++;
                                         }
                                         ?>
@@ -820,11 +706,7 @@ function FormatearFechaDashboard($fecha)
             ?>;
     </script>
 
-    <script
-        src="
-            https://cdn.jsdelivr.net/npm/chart.js
-        ">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="../js/dashboard.js"></script>
 
