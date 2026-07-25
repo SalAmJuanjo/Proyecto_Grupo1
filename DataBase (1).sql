@@ -42,6 +42,7 @@ CREATE TABLE `registrarpuente` (
   `servicios_publicos` set('agua potable','alcantarillado','electricidad','telecomunicaciones','tubería de combustible','otros','ninguno') NOT NULL,
   `restriccion_peso` decimal(5,1) DEFAULT NULL,
   `restriccion_altura` decimal(5,2) DEFAULT NULL,
+  `imagen` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -52,7 +53,7 @@ CREATE TABLE `registrarpuente` (
 
 LOCK TABLES `registrarpuente` WRITE;
 /*!40000 ALTER TABLE `registrarpuente` DISABLE KEYS */;
-INSERT INTO `registrarpuente` VALUES ('PN-101','Puente sobre río Segundo',1,'nacional primaria','Alajuela','Alajuela',10.016245,'vigas','concreto preesforzado',86.50,3,1,'2008-05-14','puente esencial','agua potable,electricidad,telecomunicaciones',40.0,4.80),('PN-102','Puente sobre río Torres',39,'nacional primaria','San José','San José',9.945680,'marco rígido','concreto reforzado',42.75,1,1,'1996-11-22','puente convencional','alcantarillado,electricidad',30.0,4.50),('PN-103','Puente sobre río Peñas Blancas',142,'nacional secundaria','Alajuela','San Ramón',10.218430,'cercha','acero',118.20,4,1,'1987-03-09','puente crítico','telecomunicaciones',25.0,4.20),('PN-104','Puente sobre río Pacuare',10,'nacional primaria','Cartago','Turrialba',9.897315,'arco','concreto reforzado',154.90,3,1,'2015-07-18','puente esencial','agua potable,electricidad,otros',45.0,5.10),('PN-105','Puente sobre quebrada Honda',804,'cantonal','Guanacaste','Santa Cruz',10.267840,'modular provisional','acero',24.60,2,1,'2021-02-12','otro puente','ninguno',18.0,3.90);
+INSERT INTO `registrarpuente` VALUES ('','',0,'','','',0.000000,'','',0.00,0,0,'0000-00-00','','',0.0,0.00,''),('PN-101','Puente sobre río Segundo',1,'nacional primaria','Alajuela','Alajuela',10.016245,'vigas','concreto preesforzado',86.50,3,1,'2008-05-14','puente esencial','agua potable,electricidad,telecomunicaciones',40.0,4.80,NULL),('PN-102','Puente sobre río Torres',39,'nacional primaria','San José','San José',9.945680,'marco rígido','concreto reforzado',42.75,1,1,'1996-11-22','puente convencional','alcantarillado,electricidad',30.0,4.50,NULL),('PN-103','Puente sobre río Peñas Blancas',142,'nacional secundaria','Alajuela','San Ramón',10.218430,'cercha','acero',118.20,4,1,'1987-03-09','puente crítico','telecomunicaciones',25.0,4.20,NULL),('PN-104','Puente sobre río Pacuare',10,'nacional primaria','Cartago','Turrialba',9.897315,'arco','concreto reforzado',154.90,3,1,'2015-07-18','puente esencial','agua potable,electricidad,otros',45.0,5.10,NULL),('PN-105','Puente sobre quebrada Honda',804,'cantonal','Guanacaste','Santa Cruz',10.267840,'modular provisional','acero',24.60,2,1,'2021-02-12','otro puente','ninguno',18.0,3.90,NULL),('Po7','Etse',1,'nacional secundaria','Cartago','o',12.000000,'modular provisional','concreto preesforzado',0.02,3,2,'2026-07-02','puente esencial','agua potable',0.0,0.03,'Proyecto_Grupo1/View/Uploads/Captura de pantalla 2026-07-25 085158.png'),('Y45T','puente rafael',46,'nacional secundaria','San José','m',7.850000,'colgante','concreto reforzado',0.06,16,7,'2025-06-05','puente crítico','alcantarillado',1.0,0.60,'/Proyecto_Grupo1/View/Uploads/Captura de pantalla 2026-07-25 085158.png');
 /*!40000 ALTER TABLE `registrarpuente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -669,7 +670,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spRegistrarPuente`(
         'ninguno'
     ),
     IN p_restriccion_peso DECIMAL(5,1),
-    IN p_restriccion_altura DECIMAL(5,2)
+    IN p_restriccion_altura DECIMAL(5,2),
+    IN p_imagen VARCHAR(100)
 )
 BEGIN
     INSERT INTO registrarpuente (
@@ -689,7 +691,8 @@ BEGIN
         importancia,
         servicios_publicos,
         restriccion_peso,
-        restriccion_altura
+        restriccion_altura,
+        imagen
     )
     VALUES (
         p_codigo,
@@ -708,7 +711,8 @@ BEGIN
         p_importancia,
         p_servicios_publicos,
         p_restriccion_peso,
-        p_restriccion_altura
+        p_restriccion_altura,
+        p_imagen
     );
 END ;;
 DELIMITER ;
@@ -780,4 +784,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-21 14:19:54
+-- Dump completed on 2026-07-25  9:51:31

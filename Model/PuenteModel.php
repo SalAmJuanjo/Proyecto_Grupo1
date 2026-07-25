@@ -18,7 +18,8 @@
     $importancia,
     $servicios_publicos,
     $restriccion_peso,
-    $restriccion_altura
+    $restriccion_altura,
+    $imagen
 ) {
     try {
         $conn = OpenDB();
@@ -40,7 +41,9 @@
             '$importancia',
             '$servicios_publicos',
             '$restriccion_peso',
-            '$restriccion_altura'
+            '$restriccion_altura',
+            '$imagen'
+
         )";
 
         $response = $conn->query($sql);
@@ -74,7 +77,8 @@ function ListarPuentesModel() {
                     importancia,
                     servicios_publicos,
                     restriccion_peso,
-                    restriccion_altura
+                    restriccion_altura,
+                    imagen
                 FROM registrarpuente";
 
         $response = $conn->query($sql);

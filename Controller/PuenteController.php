@@ -24,6 +24,17 @@ if(isset($_POST["btnRegistrarPuente"]))
     $importancia = $_POST["importancia"];
     $restriccionPeso = $_POST["restriccionPeso"];
     $restriccionAltura = $_POST["restriccionAltura"];
+
+    $imagen = '';
+    if (!empty($_FILES["imagen"]["name"])) {
+        $nombreImagen = basename($_FILES["imagen"]["name"]);
+        $imagen = '/Proyecto_Grupo1/View/Uploads/' . $nombreImagen;
+        $origen = $_FILES["imagen"]["tmp_name"];
+        $destino = $_SERVER['DOCUMENT_ROOT'] . $imagen;
+        move_uploaded_file($origen, $destino);
+    }
+     
+     
     
    
     $serviciosPublicos = isset($_POST["serviciosPublicos"]) ? implode(', ', $_POST["serviciosPublicos"]) : '';
@@ -48,7 +59,9 @@ if(isset($_POST["btnRegistrarPuente"]))
         $importancia, 
         $serviciosPublicos,
         $restriccionPeso,    
-        $restriccionAltura   
+        $restriccionAltura,
+        $imagen   
+
     );
 
     if($datos)
@@ -65,28 +78,37 @@ if (isset($_POST["btnmostrarpuentes"])) {
 
     if ($puentes && $puentes->num_rows > 0) {
         while ($row = $puentes->fetch_assoc()) {
+            $imagen_html = '';
+            if (!empty($row['imagen'])) {
+                $imagen_html = "<img src='{$row['imagen']}' alt='Imagen del puente' style='max-width: 200px; max-height: 200px; object-fit: cover;'>";
+            }
             echo "
             <div class='card mb-3'>
-                <div class='card-body'>
-                    <p class='card-text'>
-                        <strong>Código:</strong> {$row['codigo']}<br>
-                        <strong>Nombre:</strong> {$row['nombre']}<br>
-                        <strong>Número de ruta:</strong> {$row['numero_ruta']}<br>
-                        <strong>Clasificación de ruta:</strong> {$row['clasificacion_ruta']}<br>
-                        <strong>Provincia:</strong> {$row['provincia']}<br>
-                        <strong>Cantón:</strong> {$row['canton']}<br>
-                        <strong>Coordenadas:</strong> {$row['coordenadas']}<br>
-                        <strong>Tipo de estructura:</strong> {$row['tipo_estructura']}<br>
-                        <strong>Material principal:</strong> {$row['material_principal']}<br>
-                        <strong>Longitud total:</strong> {$row['longitud_total']} m<br>
-                        <strong>Número de tramos:</strong> {$row['numero_tramos']}<br>
-                        <strong>Número de superestructuras:</strong> {$row['numero_superestructuras']}<br>
-                        <strong>Fecha construcción:</strong> {$row['fecha_construccion']}<br>
-                        <strong>Importancia:</strong> {$row['importancia']}<br>
-                        <strong>Servicios públicos:</strong> {$row['servicios_publicos']}<br>
-                        <strong>Restricción de peso:</strong> {$row['restriccion_peso']} t<br>
-                        <strong>Restricción de altura:</strong> {$row['restriccion_altura']} m
-                    </p>
+                <div class='card-body' style='display: flex; gap: 20px; align-items: flex-start;'>
+                    <div style='flex: 1;'>
+                        <p class='card-text'>
+                            <strong>Código:</strong> {$row['codigo']}<br>
+                            <strong>Nombre:</strong> {$row['nombre']}<br>
+                            <strong>Número de ruta:</strong> {$row['numero_ruta']}<br>
+                            <strong>Clasificación de ruta:</strong> {$row['clasificacion_ruta']}<br>
+                            <strong>Provincia:</strong> {$row['provincia']}<br>
+                            <strong>Cantón:</strong> {$row['canton']}<br>
+                            <strong>Coordenadas:</strong> {$row['coordenadas']}<br>
+                            <strong>Tipo de estructura:</strong> {$row['tipo_estructura']}<br>
+                            <strong>Material principal:</strong> {$row['material_principal']}<br>
+                            <strong>Longitud total:</strong> {$row['longitud_total']} m<br>
+                            <strong>Número de tramos:</strong> {$row['numero_tramos']}<br>
+                            <strong>Número de superestructuras:</strong> {$row['numero_superestructuras']}<br>
+                            <strong>Fecha construcción:</strong> {$row['fecha_construccion']}<br>
+                            <strong>Importancia:</strong> {$row['importancia']}<br>
+                            <strong>Servicios públicos:</strong> {$row['servicios_publicos']}<br>
+                            <strong>Restricción de peso:</strong> {$row['restriccion_peso']} t<br>
+                            <strong>Restricción de altura:</strong> {$row['restriccion_altura']} m
+                        </p>
+                    </div>
+                    <div style='flex: 0 0 auto;'>
+                        {$imagen_html}
+                    </div>
                 </div>
             </div>";
         }

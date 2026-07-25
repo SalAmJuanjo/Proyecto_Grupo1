@@ -21,8 +21,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                 <div class="container-fluid px-3 px-lg-4 py-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <form action="" method="post" class="needs-validation" id="formRegistrarPuente"
-                                name="formRegistrarPuente" novalidate>
+                            <form action="" method="post" id="formRegistrarPuente"
+                                name="formRegistrarPuente" enctype="multipart/form-data">
                                 <div class="mb-4">
                                     <h1 class="h3 mb-2">Registrar Puente</h1>
                                     <p class="text-muted mb-3">Completa los datos del puente para registrar la
@@ -32,32 +32,25 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                 <!-- Código -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="CodigoPuente">Código del puente</label>
-                                    <input class="form-control" id="CodigoPuente" name="CodigoPuente" type="text"
-                                        required>
-                                    <div class="invalid-feedback">Ingresa el código del puente.</div>
+                                    <input class="form-control" id="CodigoPuente" name="CodigoPuente" type="text">
                                 </div>
 
                                 <!-- Nombre -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="nombrePuente">Nombre del puente</label>
-                                    <input class="form-control" id="nombrePuente" name="nombrePuente" type="text"
-                                        required>
-                                    <div class="invalid-feedback">Ingresa el nombre del puente.</div>
+                                    <input class="form-control" id="nombrePuente" name="nombrePuente" type="text">
                                 </div>
 
                                 <!-- Número de ruta -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="numeroRuta">Número de ruta</label>
-                                    <input class="form-control" id="numeroRuta" name="numeroRuta" type="number"
-                                        required>
-                                    <div class="invalid-feedback">Ingresa el número de ruta.</div>
+                                    <input class="form-control" id="numeroRuta" name="numeroRuta" type="number">
                                 </div>
 
                                 <!-- Clasificación de ruta -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="clasificacionRuta">Clasificación de ruta</label>
-                                    <select class="form-control" id="clasificacionRuta" name="clasificacionRuta"
-                                        required>
+                                    <select class="form-control" id="clasificacionRuta" name="clasificacionRuta">
                                         <option value="">Seleccione...</option>
                                         <option value="nacional primaria">Nacional primaria</option>
                                         <option value="nacional secundaria">Nacional secundaria</option>
@@ -65,13 +58,12 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                         <option value="cantonal">Cantonal</option>
                                         <option value="otra">Otra</option>
                                     </select>
-                                    <div class="invalid-feedback">Seleccione la clasificación de la ruta.</div>
                                 </div>
 
                                 <!-- Provincia -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="provincia">Provincia</label>
-                                    <select class="form-control" id="provincia" name="provincia" required>
+                                    <select class="form-control" id="provincia" name="provincia">
                                         <option value="">Seleccione...</option>
                                         <option value="San José">San José</option>
                                         <option value="Alajuela">Alajuela</option>
@@ -81,28 +73,24 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                         <option value="Puntarenas">Puntarenas</option>
                                         <option value="Limón">Limón</option>
                                     </select>
-                                    <div class="invalid-feedback">Seleccione la provincia.</div>
                                 </div>
 
                                 <!-- Cantón -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="canton">Cantón</label>
-                                    <input class="form-control" id="canton" name="canton" type="text" required>
-                                    <div class="invalid-feedback">Ingrese el cantón.</div>
+                                    <input class="form-control" id="canton" name="canton" type="text">
                                 </div>
 
                                 <!-- Coordenadas -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="coordenadas">Coordenadas (grados decimales)</label>
-                                    <input class="form-control" id="coordenadas" name="coordenadas" type="text"
-                                        required>
-                                    <div class="invalid-feedback">Ingrese las coordenadas.</div>
+                                    <input class="form-control" id="coordenadas" name="coordenadas" type="text">
                                 </div>
 
                                 <!-- Tipo de estructura -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="tipoEstructura">Tipo de estructura</label>
-                                    <select class="form-control" id="tipoEstructura" name="tipoEstructura" required>
+                                    <select class="form-control" id="tipoEstructura" name="tipoEstructura">
                                         <option value="">Seleccione...</option>
                                         <option value="vigas">Vigas</option>
                                         <option value="cercha">Cercha</option>
@@ -113,14 +101,12 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                         <option value="modular provisional">Modular provisional</option>
                                         <option value="otra">Otra</option>
                                     </select>
-                                    <div class="invalid-feedback">Seleccione el tipo de estructura.</div>
                                 </div>
 
                                 <!-- Material principal -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="materialPrincipal">Material principal</label>
-                                    <select class="form-control" id="materialPrincipal" name="materialPrincipal"
-                                        required>
+                                    <select class="form-control" id="materialPrincipal" name="materialPrincipal">
                                         <option value="">Seleccione...</option>
                                         <option value="concreto reforzado">Concreto reforzado</option>
                                         <option value="concreto preesforzado">Concreto preesforzado</option>
@@ -129,23 +115,20 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                         <option value="mampostería">Mampostería</option>
                                         <option value="mixto">Mixto</option>
                                     </select>
-                                    <div class="invalid-feedback">Seleccione el material principal.</div>
                                 </div>
+
 
                                 <!-- Longitud total -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="longitudTotal">Longitud total (m)</label>
                                     <input class="form-control" id="longitudTotal" name="longitudTotal" type="number"
-                                        step="0.01" required>
-                                    <div class="invalid-feedback">Ingrese la longitud total.</div>
+                                        step="0.01">
                                 </div>
 
                                 <!-- Número de tramos -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="numeroTramos">Número de tramos</label>
-                                    <input class="form-control" id="numeroTramos" name="numeroTramos" type="number"
-                                        required>
-                                    <div class="invalid-feedback">Ingrese el número de tramos.</div>
+                                    <input class="form-control" id="numeroTramos" name="numeroTramos" type="number">
                                 </div>
 
                                 <!-- Número de superestructuras -->
@@ -153,36 +136,33 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     <label class="form-label" for="numeroSuperestructuras">Número de
                                         superestructuras</label>
                                     <input class="form-control" id="numeroSuperestructuras"
-                                        name="numeroSuperestructuras" type="number" required>
-                                    <div class="invalid-feedback">Ingrese el número de superestructuras.</div>
+                                        name="numeroSuperestructuras" type="number">
                                 </div>
 
                                 <!-- Fecha de construcción -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="fechaConstruccion">Fecha de construcción</label>
                                     <input class="form-control" id="fechaConstruccion" name="fechaConstruccion"
-                                        type="date" required>
-                                    <div class="invalid-feedback">Ingrese la fecha de construcción.</div>
+                                        type="date">
                                 </div>
 
                                 <!-- Importancia -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="importancia">Importancia</label>
-                                    <select class="form-control" id="importancia" name="importancia" required>
+                                    <select class="form-control" id="importancia" name="importancia">
                                         <option value="">Seleccione...</option>
                                         <option value="puente crítico">Puente crítico</option>
                                         <option value="puente esencial">Puente esencial</option>
                                         <option value="puente convencional">Puente convencional</option>
                                         <option value="otro puente">Otro puente</option>
                                     </select>
-                                    <div class="invalid-feedback">Seleccione la importancia.</div>
                                 </div>
 
                                 <!-- Servicios públicos -->
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label" for="serviciosPublicos">Servicios públicos</label>
                                     <select class="form-control" id="serviciosPublicos" name="serviciosPublicos[]"
-                                        multiple required>
+                                        multiple>
                                         <option value="agua potable">Agua potable</option>
                                         <option value="alcantarillado">Alcantarillado</option>
                                         <option value="electricidad">Electricidad</option>
@@ -190,27 +170,29 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                         <option value="tubería de combustible">Tubería de combustible</option>
                                         <option value="otros">Otros</option>
                                     </select>
-                                    <div class="invalid-feedback">Seleccione los servicios públicos.</div>
                                 </div>
                                 <!-- Restricción de Peso -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="restriccionPeso">Restricción de peso
                                         (toneladas)</label>
-                                    <!-- Usamos type="number" y step="0.01" por si permite decimales -->
                                     <input class="form-control" id="restriccionPeso" name="restriccionPeso"
-                                        type="number" step="0.01" required>
-                                    <div class="invalid-feedback">Ingrese la restricción de peso. Si no tiene, ingrese
-                                        0.</div>
+                                        type="number" step="0.01">
                                 </div>
 
                                 <!-- Restricción de Altura -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="restriccionAltura">Restricción de altura (m)</label>
-                                    <!-- Usamos type="number" y step="0.01" por si permite decimales -->
                                     <input class="form-control" id="restriccionAltura" name="restriccionAltura"
-                                        type="number" step="0.01" required>
-                                    <div class="invalid-feedback">Ingrese la restricción de altura. Si no tiene, ingrese
-                                        0.</div>
+                                        type="number" step="0.01">
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="imagen">
+                                        <i class="bi bi-image me-1 text-muted"></i>Imagen
+                                    </label>
+                                    <input class="form-control" id="imagen" name="imagen" type="file"
+                                        accept=".png,image/png">
                                 </div>
 
                                 <button id="btnRegistrarPuente" name="btnRegistrarPuente" class="btn btn-primary mt-4"
@@ -227,6 +209,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
         </div>
     </div>
     <?php ImportJS(); ?>
+    
+    <script src="../../View/js/RegistrarPuente.js"></script>
 </body>
 
 </html>
