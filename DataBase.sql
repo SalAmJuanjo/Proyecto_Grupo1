@@ -53,7 +53,7 @@ CREATE TABLE `registrarpuente` (
 
 LOCK TABLES `registrarpuente` WRITE;
 /*!40000 ALTER TABLE `registrarpuente` DISABLE KEYS */;
-INSERT INTO `registrarpuente` VALUES ('','',0,'','','',0.000000,'','',0.00,0,0,'0000-00-00','','',0.0,0.00,''),('PN-101','Puente sobre río Segundo',1,'nacional primaria','Alajuela','Alajuela',10.016245,'vigas','concreto preesforzado',86.50,3,1,'2008-05-14','puente esencial','agua potable,electricidad,telecomunicaciones',40.0,4.80,NULL),('PN-102','Puente sobre río Torres',39,'nacional primaria','San José','San José',9.945680,'marco rígido','concreto reforzado',42.75,1,1,'1996-11-22','puente convencional','alcantarillado,electricidad',30.0,4.50,NULL),('PN-103','Puente sobre río Peñas Blancas',142,'nacional secundaria','Alajuela','San Ramón',10.218430,'cercha','acero',118.20,4,1,'1987-03-09','puente crítico','telecomunicaciones',25.0,4.20,NULL),('PN-104','Puente sobre río Pacuare',10,'nacional primaria','Cartago','Turrialba',9.897315,'arco','concreto reforzado',154.90,3,1,'2015-07-18','puente esencial','agua potable,electricidad,otros',45.0,5.10,NULL),('PN-105','Puente sobre quebrada Honda',804,'cantonal','Guanacaste','Santa Cruz',10.267840,'modular provisional','acero',24.60,2,1,'2021-02-12','otro puente','ninguno',18.0,3.90,NULL),('Po7','Etse',1,'nacional secundaria','Cartago','o',12.000000,'modular provisional','concreto preesforzado',0.02,3,2,'2026-07-02','puente esencial','agua potable',0.0,0.03,'Proyecto_Grupo1/View/Uploads/Captura de pantalla 2026-07-25 085158.png'),('Y45T','puente rafael',46,'nacional secundaria','San José','m',7.850000,'colgante','concreto reforzado',0.06,16,7,'2025-06-05','puente crítico','alcantarillado',1.0,0.60,'/Proyecto_Grupo1/View/Uploads/Captura de pantalla 2026-07-25 085158.png');
+INSERT INTO `registrarpuente` VALUES ('SB-001','Puente sobre río Cedro',1,'nacional primaria','San José','Pérez Zeledón',9.365420,'vigas','concreto preesforzado',92.50,3,2,'1994-04-15','otro puente','electricidad,telecomunicaciones',10.5,5.20,NULL),('SB-002','Puente sobre río Diamante',2,'nacional primaria','Cartago','El Guarco',9.788310,'marco rígido','concreto reforzado',68.40,2,2,'2002-08-21','puente convencional','agua potable,electricidad',9.8,4.90,NULL),('SB-003','Puente sobre río Esmeralda',27,'nacional primaria','San José','Escazú',9.934120,'vigas','concreto preesforzado',105.75,4,3,'1998-11-10','puente crítico','agua potable,electricidad,telecomunicaciones',14.2,5.50,NULL),('SB-004','Puente sobre río Fortuna',32,'nacional primaria','Limón','Limón',9.991840,'cercha','acero',130.60,4,2,'1989-02-18','puente esencial','electricidad,telecomunicaciones',11.7,5.10,NULL),('SB-005','Puente sobre quebrada Granada',118,'nacional secundaria','Alajuela','Grecia',10.072350,'vigas','concreto reforzado',45.80,2,2,'2008-06-12','puente esencial','agua potable',9.4,4.60,NULL),('SB-006','Puente sobre río Horizonte',4,'nacional primaria','Heredia','Sarapiquí',10.412680,'arco','concreto reforzado',88.90,3,2,'1996-09-27','puente crítico','electricidad,telecomunicaciones',10.8,5.00,NULL),('SB-007','Puente sobre quebrada Ilusión',804,'cantonal','Guanacaste','Santa Cruz',10.267540,'modular provisional','acero',29.70,1,1,'2017-03-05','otro puente','ninguno',4.8,3.80,NULL),('SB-008','Puente sobre río Jacaranda',141,'nacional secundaria','Alajuela','San Carlos',10.355740,'vigas','concreto preesforzado',76.30,3,2,'2011-12-14','puente esencial','agua potable,electricidad',9.9,4.70,NULL),('SB-009','Puente sobre río Kandela',21,'nacional primaria','Puntarenas','Esparza',9.998630,'colgante','acero',112.40,3,2,'2005-01-29','puente crítico','electricidad,telecomunicaciones',10.6,5.30,NULL),('SB-010','Puente sobre quebrada Luna',301,'cantonal','Cartago','Paraíso',9.838970,'vigas','concreto reforzado',36.20,2,1,'2019-07-16','otro puente','agua potable',5.5,4.10,NULL);
 /*!40000 ALTER TABLE `registrarpuente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +77,7 @@ CREATE TABLE `tb_detalle_inspeccion` (
   CONSTRAINT `fk_detalle_elemento` FOREIGN KEY (`ConsecutivoElemento`) REFERENCES `tb_elemento` (`ConsecutivoElemento`),
   CONSTRAINT `fk_detalle_inspeccion` FOREIGN KEY (`ConsecutivoInspeccion`) REFERENCES `tb_inspeccion` (`ConsecutivoInspeccion`) ON DELETE CASCADE,
   CONSTRAINT `chk_calificacion` CHECK (`Calificacion` is null or `Calificacion` between 1 and 5)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +86,7 @@ CREATE TABLE `tb_detalle_inspeccion` (
 
 LOCK TABLES `tb_detalle_inspeccion` WRITE;
 /*!40000 ALTER TABLE `tb_detalle_inspeccion` DISABLE KEYS */;
-INSERT INTO `tb_detalle_inspeccion` VALUES (1,1,1,_binary '',1,NULL),(2,1,2,_binary '',1,NULL),(3,1,3,_binary '',2,'Corrosión superficial.'),(4,1,4,_binary '',1,NULL),(5,1,5,_binary '',1,NULL),(6,1,6,_binary '',1,NULL),(7,1,7,_binary '',1,NULL),(8,1,8,_binary '',2,'Fisura leve.'),(9,1,9,_binary '',1,NULL),(10,1,10,_binary '',1,NULL),(11,1,11,_binary '',1,NULL),(12,1,12,_binary '',1,NULL),(13,1,13,_binary '',1,NULL),(14,1,14,_binary '',1,NULL),(15,2,1,_binary '',2,'Desgaste moderado.'),(16,2,2,_binary '',2,'Juntas deterioradas.'),(17,2,3,_binary '',3,'Baranda golpeada.'),(18,2,4,_binary '',2,'Drenaje parcialmente obstruido.'),(19,2,5,_binary '',2,'Fisuras visibles.'),(20,2,6,_binary '',2,'Corrosión superficial.'),(21,2,7,_binary '',2,'Fisuras menores.'),(22,2,8,_binary '',3,'Daño moderado.'),(23,2,9,_binary '',2,'Desgaste.'),(24,2,10,_binary '',2,'Fisuras.'),(25,2,11,_binary '',2,'Daño menor.'),(26,2,12,_binary '',2,'Socavación leve.'),(27,2,13,_binary '',2,'Erosión ligera.'),(28,2,14,_binary '',2,'Sedimentos acumulados.'),(29,3,1,_binary '',1,NULL),(30,3,2,_binary '',1,NULL),(31,3,3,_binary '',1,NULL),(32,3,4,_binary '',1,NULL),(33,3,5,_binary '',2,'Fisura superficial.'),(34,3,6,_binary '',1,NULL),(35,3,7,_binary '',1,NULL),(36,3,8,_binary '',1,NULL),(37,3,9,_binary '',1,NULL),(38,3,10,_binary '',1,NULL),(39,3,11,_binary '',1,NULL),(40,3,12,_binary '',1,NULL),(41,3,13,_binary '',1,NULL),(42,3,14,_binary '',1,NULL),(43,4,1,_binary '',3,'Desgaste importante.'),(44,4,2,_binary '',3,'Juntas abiertas.'),(45,4,3,_binary '',4,'Baranda deformada.'),(46,4,4,_binary '',3,'Drenaje obstruido.'),(47,4,5,_binary '',4,'Fisuras severas.'),(48,4,6,_binary '',3,'Corrosión.'),(49,4,7,_binary '',3,'Fisuras.'),(50,4,8,_binary '',4,'Daño estructural.'),(51,4,9,_binary '',3,'Apoyo deteriorado.'),(52,4,10,_binary '',3,'Asentamiento.'),(53,4,11,_binary '',3,'Deterioro.'),(54,4,12,_binary '',4,'Socavación.'),(55,4,13,_binary '',3,'Erosión.'),(56,4,14,_binary '',4,'Obstrucción del cauce.'),(57,5,1,_binary '',5,'Daño severo.'),(58,5,2,_binary '',5,'Juntas destruidas.'),(59,5,3,_binary '',5,'Barandas colapsadas.'),(60,5,4,_binary '',5,'Sistema de drenaje inoperable.'),(61,5,5,_binary '',5,'Grietas profundas.'),(62,5,6,_binary '',5,'Corrosión generalizada.'),(63,5,7,_binary '',4,'Fisuras críticas.'),(64,5,8,_binary '',5,'Falla estructural.'),(65,5,9,_binary '',5,'Apoyos comprometidos.'),(66,5,10,_binary '',5,'Asentamiento severo.'),(67,5,11,_binary '',5,'Pilas dañadas.'),(68,5,12,_binary '',5,'Socavación severa.'),(69,5,13,_binary '',5,'Talud inestable.'),(70,5,14,_binary '',5,'Cauce obstruido.');
+INSERT INTO `tb_detalle_inspeccion` VALUES (1,1,1,_binary '',5,'Daño crítico que requiere atención inmediata.'),(2,2,1,_binary '',4,'Deterioro severo que requiere intervención.'),(3,3,1,_binary '',4,'Deterioro severo que requiere intervención.'),(4,4,1,_binary '',4,'Deterioro severo que requiere intervención.'),(5,5,1,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(6,6,1,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(7,7,1,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(8,8,1,_binary '',2,'Deterioro menor observado.'),(9,9,1,_binary '',2,'Deterioro menor observado.'),(10,10,1,_binary '',2,'Deterioro menor observado.'),(11,1,2,_binary '',5,'Daño crítico que requiere atención inmediata.'),(12,2,2,_binary '',4,'Deterioro severo que requiere intervención.'),(13,3,2,_binary '',4,'Deterioro severo que requiere intervención.'),(14,4,2,_binary '',4,'Deterioro severo que requiere intervención.'),(15,5,2,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(16,6,2,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(17,7,2,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(18,8,2,_binary '',2,'Deterioro menor observado.'),(19,9,2,_binary '',2,'Deterioro menor observado.'),(20,10,2,_binary '',2,'Deterioro menor observado.'),(21,1,3,_binary '',5,'Daño crítico que requiere atención inmediata.'),(22,2,3,_binary '',4,'Deterioro severo que requiere intervención.'),(23,3,3,_binary '',4,'Deterioro severo que requiere intervención.'),(24,4,3,_binary '',4,'Deterioro severo que requiere intervención.'),(25,5,3,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(26,6,3,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(27,7,3,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(28,8,3,_binary '',2,'Deterioro menor observado.'),(29,9,3,_binary '',2,'Deterioro menor observado.'),(30,10,3,_binary '',1,'Elemento en buenas condiciones.'),(31,1,4,_binary '',5,'Daño crítico que requiere atención inmediata.'),(32,2,4,_binary '',4,'Deterioro severo que requiere intervención.'),(33,3,4,_binary '',4,'Deterioro severo que requiere intervención.'),(34,4,4,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(35,5,4,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(36,6,4,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(37,7,4,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(38,8,4,_binary '',2,'Deterioro menor observado.'),(39,9,4,_binary '',2,'Deterioro menor observado.'),(40,10,4,_binary '',1,'Elemento en buenas condiciones.'),(41,1,5,_binary '',5,'Daño crítico que requiere atención inmediata.'),(42,2,5,_binary '',4,'Deterioro severo que requiere intervención.'),(43,3,5,_binary '',4,'Deterioro severo que requiere intervención.'),(44,4,5,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(45,5,5,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(46,6,5,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(47,7,5,_binary '',2,'Deterioro menor observado.'),(48,8,5,_binary '',2,'Deterioro menor observado.'),(49,9,5,_binary '',2,'Deterioro menor observado.'),(50,10,5,_binary '',1,'Elemento en buenas condiciones.'),(51,1,6,_binary '',5,'Daño crítico que requiere atención inmediata.'),(52,2,6,_binary '',4,'Deterioro severo que requiere intervención.'),(53,3,6,_binary '',4,'Deterioro severo que requiere intervención.'),(54,4,6,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(55,5,6,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(56,6,6,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(57,7,6,_binary '',2,'Deterioro menor observado.'),(58,8,6,_binary '',2,'Deterioro menor observado.'),(59,9,6,_binary '',2,'Deterioro menor observado.'),(60,10,6,_binary '',1,'Elemento en buenas condiciones.'),(61,1,7,_binary '',5,'Daño crítico que requiere atención inmediata.'),(62,2,7,_binary '',4,'Deterioro severo que requiere intervención.'),(63,3,7,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(64,4,7,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(65,5,7,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(66,6,7,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(67,7,7,_binary '',2,'Deterioro menor observado.'),(68,8,7,_binary '',2,'Deterioro menor observado.'),(69,9,7,_binary '',1,'Elemento en buenas condiciones.'),(70,10,7,_binary '',1,'Elemento en buenas condiciones.'),(71,1,8,_binary '',5,'Daño crítico que requiere atención inmediata.'),(72,2,8,_binary '',4,'Deterioro severo que requiere intervención.'),(73,3,8,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(74,4,8,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(75,5,8,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(76,6,8,_binary '',2,'Deterioro menor observado.'),(77,7,8,_binary '',2,'Deterioro menor observado.'),(78,8,8,_binary '',2,'Deterioro menor observado.'),(79,9,8,_binary '',1,'Elemento en buenas condiciones.'),(80,10,8,_binary '',1,'Elemento en buenas condiciones.'),(81,1,9,_binary '',4,'Deterioro severo que requiere intervención.'),(82,2,9,_binary '',4,'Deterioro severo que requiere intervención.'),(83,3,9,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(84,4,9,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(85,5,9,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(86,6,9,_binary '',2,'Deterioro menor observado.'),(87,7,9,_binary '',2,'Deterioro menor observado.'),(88,8,9,_binary '',2,'Deterioro menor observado.'),(89,9,9,_binary '',1,'Elemento en buenas condiciones.'),(90,10,9,_binary '',1,'Elemento en buenas condiciones.'),(91,1,10,_binary '',4,'Deterioro severo que requiere intervención.'),(92,2,10,_binary '',4,'Deterioro severo que requiere intervención.'),(93,3,10,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(94,4,10,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(95,5,10,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(96,6,10,_binary '',2,'Deterioro menor observado.'),(97,7,10,_binary '',2,'Deterioro menor observado.'),(98,8,10,_binary '',2,'Deterioro menor observado.'),(99,9,10,_binary '',1,'Elemento en buenas condiciones.'),(100,10,10,_binary '',1,'Elemento en buenas condiciones.'),(101,1,11,_binary '',4,'Deterioro severo que requiere intervención.'),(102,2,11,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(103,3,11,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(104,4,11,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(105,5,11,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(106,6,11,_binary '',2,'Deterioro menor observado.'),(107,7,11,_binary '',2,'Deterioro menor observado.'),(108,8,11,_binary '',2,'Deterioro menor observado.'),(109,9,11,_binary '',1,'Elemento en buenas condiciones.'),(110,10,11,_binary '',1,'Elemento en buenas condiciones.'),(111,1,12,_binary '',4,'Deterioro severo que requiere intervención.'),(112,2,12,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(113,3,12,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(114,4,12,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(115,5,12,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(116,6,12,_binary '',2,'Deterioro menor observado.'),(117,7,12,_binary '',2,'Deterioro menor observado.'),(118,8,12,_binary '',2,'Deterioro menor observado.'),(119,9,12,_binary '',1,'Elemento en buenas condiciones.'),(120,10,12,_binary '',1,'Elemento en buenas condiciones.'),(121,1,13,_binary '',4,'Deterioro severo que requiere intervención.'),(122,2,13,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(123,3,13,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(124,4,13,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(125,5,13,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(126,6,13,_binary '',2,'Deterioro menor observado.'),(127,7,13,_binary '',2,'Deterioro menor observado.'),(128,8,13,_binary '',2,'Deterioro menor observado.'),(129,9,13,_binary '',1,'Elemento en buenas condiciones.'),(130,10,13,_binary '',1,'Elemento en buenas condiciones.'),(131,1,14,_binary '',4,'Deterioro severo que requiere intervención.'),(132,2,14,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(133,3,14,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(134,4,14,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(135,5,14,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(136,6,14,_binary '',2,'Deterioro menor observado.'),(137,7,14,_binary '',2,'Deterioro menor observado.'),(138,8,14,_binary '',2,'Deterioro menor observado.'),(139,9,14,_binary '',1,'Elemento en buenas condiciones.'),(140,10,14,_binary '',1,'Elemento en buenas condiciones.');
 /*!40000 ALTER TABLE `tb_detalle_inspeccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +141,7 @@ CREATE TABLE `tb_inspeccion` (
   KEY `idx_inspeccion_inspector` (`ConsecutivoInspector`),
   CONSTRAINT `fk_inspeccion_inspector` FOREIGN KEY (`ConsecutivoInspector`) REFERENCES `tb_usuario` (`Consecutivo`),
   CONSTRAINT `fk_inspeccion_puente` FOREIGN KEY (`CodigoPuente`) REFERENCES `registrarpuente` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `tb_inspeccion` (
 
 LOCK TABLES `tb_inspeccion` WRITE;
 /*!40000 ALTER TABLE `tb_inspeccion` DISABLE KEYS */;
-INSERT INTO `tb_inspeccion` VALUES (1,'PN-101',1,'2025-08-12','Inspección rutinaria.',16,14,1.14,'Buena','2026-07-21 14:12:32',_binary ''),(2,'PN-101',1,'2025-09-15','Inspección de seguimiento.',30,14,2.14,'Regular','2026-07-21 14:12:44',_binary ''),(3,'PN-102',1,'2025-08-20','Inspección anual.',15,14,1.07,'Buena','2026-07-21 14:12:56',_binary ''),(4,'PN-102',1,'2025-10-10','Inspección posterior a lluvias.',47,14,3.36,'Deficiente','2026-07-21 14:13:03',_binary ''),(5,'PN-103',1,'2025-11-05','Inspección extraordinaria.',69,14,4.93,'Critica','2026-07-21 14:13:12',_binary '');
+INSERT INTO `tb_inspeccion` VALUES (1,'SB-001',1,'2026-01-10','Inspección detallada de los elementos del puente.',64,14,4.57,'Critica','2026-07-27 21:45:59',_binary ''),(2,'SB-002',1,'2026-01-12','Inspección detallada de los elementos del puente.',52,14,3.71,'Critica','2026-07-27 21:45:59',_binary ''),(3,'SB-003',1,'2026-01-15','Inspección detallada de los elementos del puente.',48,14,3.43,'Deficiente','2026-07-27 21:45:59',_binary ''),(4,'SB-004',1,'2026-01-18','Inspección detallada de los elementos del puente.',45,14,3.21,'Deficiente','2026-07-27 21:45:59',_binary ''),(5,'SB-005',1,'2026-01-20','Inspección detallada de los elementos del puente.',42,14,3.00,'Deficiente','2026-07-27 21:45:59',_binary ''),(6,'SB-006',1,'2026-01-22','Inspección detallada de los elementos del puente.',35,14,2.50,'Regular','2026-07-27 21:45:59',_binary ''),(7,'SB-007',1,'2026-01-25','Inspección detallada de los elementos del puente.',32,14,2.29,'Regular','2026-07-27 21:45:59',_binary ''),(8,'SB-008',1,'2026-01-27','Inspección detallada de los elementos del puente.',28,14,2.00,'Regular','2026-07-27 21:45:59',_binary ''),(9,'SB-009',1,'2026-01-29','Inspección detallada de los elementos del puente.',20,14,1.43,'Buena','2026-07-27 21:45:59',_binary ''),(10,'SB-010',1,'2026-02-01','Inspección detallada de los elementos del puente.',16,14,1.14,'Buena','2026-07-27 21:45:59',_binary '');
 /*!40000 ALTER TABLE `tb_inspeccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,6 +232,178 @@ BEGIN
     ORDER BY
         Categoria,
         ConsecutivoElemento;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spConsultarPriorizacionPuentes` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spConsultarPriorizacionPuentes`(
+    IN pMetodo VARCHAR(50)
+)
+BEGIN
+    SELECT
+        p.codigo,
+        p.nombre,
+        p.numero_ruta,
+        p.clasificacion_ruta,
+        p.provincia,
+        p.canton,
+        p.importancia,
+
+        i.ConsecutivoInspeccion AS consecutivo_inspeccion,
+        i.FechaInspeccion AS fecha_inspeccion,
+        i.IndiceDeterioro AS indice_deterioro,
+        i.CondicionPreliminar AS condicion,
+
+        CASE
+            WHEN LOWER(i.CondicionPreliminar) = 'critica'
+                THEN 4
+            WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
+                THEN 3
+            WHEN LOWER(i.CondicionPreliminar) = 'regular'
+                THEN 2
+            WHEN LOWER(i.CondicionPreliminar) = 'buena'
+                THEN 1
+            ELSE 0
+        END AS puntaje_condicion,
+
+        CASE
+            WHEN LOWER(p.importancia) = 'puente crítico'
+                THEN 4
+            WHEN LOWER(p.importancia) = 'puente esencial'
+                THEN 3
+            WHEN LOWER(p.importancia) = 'puente convencional'
+                THEN 2
+            WHEN LOWER(p.importancia) = 'otro puente'
+                THEN 1
+            ELSE 0
+        END AS puntaje_importancia,
+
+        CASE
+            WHEN pMetodo = 'condicion_importancia' THEN
+                (
+                    CASE
+                        WHEN LOWER(i.CondicionPreliminar) = 'critica'
+                            THEN 4
+                        WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
+                            THEN 3
+                        WHEN LOWER(i.CondicionPreliminar) = 'regular'
+                            THEN 2
+                        WHEN LOWER(i.CondicionPreliminar) = 'buena'
+                            THEN 1
+                        ELSE 0
+                    END * 0.70
+                )
+                +
+                (
+                    CASE
+                        WHEN LOWER(p.importancia) = 'puente crítico'
+                            THEN 4
+                        WHEN LOWER(p.importancia) = 'puente esencial'
+                            THEN 3
+                        WHEN LOWER(p.importancia) = 'puente convencional'
+                            THEN 2
+                        WHEN LOWER(p.importancia) = 'otro puente'
+                            THEN 1
+                        ELSE 0
+                    END * 0.30
+                )
+
+            ELSE
+                CASE
+                    WHEN LOWER(i.CondicionPreliminar) = 'critica'
+                        THEN 4
+                    WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
+                        THEN 3
+                    WHEN LOWER(i.CondicionPreliminar) = 'regular'
+                        THEN 2
+                    WHEN LOWER(i.CondicionPreliminar) = 'buena'
+                        THEN 1
+                    ELSE 0
+                END
+        END AS puntaje_prioridad
+
+    FROM registrarpuente p
+
+    INNER JOIN tb_inspeccion i
+        ON i.CodigoPuente = p.codigo
+        AND i.Estado = 1
+
+    WHERE p.codigo <> ''
+
+
+      AND i.ConsecutivoInspeccion = (
+            SELECT i2.ConsecutivoInspeccion
+            FROM tb_inspeccion i2
+            WHERE i2.CodigoPuente = p.codigo
+              AND i2.Estado = 1
+            ORDER BY
+                i2.FechaInspeccion DESC,
+                i2.ConsecutivoInspeccion DESC
+            LIMIT 1
+      )
+
+    ORDER BY
+
+        CASE
+            WHEN pMetodo = 'condicion_importancia' THEN
+                (
+                    CASE
+                        WHEN LOWER(i.CondicionPreliminar) = 'critica'
+                            THEN 4
+                        WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
+                            THEN 3
+                        WHEN LOWER(i.CondicionPreliminar) = 'regular'
+                            THEN 2
+                        WHEN LOWER(i.CondicionPreliminar) = 'buena'
+                            THEN 1
+                        ELSE 0
+                    END * 0.70
+                )
+                +
+                (
+                    CASE
+                        WHEN LOWER(p.importancia) = 'puente crítico'
+                            THEN 4
+                        WHEN LOWER(p.importancia) = 'puente esencial'
+                            THEN 3
+                        WHEN LOWER(p.importancia) = 'puente convencional'
+                            THEN 2
+                        WHEN LOWER(p.importancia) = 'otro puente'
+                            THEN 1
+                        ELSE 0
+                    END * 0.30
+                )
+
+            ELSE
+                CASE
+                    WHEN LOWER(i.CondicionPreliminar) = 'critica'
+                        THEN 4
+                    WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
+                        THEN 3
+                    WHEN LOWER(i.CondicionPreliminar) = 'regular'
+                        THEN 2
+                    WHEN LOWER(i.CondicionPreliminar) = 'buena'
+                        THEN 1
+                    ELSE 0
+                END
+        END DESC,
+
+        i.IndiceDeterioro DESC,
+        i.FechaInspeccion DESC,
+        p.nombre ASC;
 
 END ;;
 DELIMITER ;
@@ -784,4 +956,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-25  9:51:31
+-- Dump completed on 2026-07-27 21:55:33
