@@ -30,6 +30,7 @@ if (isset($_POST["btnIniciarSesion"])) {
     if ($datos) {
         $_SESSION["NombreUsuario"] = $datos["Nombre"];
         $_SESSION["ConsecutivoUsuario"] = $datos["Consecutivo"];
+        $_SESSION["CorreoElectronicoUsuario"] = $datos["CorreoElectronico"];
 
         header("Location: ../../View/vInicio/Principal.php");
         exit();
@@ -52,10 +53,12 @@ if (isset($_POST["btnRecuperarAcceso"])) {
             $plantilla = str_replace("{{TEMPORAL}}", $temporal, $plantilla);
             $plantilla = str_replace("{{NOMBRE}}", $datos['Nombre'], $plantilla);
 
-            EnviarCorreo("Recuperación de acceso", $plantilla, $datos['CorreoElectronico']);
+            if (EnviarCorreo("Recuperación de acceso", $plantilla, $datos['CorreoElectronico'])) {
+                header("Location: ../../View/vInicio/IniciarSesion.php");
+                exit();
+            }
 
-            header("Location: ../../View/vInicio/IniciarSesion.php");
-            exit();
+            $_SESSION["Mensaje"] = "No se pudo enviar el correo para recuperar el acceso.";
         }
     }
 

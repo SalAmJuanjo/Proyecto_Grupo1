@@ -20,9 +20,9 @@ function EnviarCorreo($asunto, $contenido, $destinatario)
         require 'PHPMailer/src/PHPMailer.php';
         require 'PHPMailer/src/SMTP.php';
 
-        //Eliminé el mío (juanjo), pero si me funcionó
+        
         $correoSalida = "juanjosama0627@gmail.com";
-        $contrasennaSalida = "xjbq wdmq wpcb juuv";
+        $contrasennaSalida = "sqcg ioan pbtg lyxq";
 
         if ($contrasennaSalida == "") {
             return true; // Simulación de envío exitoso

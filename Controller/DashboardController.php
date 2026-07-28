@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT']
 
 
 function ValidarAccesoDashboardController()
+{
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }

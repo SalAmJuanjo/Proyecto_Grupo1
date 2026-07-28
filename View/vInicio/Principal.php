@@ -29,12 +29,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/LayoutInterno.ph
                                 </p>
                             </div>
                         </div>
-                        <div class="heading-actions">
-                            <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-download"></i>
-                                Exportar</button>
-                            <button class="btn btn-primary btn-sm"><i cla0ss="bi bi-file-earmark-plus"></i> Crear
-                                reporte</button>
-                        </div>
                     </div>
 
                     <!-- Acciones principales -->
