@@ -6,7 +6,7 @@ include_once $_SERVER['DOCUMENT_ROOT']
 
 function ValidarAccesoPriorizacionController()
 {
-    if (session_status() === PHP_SESSION_NONE) {
+    if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
 
@@ -27,17 +27,74 @@ function ConsultarPriorizacionController()
         $metodoRecibido = trim($_GET["metodo"]);
 
         if (
-            $metodoRecibido === "condicion"
-            || $metodoRecibido === "condicion_importancia"
+            $metodoRecibido == "condicion"
+            || $metodoRecibido == "condicion_importancia"
         ) {
             $metodo = $metodoRecibido;
         }
     }
 
-    $puentes = ConsultarPriorizacionModel($metodo);
+    $puentes =
+        ConsultarPriorizacionModel(
+            $metodo
+        );
 
-    return array(
+    $datos = array(
         "metodo" => $metodo,
         "puentes" => $puentes
+    );
+
+    return $datos;
+}
+
+
+function ObtenerClaseCondicionPriorizacionController(
+    $condicion
+) {
+    $condicionNormalizada = strtolower(
+        str_replace(
+            array("í", "Í"),
+            "i",
+            trim($condicion)
+        )
+    );
+
+    switch ($condicionNormalizada) {
+
+        case "buena":
+            return "dashboard-badge-buena";
+
+        case "regular":
+            return "dashboard-badge-regular";
+
+        case "deficiente":
+            return "dashboard-badge-deficiente";
+
+        case "critica":
+            return "dashboard-badge-critica";
+
+        default:
+            return "dashboard-badge-neutral";
+    }
+}
+
+
+function FormatearFechaPriorizacionController(
+    $fecha
+) {
+    if (empty($fecha)) {
+        return "Sin fecha";
+    }
+
+    $marcaTiempo =
+        strtotime($fecha);
+
+    if (!$marcaTiempo) {
+        return $fecha;
+    }
+
+    return date(
+        "d/m/Y",
+        $marcaTiempo
     );
 }

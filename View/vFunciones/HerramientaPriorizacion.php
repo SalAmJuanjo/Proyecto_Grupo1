@@ -1,61 +1,30 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT']
+include_once $_SERVER['DOCUMENT_ROOT']
+    . '/Proyecto_Grupo1/View/LayoutInterno.php';
+
+include_once $_SERVER['DOCUMENT_ROOT']
     . '/Proyecto_Grupo1/Controller/PriorizacionController.php';
+
 
 ValidarAccesoPriorizacionController();
 
-require_once $_SERVER['DOCUMENT_ROOT']
-    . '/Proyecto_Grupo1/View/LayoutInterno.php';
 
-$datosPriorizacion = ConsultarPriorizacionController();
-
-$metodoSeleccionado = $datosPriorizacion["metodo"];
-$puentes = $datosPriorizacion["puentes"];
+$datosPriorizacion =
+    ConsultarPriorizacionController();
 
 
-function ObtenerClaseCondicionPriorizacion($condicion)
-{
-    $condicionNormalizada = strtolower(
-        str_replace(
-            array("í", "Í"),
-            "i",
-            trim($condicion)
-        )
-    );
+$metodoSeleccionado =
+    isset($datosPriorizacion["metodo"])
+        ? $datosPriorizacion["metodo"]
+        : "condicion";
 
-    switch ($condicionNormalizada) {
-        case "buena":
-            return "dashboard-badge-buena";
 
-        case "regular":
-            return "dashboard-badge-regular";
-
-        case "deficiente":
-            return "dashboard-badge-deficiente";
-
-        case "critica":
-            return "dashboard-badge-critica";
-
-        default:
-            return "dashboard-badge-neutral";
-    }
-}
-
-function FormatearFechaPriorizacion($fecha)
-{
-    if (empty($fecha)) {
-        return "Sin fecha";
-    }
-
-    $marcaTiempo = strtotime($fecha);
-
-    if (!$marcaTiempo) {
-        return $fecha;
-    }
-
-    return date("d/m/Y", $marcaTiempo);
-}
+$puentes =
+    isset($datosPriorizacion["puentes"])
+    && is_array($datosPriorizacion["puentes"])
+        ? $datosPriorizacion["puentes"]
+        : array();
 
 ?>
 
@@ -73,358 +42,374 @@ function FormatearFechaPriorizacion($fecha)
             data-sidebar-close>
         </div>
 
+
         <?php aside(); ?>
+
 
         <div class="admin-main">
 
             <?php navbar(); ?>
+
 
             <main class="dashboard-content">
 
                 <div class="container-fluid px-3 px-lg-4 py-4">
 
 
-                    <div class="page-heading mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
 
-                        <div class="page-heading-copy">
+                        <div>
 
-                            <div>
+                            <h1 class="h3 mb-1">
+                                Priorización de puentes
+                            </h1>
 
-                                <p class="eyebrow mb-1">
-                                    SmartBridge
-                                </p>
-
-                                <h1 class="h3 mb-1">
-                                    Herramienta de priorización
-                                </h1>
-
-                                <p class="text-muted mb-0">
-                                    Ordena los puentes según su condición
-                                    estructural y nivel de importancia.
-                                </p>
-
-                            </div>
+                            <p class="text-muted mb-0">
+                                Orden de atención de los puentes según el método seleccionado.
+                            </p>
 
                         </div>
 
                     </div>
 
 
-                    <section class="card mb-4">
+                    <div class="card mb-4">
 
                         <div class="card-body">
 
                             <form
-                                method="GET"
                                 action=""
-                                class="row align-items-end g-3">
+                                method="GET">
 
-                                <div class="col-12 col-lg-8">
+                                <div class="row align-items-end">
 
-                                    <label
-                                        for="metodo"
-                                        class="form-label fw-semibold">
 
-                                        Método de priorización
+                                    <div class="col-md-6">
 
-                                    </label>
+                                        <label
+                                            for="metodo"
+                                            class="form-label">
 
-                                    <select
-                                        class="form-select"
-                                        id="metodo"
-                                        name="metodo">
+                                            Método de priorización
 
-                                        <option
-                                            value="condicion"
-                                            <?php
-                                            echo $metodoSeleccionado === "condicion"
-                                                ? "selected"
-                                                : "";
-                                            ?>>
+                                        </label>
 
-                                            Condición estructural
 
-                                        </option>
+                                        <select
+                                            class="form-select"
+                                            id="metodo"
+                                            name="metodo">
 
-                                        <option
-                                            value="condicion_importancia"
-                                            <?php
-                                            echo $metodoSeleccionado ===
-                                                "condicion_importancia"
-                                                    ? "selected"
-                                                    : "";
-                                            ?>>
 
-                                            Condición estructural e importancia
+                                            <option
+                                                value="condicion"
+                                                <?php
+                                                echo
+                                                    $metodoSeleccionado == "condicion"
+                                                        ? "selected"
+                                                        : "";
+                                                ?>
+                                            >
 
-                                        </option>
+                                                Condición estructural
 
-                                    </select>
+                                            </option>
 
-                                <div class="form-text">
-                                    <?php
-                                    if ($metodoSeleccionado === "condicion_importancia") {
-                                        echo "Este método combina 70 % de condición estructural y 30 % de importancia.";
-                                    } else {
-                                        echo "Este método ordena los puentes únicamente según su condición estructural.";
-                                    }
-                                    ?>
-                                </div>
 
-                                </div>
+                                            <option
+                                                value="condicion_importancia"
+                                                <?php
+                                                echo
+                                                    $metodoSeleccionado == "condicion_importancia"
+                                                        ? "selected"
+                                                        : "";
+                                                ?>
+                                            >
 
-                                <div class="col-12 col-lg-4">
+                                                Condición estructural e importancia
 
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary w-100">
+                                            </option>
 
-                                        Aplicar priorización
 
-                                    </button>
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="col-md-3 mt-3 mt-md-0">
+
+                                        <button
+                                            type="submit"
+                                            id="btnAplicarPriorizacion"
+                                            name="btnAplicarPriorizacion"
+                                            class="btn btn-primary w-100">
+
+                                            Aplicar método
+
+                                        </button>
+
+                                    </div>
+
 
                                 </div>
 
                             </form>
 
-                        </div>
 
-                    </section>
+                            <div class="mt-3">
 
+                                <?php
+                                if (
+                                    $metodoSeleccionado
+                                    == "condicion_importancia"
+                                ) {
+                                ?>
 
-                    <div class="row g-3 mb-4">
+                                    <div class="alert alert-info mb-0">
 
-                        <div class="col-12 col-md-4">
-
-                            <article class="card h-100">
-
-                                <div class="card-body">
-
-                                    <span class="text-muted">
-                                        Puentes evaluados
-                                    </span>
-
-                                    <div class="fs-2 fw-bold mt-2">
-
-                                        <?php echo count($puentes); ?>
+                                        Este método combina
+                                        50 % de condición estructural
+                                        y 50 % de importancia.
+                                        El puntaje de prioridad representa
+                                        el resultado combinado utilizado
+                                        para ordenar los puentes.
 
                                     </div>
 
-                                </div>
+                                <?php
+                                } else {
+                                ?>
 
-                            </article>
+                                    <div class="alert alert-info mb-0">
 
-                        </div>
-
-                        <div class="col-12 col-md-4">
-
-                            <article class="card h-100">
-
-                                <div class="card-body">
-
-                                    <span class="text-muted">
-                                        Método aplicado
-                                    </span>
-
-                                    <div class="fw-bold mt-2">
-
-                                        <?php
-                                        echo $metodoSeleccionado ===
-                                            "condicion_importancia"
-                                                ? "Condición e importancia"
-                                                : "Condición estructural";
-                                        ?>
+                                        Este método prioriza los puentes
+                                        según su condición estructural.
 
                                     </div>
 
-                                </div>
+                                <?php
+                                }
+                                ?>
 
-                            </article>
-
-                        </div>
-
-                        <div class="col-12 col-md-4">
-
-                            <article class="card h-100">
-
-                                <div class="card-body">
-
-                                    <span class="text-muted">
-                                        Mayor prioridad
-                                    </span>
-
-                                    <div class="fw-bold mt-2">
-
-                                        <?php
-                                        echo !empty($puentes)
-                                            ? htmlspecialchars(
-                                                $puentes[0]["nombre"],
-                                                ENT_QUOTES,
-                                                "UTF-8"
-                                            )
-                                            : "Sin resultados";
-                                        ?>
-
-                                    </div>
-
-                                </div>
-
-                            </article>
+                            </div>
 
                         </div>
 
                     </div>
 
 
+                    <div class="card">
 
-                    <section class="card">
+                        <div class="card-header">
+
+                            <h5 class="mb-0">
+                                Resultado de priorización
+                            </h5>
+
+                        </div>
+
 
                         <div class="card-body">
 
-                            <div
-                                class="d-flex flex-column flex-lg-row
-                                justify-content-between gap-3 mb-3">
 
-                                <div>
+                            <?php
+                            if (empty($puentes)) {
+                            ?>
 
-                                    <h2 class="h5 mb-1">
-                                        Resultado de priorización
-                                    </h2>
+                                <div class="alert alert-warning mb-0">
 
-                                    <p class="text-muted mb-0">
-                                        Los primeros registros requieren
-                                        atención prioritaria.
-                                    </p>
+                                    No se encontraron puentes con inspecciones
+                                    registradas para realizar la priorización.
 
                                 </div>
 
-                                <div>
+                            <?php
+                            } else {
+                            ?>
 
-                                    <input
-                                        type="search"
-                                        class="form-control"
-                                        placeholder="Buscar puente o ruta"
-                                        aria-label="Buscar puente"
-                                        data-table-search="tablaPriorizacion">
-
-                                </div>
-
-                            </div>
-
-                            <?php if (empty($puentes)) { ?>
-
-                                <div class="alert alert-info mb-0">
-
-                                    No existen puentes con inspecciones
-                                    finalizadas para realizar la priorización.
-
-                                </div>
-
-                            <?php } else { ?>
 
                                 <div class="table-responsive">
 
-                                    <table
-                                        class="table table-hover align-middle"
-                                        id="tablaPriorizacion">
+
+                                    <table class="table table-hover align-middle">
+
 
                                         <thead>
 
                                             <tr>
 
-                                                <th>Posición</th>
-                                                <th>Código</th>
-                                                <th>Puente</th>
-                                                <th>Ruta</th>
-                                                <th>Ubicación</th>
-                                                <th>Inspección</th>
-                                                <th>Índice</th>
-                                                <th>Condición</th>
+
+                                                <th>
+                                                    Prioridad
+                                                </th>
+
+
+                                                <th>
+                                                    Código
+                                                </th>
+
+
+                                                <th>
+                                                    Puente
+                                                </th>
+
+
+                                                <th>
+                                                    Ruta
+                                                </th>
+
+
+                                                <th>
+                                                    Ubicación
+                                                </th>
+
+
+                                                <th>
+                                                    Fecha de inspección
+                                                </th>
+
+
+                                                <th>
+                                                    Índice de deterioro
+                                                </th>
+
+
+                                                <th>
+                                                    Condición
+                                                </th>
+
 
                                                 <?php
                                                 if (
-                                                    $metodoSeleccionado ===
-                                                    "condicion_importancia"
+                                                    $metodoSeleccionado
+                                                    == "condicion_importancia"
                                                 ) {
-                                                    ?>
+                                                ?>
 
-                                                    <th>Importancia</th>
+                                                    <th>
+                                                        Importancia
+                                                    </th>
 
-                                                <?php } ?>
+
+                                                    <th>
+                                                        Puntaje de prioridad
+                                                    </th>
 
                                                 <?php
-                                                if ($metodoSeleccionado === "condicion_importancia") {
-                                                    ?>
-                                                    <th>Puntaje</th>
-                                                    <?php
                                                 }
                                                 ?>
+
 
                                             </tr>
 
                                         </thead>
 
+
                                         <tbody>
 
+
                                             <?php
+
                                             $posicion = 1;
 
+
                                             foreach ($puentes as $puente) {
-                                                ?>
+
+
+                                                $codigo =
+                                                    isset($puente["codigo"])
+                                                        ? $puente["codigo"]
+                                                        : "";
+
+
+                                                $nombre =
+                                                    isset($puente["nombre"])
+                                                        ? $puente["nombre"]
+                                                        : "";
+
+
+                                                $numeroRuta =
+                                                    isset($puente["numero_ruta"])
+                                                        ? $puente["numero_ruta"]
+                                                        : "";
+
+
+                                                $provincia =
+                                                    isset($puente["provincia"])
+                                                        ? $puente["provincia"]
+                                                        : "";
+
+
+                                                $canton =
+                                                    isset($puente["canton"])
+                                                        ? $puente["canton"]
+                                                        : "";
+
+
+                                                $fechaInspeccion =
+                                                    isset($puente["fecha_inspeccion"])
+                                                        ? $puente["fecha_inspeccion"]
+                                                        : "";
+
+
+                                                $indiceDeterioro =
+                                                    isset($puente["indice_deterioro"])
+                                                        ? (float) $puente["indice_deterioro"]
+                                                        : 0;
+
+
+                                                $condicion =
+                                                    isset($puente["condicion"])
+                                                    && trim($puente["condicion"]) != ""
+                                                        ? $puente["condicion"]
+                                                        : "Sin clasificar";
+
+
+                                                $importancia =
+                                                    isset($puente["importancia"])
+                                                        ? $puente["importancia"]
+                                                        : "";
+
+
+                                                $puntajePrioridad =
+                                                    isset($puente["puntaje_prioridad"])
+                                                        ? (float) $puente["puntaje_prioridad"]
+                                                        : 0;
+
+
+                                                $claseCondicion =
+                                                    ObtenerClaseCondicionPriorizacionController(
+                                                        $condicion
+                                                    );
+
+
+                                                $fechaFormateada =
+                                                    FormatearFechaPriorizacionController(
+                                                        $fechaInspeccion
+                                                    );
+
+                                            ?>
+
 
                                                 <tr>
 
-                                                    <td>
-
-                                                        <span
-                                                            class="badge
-                                                            bg-primary">
-
-                                                            <?php
-                                                            echo $posicion;
-                                                            ?>
-
-                                                        </span>
-
-                                                    </td>
-
-                                                    <td>
-
-                                                        <?php
-                                                        echo htmlspecialchars(
-                                                            $puente["codigo"],
-                                                            ENT_QUOTES,
-                                                            "UTF-8"
-                                                        );
-                                                        ?>
-
-                                                    </td>
 
                                                     <td>
 
                                                         <strong>
-
                                                             <?php
-                                                            echo htmlspecialchars(
-                                                                $puente["nombre"],
-                                                                ENT_QUOTES,
-                                                                "UTF-8"
-                                                            );
+                                                            echo $posicion;
                                                             ?>
-
                                                         </strong>
 
                                                     </td>
 
-                                                    <td>
 
-                                                        Ruta
+                                                    <td>
 
                                                         <?php
                                                         echo htmlspecialchars(
-                                                            $puente[
-                                                                "numero_ruta"
-                                                            ],
+                                                            $codigo,
                                                             ENT_QUOTES,
                                                             "UTF-8"
                                                         );
@@ -432,21 +417,12 @@ function FormatearFechaPriorizacion($fecha)
 
                                                     </td>
 
+
                                                     <td>
 
                                                         <?php
                                                         echo htmlspecialchars(
-                                                            $puente[
-                                                                "provincia"
-                                                            ],
-                                                            ENT_QUOTES,
-                                                            "UTF-8"
-                                                        );
-                                                        ?>,
-
-                                                        <?php
-                                                        echo htmlspecialchars(
-                                                            $puente["canton"],
+                                                            $nombre,
                                                             ENT_QUOTES,
                                                             "UTF-8"
                                                         );
@@ -454,51 +430,75 @@ function FormatearFechaPriorizacion($fecha)
 
                                                     </td>
 
+
                                                     <td>
 
                                                         <?php
                                                         echo htmlspecialchars(
-                                                            FormatearFechaPriorizacion(
-                                                                $puente[
-                                                                    "fecha_inspeccion"
-                                                                ]
-                                                            ),
+                                                            $numeroRuta,
                                                             ENT_QUOTES,
                                                             "UTF-8"
                                                         );
                                                         ?>
 
                                                     </td>
+
+
+                                                    <td>
+
+                                                        <?php
+                                                        echo htmlspecialchars(
+                                                            $provincia
+                                                            . ", "
+                                                            . $canton,
+                                                            ENT_QUOTES,
+                                                            "UTF-8"
+                                                        );
+                                                        ?>
+
+                                                    </td>
+
+
+                                                    <td>
+
+                                                        <?php
+                                                        echo htmlspecialchars(
+                                                            $fechaFormateada,
+                                                            ENT_QUOTES,
+                                                            "UTF-8"
+                                                        );
+                                                        ?>
+
+                                                    </td>
+
 
                                                     <td>
 
                                                         <?php
                                                         echo number_format(
-                                                            (float) $puente[
-                                                                "indice_deterioro"
-                                                            ],
+                                                            $indiceDeterioro,
                                                             2
                                                         );
                                                         ?>
 
                                                     </td>
 
+
                                                     <td>
 
                                                         <span
                                                             class="badge <?php
-                                                            echo ObtenerClaseCondicionPriorizacion(
-                                                                $puente[
-                                                                    "condicion"
-                                                                ]
+                                                            echo htmlspecialchars(
+                                                                $claseCondicion,
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
                                                             );
-                                                            ?>">
+                                                            ?>"
+                                                        >
 
                                                             <?php
                                                             echo htmlspecialchars(
-                                                                $puente[
-                                                                    "condicion"
-                                                                ],
+                                                                $condicion,
                                                                 ENT_QUOTES,
                                                                 "UTF-8"
                                                             );
@@ -508,22 +508,20 @@ function FormatearFechaPriorizacion($fecha)
 
                                                     </td>
 
+
                                                     <?php
                                                     if (
-                                                        $metodoSeleccionado ===
-                                                        "condicion_importancia"
+                                                        $metodoSeleccionado
+                                                        == "condicion_importancia"
                                                     ) {
-                                                        ?>
+                                                    ?>
+
 
                                                         <td>
 
                                                             <?php
                                                             echo htmlspecialchars(
-                                                                ucfirst(
-                                                                    $puente[
-                                                                        "importancia"
-                                                                    ]
-                                                                ),
+                                                                $importancia,
                                                                 ENT_QUOTES,
                                                                 "UTF-8"
                                                             );
@@ -531,55 +529,73 @@ function FormatearFechaPriorizacion($fecha)
 
                                                         </td>
 
-                                                    <?php } ?>
 
-                                                <?php
-                                                if ($metodoSeleccionado === "condicion_importancia") {
-                                                    ?>
-                                                    <td>
-                                                        <strong>
-                                                            <?php
-                                                            echo number_format(
-                                                                (float) $puente["puntaje_prioridad"],
-                                                                2
-                                                            );
-                                                            ?>
-                                                        </strong>
-                                                    </td>
+                                                        <td>
+
+                                                            <strong>
+
+                                                                <?php
+                                                                echo number_format(
+                                                                    $puntajePrioridad,
+                                                                    2
+                                                                );
+                                                                ?>
+
+                                                            </strong>
+
+                                                        </td>
+
+
                                                     <?php
-                                                }
-                                                ?>
+                                                    }
+                                                    ?>
+
 
                                                 </tr>
 
-                                                <?php
+
+                                            <?php
+
                                                 $posicion++;
                                             }
+
                                             ?>
+
 
                                         </tbody>
 
+
                                     </table>
+
 
                                 </div>
 
-                            <?php } ?>
+
+                            <?php
+                            }
+                            ?>
+
 
                         </div>
 
-                    </section>
+                    </div>
+
 
                 </div>
 
             </main>
 
+
             <?php footer(); ?>
+
 
         </div>
 
     </div>
 
+
     <?php ImportJS(); ?>
+
 
 </body>
 

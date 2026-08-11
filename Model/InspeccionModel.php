@@ -7,7 +7,9 @@ include_once $_SERVER['DOCUMENT_ROOT']
 function LimpiarResultadosInspeccionModel($conn)
 {
     while ($conn->more_results() && $conn->next_result()) {
-        $resultadoPendiente = $conn->store_result();
+
+        $resultadoPendiente =
+            $conn->store_result();
 
         if ($resultadoPendiente) {
             $resultadoPendiente->free();
@@ -21,29 +23,43 @@ function ConsultarElementosInspeccionModel()
     $conn = null;
 
     try {
+
         $conn = OpenDB();
 
-        $sql = "CALL spConsultarElementosInspeccion()";
-        $response = $conn->query($sql);
+        $sql =
+            "CALL spConsultarElementosInspeccion()";
+
+        $response =
+            $conn->query($sql);
 
         if (!$response) {
-            throw new Exception($conn->error);
+            throw new Exception(
+                $conn->error
+            );
         }
 
-        $elementos = array();
+        $elementos =
+            array();
 
-        while ($fila = $response->fetch_assoc()) {
+        while (
+            $fila =
+            $response->fetch_assoc()
+        ) {
             $elementos[] = $fila;
         }
 
         $response->free();
 
-        LimpiarResultadosInspeccionModel($conn);
+        LimpiarResultadosInspeccionModel(
+            $conn
+        );
 
         CloseDB($conn);
 
         return $elementos;
+
     } catch (Exception $e) {
+
         if ($conn) {
             CloseDB($conn);
         }
@@ -58,29 +74,43 @@ function ConsultarPuentesInspeccionModel()
     $conn = null;
 
     try {
+
         $conn = OpenDB();
 
-        $sql = "CALL spConsultarPuentesInspeccion()";
-        $response = $conn->query($sql);
+        $sql =
+            "CALL spConsultarPuentesInspeccion()";
+
+        $response =
+            $conn->query($sql);
 
         if (!$response) {
-            throw new Exception($conn->error);
+            throw new Exception(
+                $conn->error
+            );
         }
 
-        $puentes = array();
+        $puentes =
+            array();
 
-        while ($fila = $response->fetch_assoc()) {
+        while (
+            $fila =
+            $response->fetch_assoc()
+        ) {
             $puentes[] = $fila;
         }
 
         $response->free();
 
-        LimpiarResultadosInspeccionModel($conn);
+        LimpiarResultadosInspeccionModel(
+            $conn
+        );
 
         CloseDB($conn);
 
         return $puentes;
+
     } catch (Exception $e) {
+
         if ($conn) {
             CloseDB($conn);
         }
@@ -100,13 +130,19 @@ function RegistrarInspeccionModel(
     $stmt = null;
 
     try {
+
         $conn = OpenDB();
 
-        $sql = "CALL spRegistrarInspeccion(?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+        $sql =
+            "CALL spRegistrarInspeccion(?, ?, ?, ?)";
+
+        $stmt =
+            $conn->prepare($sql);
 
         if (!$stmt) {
-            throw new Exception($conn->error);
+            throw new Exception(
+                $conn->error
+            );
         }
 
         $stmt->bind_param(
@@ -118,21 +154,47 @@ function RegistrarInspeccionModel(
         );
 
         if (!$stmt->execute()) {
-            throw new Exception($stmt->error);
+            throw new Exception(
+                $stmt->error
+            );
         }
 
-        $resultado = $stmt->get_result();
+        $resultado =
+            $stmt->get_result();
+
         $consecutivoInspeccion = 0;
 
-        if ($resultado && $fila = $resultado->fetch_assoc()) {
-            if (isset($fila["ConsecutivoInspeccion"])) {
-                $consecutivoInspeccion =
-                    (int) $fila["ConsecutivoInspeccion"];
-            } else {
-                $valores = array_values($fila);
+        if (
+            $resultado
+            && $fila =
+                $resultado->fetch_assoc()
+        ) {
 
-                if (isset($valores[0])) {
-                    $consecutivoInspeccion = (int) $valores[0];
+            if (
+                isset(
+                    $fila[
+                        "ConsecutivoInspeccion"
+                    ]
+                )
+            ) {
+
+                $consecutivoInspeccion =
+                    (int)
+                    $fila[
+                        "ConsecutivoInspeccion"
+                    ];
+
+            } else {
+
+                $valores =
+                    array_values($fila);
+
+                if (
+                    isset($valores[0])
+                ) {
+                    $consecutivoInspeccion =
+                        (int)
+                        $valores[0];
                 }
             }
 
@@ -141,12 +203,16 @@ function RegistrarInspeccionModel(
 
         $stmt->close();
 
-        LimpiarResultadosInspeccionModel($conn);
+        LimpiarResultadosInspeccionModel(
+            $conn
+        );
 
         CloseDB($conn);
 
         return $consecutivoInspeccion;
+
     } catch (Exception $e) {
+
         if ($stmt) {
             $stmt->close();
         }
@@ -165,35 +231,48 @@ function RegistrarDetalleInspeccionModel(
     $consecutivoElemento,
     $esAplicable,
     $calificacion,
-    $observacion
+    $observacion,
+    $imagen
 ) {
     $conn = null;
     $stmt = null;
 
     try {
+
         $conn = OpenDB();
 
-        $sql = "CALL spRegistrarDetalleInspeccion(?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+        $sql =
+            "CALL spRegistrarDetalleInspeccion("
+            . "?, ?, ?, ?, ?, ?"
+            . ")";
+
+        $stmt =
+            $conn->prepare($sql);
 
         if (!$stmt) {
-            throw new Exception($conn->error);
+            throw new Exception(
+                $conn->error
+            );
         }
 
         $stmt->bind_param(
-            "iiiis",
+            "iiiiss",
             $consecutivoInspeccion,
             $consecutivoElemento,
             $esAplicable,
             $calificacion,
-            $observacion
+            $observacion,
+            $imagen
         );
 
         if (!$stmt->execute()) {
-            throw new Exception($stmt->error);
+            throw new Exception(
+                $stmt->error
+            );
         }
 
-        $resultado = $stmt->get_result();
+        $resultado =
+            $stmt->get_result();
 
         if ($resultado) {
             $resultado->free();
@@ -201,12 +280,16 @@ function RegistrarDetalleInspeccionModel(
 
         $stmt->close();
 
-        LimpiarResultadosInspeccionModel($conn);
+        LimpiarResultadosInspeccionModel(
+            $conn
+        );
 
         CloseDB($conn);
 
         return true;
+
     } catch (Exception $e) {
+
         if ($stmt) {
             $stmt->close();
         }
@@ -220,19 +303,26 @@ function RegistrarDetalleInspeccionModel(
 }
 
 
-function FinalizarInspeccionModel($consecutivoInspeccion)
-{
+function FinalizarInspeccionModel(
+    $consecutivoInspeccion
+) {
     $conn = null;
     $stmt = null;
 
     try {
+
         $conn = OpenDB();
 
-        $sql = "CALL spFinalizarInspeccion(?)";
-        $stmt = $conn->prepare($sql);
+        $sql =
+            "CALL spFinalizarInspeccion(?)";
+
+        $stmt =
+            $conn->prepare($sql);
 
         if (!$stmt) {
-            throw new Exception($conn->error);
+            throw new Exception(
+                $conn->error
+            );
         }
 
         $stmt->bind_param(
@@ -241,25 +331,41 @@ function FinalizarInspeccionModel($consecutivoInspeccion)
         );
 
         if (!$stmt->execute()) {
-            throw new Exception($stmt->error);
+            throw new Exception(
+                $stmt->error
+            );
         }
 
-        $resultado = $stmt->get_result();
-        $resumen = array();
+        $resultado =
+            $stmt->get_result();
 
-        if ($resultado && $fila = $resultado->fetch_assoc()) {
-            $resumen = $fila;
+        $resumen =
+            array();
+
+        if (
+            $resultado
+            && $fila =
+                $resultado->fetch_assoc()
+        ) {
+
+            $resumen =
+                $fila;
+
             $resultado->free();
         }
 
         $stmt->close();
 
-        LimpiarResultadosInspeccionModel($conn);
+        LimpiarResultadosInspeccionModel(
+            $conn
+        );
 
         CloseDB($conn);
 
         return $resumen;
+
     } catch (Exception $e) {
+
         if ($stmt) {
             $stmt->close();
         }

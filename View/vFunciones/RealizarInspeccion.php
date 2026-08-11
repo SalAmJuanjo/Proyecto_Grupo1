@@ -1,15 +1,11 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/LayoutInterno.php';
+include_once $_SERVER['DOCUMENT_ROOT']
+    . '/Proyecto_Grupo1/View/LayoutInterno.php';
 
 include_once $_SERVER['DOCUMENT_ROOT']
     . '/Proyecto_Grupo1/Controller/InspeccionController.php';
 
-include_once $_SERVER['DOCUMENT_ROOT']
-    . '/Proyecto_Grupo1/View/LayoutInterno.php';
 
 $mensajeExito = "";
 $mensajeError = "";
@@ -19,172 +15,47 @@ $fechaInspeccionSeleccionada = date("Y-m-d");
 $observacionGeneralSeleccionada = "";
 $elementosSeleccionados = array();
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+if (isset($resultadoInspeccion)) {
+
+    $mensajeExito =
+        isset($resultadoInspeccion["mensajeExito"])
+            ? $resultadoInspeccion["mensajeExito"]
+            : "";
+
+    $mensajeError =
+        isset($resultadoInspeccion["mensajeError"])
+            ? $resultadoInspeccion["mensajeError"]
+            : "";
+
     $codigoPuenteSeleccionado =
-        isset($_POST["codigoPuente"])
-            ? trim($_POST["codigoPuente"])
+        isset($resultadoInspeccion["codigoPuente"])
+            ? $resultadoInspeccion["codigoPuente"]
             : "";
 
     $fechaInspeccionSeleccionada =
-        isset($_POST["fechaInspeccion"])
-            ? trim($_POST["fechaInspeccion"])
-            : "";
+        isset($resultadoInspeccion["fechaInspeccion"])
+            ? $resultadoInspeccion["fechaInspeccion"]
+            : date("Y-m-d");
 
     $observacionGeneralSeleccionada =
-        isset($_POST["observacionGeneral"])
-            ? trim($_POST["observacionGeneral"])
+        isset($resultadoInspeccion["observacionGeneral"])
+            ? $resultadoInspeccion["observacionGeneral"]
             : "";
 
     $elementosSeleccionados =
-        isset($_POST["elementos"]) && is_array($_POST["elementos"])
-            ? $_POST["elementos"]
+        isset($resultadoInspeccion["elementosSeleccionados"])
+        && is_array($resultadoInspeccion["elementosSeleccionados"])
+            ? $resultadoInspeccion["elementosSeleccionados"]
             : array();
-
-    $consecutivoInspector =
-        isset($_SESSION["ConsecutivoUsuario"])
-            ? (int) $_SESSION["ConsecutivoUsuario"]
-            : 0;
-
-    if ($consecutivoInspector <= 0) {
-        $mensajeError = "No fue posible identificar al inspector.";
-    } elseif ($codigoPuenteSeleccionado === "") {
-        $mensajeError = "Debe seleccionar un puente.";
-    } elseif ($fechaInspeccionSeleccionada === "") {
-        $mensajeError = "Debe indicar la fecha de inspección.";
-    } elseif (empty($elementosSeleccionados)) {
-        $mensajeError = "No se recibieron los elementos de la inspección.";
-    } else {
-        $detallesValidos = array();
-        $cantidadAplicables = 0;
-
-        foreach ($elementosSeleccionados as $detalle) {
-            $consecutivoElemento =
-                isset($detalle["id"])
-                    ? (int) $detalle["id"]
-                    : 0;
-
-            $valorCalificacion =
-                isset($detalle["calificacion"])
-                    ? trim($detalle["calificacion"])
-                    : "";
-
-            $observacion =
-                isset($detalle["observacion"])
-                    ? trim($detalle["observacion"])
-                    : "";
-
-            if ($consecutivoElemento <= 0) {
-                $mensajeError = "Se encontró un elemento no válido.";
-                break;
-            }
-
-            if ($valorCalificacion === "") {
-                $mensajeError =
-                    "Debe seleccionar una calificación o N/A para todos los elementos.";
-                break;
-            }
-
-            if ($valorCalificacion === "NA") {
-                $esAplicable = 0;
-                $calificacion = null;
-            } elseif (
-                is_numeric($valorCalificacion) &&
-                (int) $valorCalificacion >= 1 &&
-                (int) $valorCalificacion <= 5
-            ) {
-                $esAplicable = 1;
-                $calificacion = (int) $valorCalificacion;
-                $cantidadAplicables++;
-
-                if ($calificacion > 1 && $observacion === "") {
-                    $mensajeError =
-                        "Debe ingresar una observación para todos los elementos con calificación mayor a 1.";
-                    break;
-                }
-            } else {
-                $mensajeError = "Se encontró una calificación no válida.";
-                break;
-            }
-
-            $detallesValidos[] = array(
-                "consecutivoElemento" => $consecutivoElemento,
-                "esAplicable" => $esAplicable,
-                "calificacion" => $calificacion,
-                "observacion" => $observacion
-            );
-        }
-
-        if ($mensajeError === "" && $cantidadAplicables === 0) {
-            $mensajeError =
-                "La inspección debe tener al menos un elemento aplicable.";
-        }
-
-        if ($mensajeError === "") {
-            $consecutivoInspeccion = RegistrarInspeccionController(
-                $codigoPuenteSeleccionado,
-                $consecutivoInspector,
-                $fechaInspeccionSeleccionada,
-                $observacionGeneralSeleccionada
-            );
-
-            if ($consecutivoInspeccion <= 0) {
-                $mensajeError =
-                    "No fue posible registrar el encabezado de la inspección.";
-            } else {
-                $detallesGuardados = true;
-
-                foreach ($detallesValidos as $detalleValido) {
-                    $resultadoDetalle =
-                        RegistrarDetalleInspeccionController(
-                            $consecutivoInspeccion,
-                            $detalleValido["consecutivoElemento"],
-                            $detalleValido["esAplicable"],
-                            $detalleValido["calificacion"],
-                            $detalleValido["observacion"]
-                        );
-
-                    if (!$resultadoDetalle) {
-                        $detallesGuardados = false;
-                        break;
-                    }
-                }
-
-                if (!$detallesGuardados) {
-                    $mensajeError =
-                        "La inspección fue creada, pero no fue posible guardar todos sus elementos.";
-                } else {
-                    $resultadoFinal =
-                        FinalizarInspeccionController(
-                            $consecutivoInspeccion
-                        );
-
-                    if (empty($resultadoFinal)) {
-                        $mensajeError =
-                            "Los elementos fueron guardados, pero no fue posible finalizar la inspección.";
-                    } else {
-                        $mensajeExito =
-                            "La inspección se registró correctamente. "
-                            . "Daño acumulado: "
-                            . $resultadoFinal["DanioAcumulado"]
-                            . ". Índice de deterioro: "
-                            . $resultadoFinal["IndiceDeterioro"]
-                            . ". Condición preliminar: "
-                            . $resultadoFinal["CondicionPreliminar"]
-                            . ".";
-
-                        $codigoPuenteSeleccionado = "";
-                        $fechaInspeccionSeleccionada = date("Y-m-d");
-                        $observacionGeneralSeleccionada = "";
-                        $elementosSeleccionados = array();
-                    }
-                }
-            }
-        }
-    }
 }
 
-$puentes = ConsultarPuentesInspeccionController();
-$elementos = ConsultarElementosInspeccionController();
+
+$puentes =
+    ConsultarPuentesInspeccionController();
+
+$elementos =
+    ConsultarElementosInspeccionController();
 
 ?>
 
@@ -197,7 +68,10 @@ $elementos = ConsultarElementosInspeccionController();
 
     <div class="admin-shell">
 
-        <div class="sidebar-backdrop" data-sidebar-close></div>
+        <div
+            class="sidebar-backdrop"
+            data-sidebar-close>
+        </div>
 
         <?php aside(); ?>
 
@@ -213,21 +87,40 @@ $elementos = ConsultarElementosInspeccionController();
                         Realizar inspección
                     </h1>
 
-                    <?php if ($mensajeExito !== "") { ?>
+
+                    <?php if ($mensajeExito != "") { ?>
 
                         <div class="alert alert-success">
-                            <?php echo htmlspecialchars($mensajeExito); ?>
+
+                            <?php
+                            echo htmlspecialchars(
+                                $mensajeExito,
+                                ENT_QUOTES,
+                                "UTF-8"
+                            );
+                            ?>
+
                         </div>
 
                     <?php } ?>
 
-                    <?php if ($mensajeError !== "") { ?>
+
+                    <?php if ($mensajeError != "") { ?>
 
                         <div class="alert alert-danger">
-                            <?php echo htmlspecialchars($mensajeError); ?>
+
+                            <?php
+                            echo htmlspecialchars(
+                                $mensajeError,
+                                ENT_QUOTES,
+                                "UTF-8"
+                            );
+                            ?>
+
                         </div>
 
                     <?php } ?>
+
 
                     <?php if (empty($puentes)) { ?>
 
@@ -243,13 +136,19 @@ $elementos = ConsultarElementosInspeccionController();
 
                     <?php } else { ?>
 
-                        <form method="POST">
+
+                        <form
+                            id="formRealizarInspeccion"
+                            method="POST"
+                            enctype="multipart/form-data">
+
 
                             <div class="card mb-4">
 
                                 <div class="card-body">
 
                                     <div class="row">
+
 
                                         <div class="col-md-8 mb-3">
 
@@ -271,16 +170,28 @@ $elementos = ConsultarElementosInspeccionController();
                                                     Seleccione un puente
                                                 </option>
 
-                                                <?php foreach ($puentes as $puente) { ?>
+
+                                                <?php
+                                                foreach ($puentes as $puente) {
+                                                ?>
 
                                                     <option
-                                                        value="<?php echo htmlspecialchars($puente["codigo"]); ?>"
+                                                        value="<?php
+                                                        echo htmlspecialchars(
+                                                            $puente["codigo"],
+                                                            ENT_QUOTES,
+                                                            "UTF-8"
+                                                        );
+                                                        ?>"
                                                         <?php
-                                                        echo $codigoPuenteSeleccionado === $puente["codigo"]
-                                                            ? "selected"
-                                                            : "";
+                                                        echo
+                                                            $codigoPuenteSeleccionado
+                                                            == $puente["codigo"]
+                                                                ? "selected"
+                                                                : "";
                                                         ?>
                                                     >
+
                                                         <?php
                                                         echo htmlspecialchars(
                                                             "Ruta "
@@ -288,16 +199,21 @@ $elementos = ConsultarElementosInspeccionController();
                                                             . " | "
                                                             . $puente["nombre"]
                                                             . " | "
-                                                            . $puente["codigo"]
+                                                            . $puente["codigo"],
+                                                            ENT_QUOTES,
+                                                            "UTF-8"
                                                         );
                                                         ?>
+
                                                     </option>
 
                                                 <?php } ?>
 
+
                                             </select>
 
                                         </div>
+
 
                                         <div class="col-md-4 mb-3">
 
@@ -314,7 +230,13 @@ $elementos = ConsultarElementosInspeccionController();
                                                 class="form-control"
                                                 id="fechaInspeccion"
                                                 name="fechaInspeccion"
-                                                value="<?php echo htmlspecialchars($fechaInspeccionSeleccionada); ?>"
+                                                value="<?php
+                                                echo htmlspecialchars(
+                                                    $fechaInspeccionSeleccionada,
+                                                    ENT_QUOTES,
+                                                    "UTF-8"
+                                                );
+                                                ?>"
                                                 required>
 
                                         </div>
@@ -325,13 +247,17 @@ $elementos = ConsultarElementosInspeccionController();
 
                             </div>
 
+
                             <fieldset
                                 id="datosInspeccion"
                                 <?php
-                                echo $codigoPuenteSeleccionado === ""
-                                    ? "disabled"
-                                    : "";
-                                ?>>
+                                echo
+                                    $codigoPuenteSeleccionado == ""
+                                        ? "disabled"
+                                        : "";
+                                ?>
+                            >
+
 
                                 <div class="card">
 
@@ -339,7 +265,9 @@ $elementos = ConsultarElementosInspeccionController();
 
                                         <div class="table-responsive">
 
-                                            <table class="table table-bordered align-middle">
+                                            <table
+                                                class="table table-bordered align-middle">
+
 
                                                 <thead>
 
@@ -361,141 +289,219 @@ $elementos = ConsultarElementosInspeccionController();
                                                             Observación
                                                         </th>
 
+                                                        <th>
+                                                            Imagen del daño
+                                                        </th>
+
                                                     </tr>
 
                                                 </thead>
 
+
                                                 <tbody>
 
-                                                    <?php foreach ($elementos as $elemento) { ?>
 
-                                                        <?php
-                                                        $idElemento =
-                                                            (int) $elemento["ConsecutivoElemento"];
+                                                <?php
+                                                foreach ($elementos as $elemento) {
 
-                                                        $calificacionSeleccionada = "";
+                                                    $idElemento =
+                                                        (int)
+                                                        $elemento[
+                                                            "ConsecutivoElemento"
+                                                        ];
 
-                                                        $observacionSeleccionada = "";
+                                                    $calificacionSeleccionada = "";
+                                                    $observacionSeleccionada = "";
 
-                                                        if (
+                                                    if (
+                                                        isset(
+                                                            $elementosSeleccionados[
+                                                                $idElemento
+                                                            ]
+                                                        )
+                                                    ) {
+
+                                                        $calificacionSeleccionada =
                                                             isset(
                                                                 $elementosSeleccionados[
                                                                     $idElemento
-                                                                ]
+                                                                ]["calificacion"]
                                                             )
-                                                        ) {
-                                                            $calificacionSeleccionada =
-                                                                isset(
-                                                                    $elementosSeleccionados[
-                                                                        $idElemento
-                                                                    ]["calificacion"]
-                                                                )
-                                                                    ? $elementosSeleccionados[
-                                                                        $idElemento
-                                                                    ]["calificacion"]
-                                                                    : "";
+                                                                ? $elementosSeleccionados[
+                                                                    $idElemento
+                                                                ]["calificacion"]
+                                                                : "";
 
-                                                            $observacionSeleccionada =
-                                                                isset(
-                                                                    $elementosSeleccionados[
-                                                                        $idElemento
-                                                                    ]["observacion"]
-                                                                )
-                                                                    ? $elementosSeleccionados[
-                                                                        $idElemento
-                                                                    ]["observacion"]
-                                                                    : "";
-                                                        }
-                                                        ?>
+                                                        $observacionSeleccionada =
+                                                            isset(
+                                                                $elementosSeleccionados[
+                                                                    $idElemento
+                                                                ]["observacion"]
+                                                            )
+                                                                ? $elementosSeleccionados[
+                                                                    $idElemento
+                                                                ]["observacion"]
+                                                                : "";
+                                                    }
+                                                ?>
 
-                                                        <tr>
 
-                                                            <td>
+                                                    <tr>
 
-                                                                <?php
-                                                                echo htmlspecialchars(
-                                                                    $elemento["Categoria"]
-                                                                );
-                                                                ?>
 
-                                                            </td>
+                                                        <td>
 
-                                                            <td>
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $elemento[
+                                                                    "Categoria"
+                                                                ],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
 
-                                                                <?php
-                                                                echo htmlspecialchars(
-                                                                    $elemento["NombreElemento"]
-                                                                );
-                                                                ?>
+                                                        </td>
 
-                                                                <input
-                                                                    type="hidden"
-                                                                    name="elementos[<?php echo $idElemento; ?>][id]"
-                                                                    value="<?php echo $idElemento; ?>">
 
-                                                            </td>
+                                                        <td>
 
-                                                            <td>
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $elemento[
+                                                                    "NombreElemento"
+                                                                ],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
 
-                                                                <select
-                                                                    class="form-select selector-calificacion"
-                                                                    name="elementos[<?php echo $idElemento; ?>][calificacion]"
-                                                                    required>
+                                                            <input
+                                                                type="hidden"
+                                                                name="elementos[<?php
+                                                                echo $idElemento;
+                                                                ?>][id]"
+                                                                value="<?php
+                                                                echo $idElemento;
+                                                                ?>">
 
-                                                                    <option value="">
-                                                                        Seleccione
-                                                                    </option>
+                                                        </td>
 
-                                                                    <option
-                                                                        value="NA"
-                                                                        <?php
-                                                                        echo $calificacionSeleccionada === "NA"
+
+                                                        <td>
+
+                                                            <select
+                                                                class="form-select selector-calificacion"
+                                                                name="elementos[<?php
+                                                                echo $idElemento;
+                                                                ?>][calificacion]"
+                                                                required>
+
+                                                                <option value="">
+                                                                    Seleccione
+                                                                </option>
+
+                                                                <option
+                                                                    value="NA"
+                                                                    <?php
+                                                                    echo
+                                                                        $calificacionSeleccionada
+                                                                        == "NA"
                                                                             ? "selected"
                                                                             : "";
-                                                                        ?>>
+                                                                    ?>
+                                                                >
 
-                                                                        N/A
+                                                                    N/A
+
+                                                                </option>
+
+
+                                                                <?php
+                                                                for (
+                                                                    $calificacion = 1;
+                                                                    $calificacion <= 5;
+                                                                    $calificacion++
+                                                                ) {
+                                                                ?>
+
+                                                                    <option
+                                                                        value="<?php
+                                                                        echo $calificacion;
+                                                                        ?>"
+                                                                        <?php
+                                                                        echo
+                                                                            (string)
+                                                                            $calificacionSeleccionada
+                                                                            ==
+                                                                            (string)
+                                                                            $calificacion
+                                                                                ? "selected"
+                                                                                : "";
+                                                                        ?>
+                                                                    >
+
+                                                                        <?php
+                                                                        echo $calificacion;
+                                                                        ?>
 
                                                                     </option>
 
-                                                                    <?php for ($calificacion = 1; $calificacion <= 5; $calificacion++) { ?>
+                                                                <?php } ?>
 
-                                                                        <option
-                                                                            value="<?php echo $calificacion; ?>"
-                                                                            <?php
-                                                                            echo (string) $calificacionSeleccionada ===
-                                                                                (string) $calificacion
-                                                                                    ? "selected"
-                                                                                    : "";
-                                                                            ?>>
 
-                                                                            <?php echo $calificacion; ?>
+                                                            </select>
 
-                                                                        </option>
+                                                        </td>
 
-                                                                    <?php } ?>
 
-                                                                </select>
+                                                        <td>
 
-                                                            </td>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control observacion-elemento"
+                                                                name="elementos[<?php
+                                                                echo $idElemento;
+                                                                ?>][observacion]"
+                                                                value="<?php
+                                                                echo htmlspecialchars(
+                                                                    $observacionSeleccionada,
+                                                                    ENT_QUOTES,
+                                                                    "UTF-8"
+                                                                );
+                                                                ?>"
+                                                                maxlength="500"
+                                                                placeholder="Ingrese una observación">
 
-                                                            <td>
+                                                        </td>
 
-                                                                <input
-                                                                    type="text"
-                                                                    class="form-control"
-                                                                    name="elementos[<?php echo $idElemento; ?>][observacion]"
-                                                                    value="<?php echo htmlspecialchars($observacionSeleccionada); ?>"
-                                                                    maxlength="500"
-                                                                    placeholder="Ingrese una observación">
 
-                                                            </td>
+                                                        <td>
 
-                                                        </tr>
+                                                            <input
+                                                                type="file"
+                                                                class="form-control imagen-danio"
+                                                                name="elementos[<?php
+                                                                echo $idElemento;
+                                                                ?>][imagen]"
+                                                                accept=".png,image/png"
+                                                                disabled>
 
-                                                    <?php } ?>
+                                                            <small class="text-muted">
+                                                                Requerida para calificación 4 o 5.
+                                                            </small>
+
+                                                        </td>
+
+
+                                                    </tr>
+
+
+                                                <?php } ?>
+
 
                                                 </tbody>
+
 
                                             </table>
 
@@ -505,11 +511,13 @@ $elementos = ConsultarElementosInspeccionController();
 
                                 </div>
 
+
                                 <div class="card mt-4">
 
                                     <div class="card-body">
 
                                         <div class="row">
+
 
                                             <div class="col-md-3 mb-3">
 
@@ -530,6 +538,7 @@ $elementos = ConsultarElementosInspeccionController();
 
                                             </div>
 
+
                                             <div class="col-md-3 mb-3">
 
                                                 <label
@@ -548,6 +557,7 @@ $elementos = ConsultarElementosInspeccionController();
                                                     readonly>
 
                                             </div>
+
 
                                             <div class="col-md-3 mb-3">
 
@@ -568,6 +578,7 @@ $elementos = ConsultarElementosInspeccionController();
 
                                             </div>
 
+
                                             <div class="col-md-3 mb-3">
 
                                                 <label
@@ -587,11 +598,13 @@ $elementos = ConsultarElementosInspeccionController();
 
                                             </div>
 
+
                                         </div>
 
                                     </div>
 
                                 </div>
+
 
                                 <div class="card mt-4">
 
@@ -613,7 +626,9 @@ $elementos = ConsultarElementosInspeccionController();
                                             maxlength="1000"
                                             placeholder="Ingrese una observación general de la inspección"><?php
                                             echo htmlspecialchars(
-                                                $observacionGeneralSeleccionada
+                                                $observacionGeneralSeleccionada,
+                                                ENT_QUOTES,
+                                                "UTF-8"
                                             );
                                             ?></textarea>
 
@@ -621,10 +636,13 @@ $elementos = ConsultarElementosInspeccionController();
 
                                 </div>
 
+
                                 <div class="mt-4 text-end">
 
                                     <button
                                         type="submit"
+                                        id="btnRegistrarInspeccion"
+                                        name="btnRegistrarInspeccion"
                                         class="btn btn-primary">
 
                                         Guardar inspección
@@ -633,124 +651,33 @@ $elementos = ConsultarElementosInspeccionController();
 
                                 </div>
 
+
                             </fieldset>
+
 
                         </form>
 
+
                     <?php } ?>
+
 
                 </div>
 
             </main>
 
+
             <?php footer(); ?>
+
 
         </div>
 
     </div>
 
+
     <?php ImportJS(); ?>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const codigoPuente =
-                document.getElementById("codigoPuente");
+    <script src="/Proyecto_Grupo1/View/js/realizarInspeccion.js"></script>
 
-            const datosInspeccion =
-                document.getElementById("datosInspeccion");
-
-            const danioAcumulado =
-                document.getElementById("danioAcumulado");
-
-            const cantidadElementos =
-                document.getElementById("cantidadElementos");
-
-            const indiceDeterioro =
-                document.getElementById("indiceDeterioro");
-
-            const condicionPreliminar =
-                document.getElementById("condicionPreliminar");
-
-            const calificaciones =
-                document.querySelectorAll(".selector-calificacion");
-
-            function calcularCondicion(indice) {
-                if (indice >= 1 && indice < 2) {
-                    return "Buena";
-                }
-
-                if (indice >= 2 && indice < 3) {
-                    return "Regular";
-                }
-
-                if (indice >= 3 && indice < 4) {
-                    return "Deficiente";
-                }
-
-                if (indice >= 4 && indice <= 5) {
-                    return "Crítica";
-                }
-
-                return "Sin clasificar";
-            }
-
-            function actualizarResultados() {
-                let totalDanio = 0;
-                let totalElementos = 0;
-
-                calificaciones.forEach(function (selector) {
-                    const valor = selector.value;
-
-                    if (valor !== "" && valor !== "NA") {
-                        totalDanio += Number(valor);
-                        totalElementos++;
-                    }
-                });
-
-                let indice = 0;
-
-                if (totalElementos > 0) {
-                    indice = totalDanio / totalElementos;
-                }
-
-                if (danioAcumulado) {
-                    danioAcumulado.value = totalDanio;
-                }
-
-                if (cantidadElementos) {
-                    cantidadElementos.value = totalElementos;
-                }
-
-                if (indiceDeterioro) {
-                    indiceDeterioro.value = indice.toFixed(2);
-                }
-
-                if (condicionPreliminar) {
-                    condicionPreliminar.value =
-                        calcularCondicion(indice);
-                }
-            }
-
-            if (codigoPuente && datosInspeccion) {
-                codigoPuente.addEventListener(
-                    "change",
-                    function () {
-                        datosInspeccion.disabled =
-                            this.value === "";
-                    }
-                );
-            }
-
-            calificaciones.forEach(function (selector) {
-                selector.addEventListener(
-                    "change",
-                    actualizarResultados
-                );
-            });
-
-            actualizarResultados();
-        });
-    </script>
 
 </body>
 

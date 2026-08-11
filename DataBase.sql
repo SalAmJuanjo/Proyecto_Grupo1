@@ -53,7 +53,7 @@ CREATE TABLE `registrarpuente` (
 
 LOCK TABLES `registrarpuente` WRITE;
 /*!40000 ALTER TABLE `registrarpuente` DISABLE KEYS */;
-INSERT INTO `registrarpuente` VALUES ('SB-001','Puente sobre río Cedro',1,'nacional primaria','San José','Pérez Zeledón',9.365420,'vigas','concreto preesforzado',92.50,3,2,'1994-04-15','otro puente','electricidad,telecomunicaciones',10.5,5.20,NULL),('SB-002','Puente sobre río Diamante',2,'nacional primaria','Cartago','El Guarco',9.788310,'marco rígido','concreto reforzado',68.40,2,2,'2002-08-21','puente convencional','agua potable,electricidad',9.8,4.90,NULL),('SB-003','Puente sobre río Esmeralda',27,'nacional primaria','San José','Escazú',9.934120,'vigas','concreto preesforzado',105.75,4,3,'1998-11-10','puente crítico','agua potable,electricidad,telecomunicaciones',14.2,5.50,NULL),('SB-004','Puente sobre río Fortuna',32,'nacional primaria','Limón','Limón',9.991840,'cercha','acero',130.60,4,2,'1989-02-18','puente esencial','electricidad,telecomunicaciones',11.7,5.10,NULL),('SB-005','Puente sobre quebrada Granada',118,'nacional secundaria','Alajuela','Grecia',10.072350,'vigas','concreto reforzado',45.80,2,2,'2008-06-12','puente esencial','agua potable',9.4,4.60,NULL),('SB-006','Puente sobre río Horizonte',4,'nacional primaria','Heredia','Sarapiquí',10.412680,'arco','concreto reforzado',88.90,3,2,'1996-09-27','puente crítico','electricidad,telecomunicaciones',10.8,5.00,NULL),('SB-007','Puente sobre quebrada Ilusión',804,'cantonal','Guanacaste','Santa Cruz',10.267540,'modular provisional','acero',29.70,1,1,'2017-03-05','otro puente','ninguno',4.8,3.80,NULL),('SB-008','Puente sobre río Jacaranda',141,'nacional secundaria','Alajuela','San Carlos',10.355740,'vigas','concreto preesforzado',76.30,3,2,'2011-12-14','puente esencial','agua potable,electricidad',9.9,4.70,NULL),('SB-009','Puente sobre río Kandela',21,'nacional primaria','Puntarenas','Esparza',9.998630,'colgante','acero',112.40,3,2,'2005-01-29','puente crítico','electricidad,telecomunicaciones',10.6,5.30,NULL),('SB-010','Puente sobre quebrada Luna',301,'cantonal','Cartago','Paraíso',9.838970,'vigas','concreto reforzado',36.20,2,1,'2019-07-16','otro puente','agua potable',5.5,4.10,NULL);
+INSERT INTO `registrarpuente` VALUES ('SB-001','Puente sobre río Cedro',1,'nacional primaria','San José','Pérez Zeledón',9.365420,'vigas','concreto preesforzado',92.50,3,2,'1994-04-15','otro puente','electricidad,telecomunicaciones',10.5,5.20,'/Proyecto_Grupo1/View/Uploads/SB-001.png'),('SB-002','Puente sobre río Diamante',2,'nacional primaria','Cartago','El Guarco',9.788310,'marco rígido','concreto reforzado',68.40,2,2,'2002-08-21','puente convencional','agua potable,electricidad',9.8,4.90,'/Proyecto_Grupo1/View/Uploads/SB-002.png'),('SB-003','Puente sobre río Esmeralda',27,'nacional primaria','San José','Escazú',9.934120,'vigas','concreto preesforzado',105.75,4,3,'1998-11-10','puente crítico','agua potable,electricidad,telecomunicaciones',14.2,5.50,'/Proyecto_Grupo1/View/Uploads/SB-003.png'),('SB-004','Puente sobre río Fortuna',32,'nacional primaria','Limón','Limón',9.991840,'cercha','acero',130.60,4,2,'1989-02-18','puente esencial','electricidad,telecomunicaciones',11.7,5.10,'/Proyecto_Grupo1/View/Uploads/SB-004.png'),('SB-005','Puente sobre quebrada Granada',118,'nacional secundaria','Alajuela','Grecia',10.072350,'vigas','concreto reforzado',45.80,2,2,'2008-06-12','puente esencial','agua potable',9.4,4.60,'/Proyecto_Grupo1/View/Uploads/SB-005.png'),('SB-006','Puente sobre río Horizonte',4,'nacional primaria','Heredia','Sarapiquí',10.412680,'arco','concreto reforzado',88.90,3,2,'1996-09-27','puente crítico','electricidad,telecomunicaciones',10.8,5.00,'/Proyecto_Grupo1/View/Uploads/SB-006.png'),('SB-007','Puente sobre quebrada Ilusión',804,'cantonal','Guanacaste','Santa Cruz',10.267540,'modular provisional','acero',29.70,1,1,'2017-03-05','otro puente','ninguno',4.8,3.80,'/Proyecto_Grupo1/View/Uploads/SB-007.png'),('SB-008','Puente sobre río Jacaranda',141,'nacional secundaria','Alajuela','San Carlos',10.355740,'vigas','concreto preesforzado',76.30,3,2,'2011-12-14','puente esencial','agua potable,electricidad',9.9,4.70,'/Proyecto_Grupo1/View/Uploads/SB-008.png'),('SB-009','Puente sobre río Kandela',21,'nacional primaria','Puntarenas','Esparza',9.998630,'colgante','acero',112.40,3,2,'2005-01-29','puente crítico','electricidad,telecomunicaciones',10.6,5.30,'/Proyecto_Grupo1/View/Uploads/SB-009.png'),('SB-010','Puente sobre quebrada Luna',301,'cantonal','Cartago','Paraíso',9.838970,'vigas','concreto reforzado',36.20,2,1,'2019-07-16','otro puente','agua potable',5.5,4.10,'/Proyecto_Grupo1/View/Uploads/SB-010.png');
 /*!40000 ALTER TABLE `registrarpuente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,13 +71,14 @@ CREATE TABLE `tb_detalle_inspeccion` (
   `EsAplicable` bit(1) NOT NULL DEFAULT b'1',
   `Calificacion` tinyint(4) DEFAULT NULL,
   `Observacion` text DEFAULT NULL,
+  `Imagen` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ConsecutivoDetalle`),
   UNIQUE KEY `uq_inspeccion_elemento` (`ConsecutivoInspeccion`,`ConsecutivoElemento`),
   KEY `idx_detalle_elemento` (`ConsecutivoElemento`),
   CONSTRAINT `fk_detalle_elemento` FOREIGN KEY (`ConsecutivoElemento`) REFERENCES `tb_elemento` (`ConsecutivoElemento`),
   CONSTRAINT `fk_detalle_inspeccion` FOREIGN KEY (`ConsecutivoInspeccion`) REFERENCES `tb_inspeccion` (`ConsecutivoInspeccion`) ON DELETE CASCADE,
   CONSTRAINT `chk_calificacion` CHECK (`Calificacion` is null or `Calificacion` between 1 and 5)
-) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +87,7 @@ CREATE TABLE `tb_detalle_inspeccion` (
 
 LOCK TABLES `tb_detalle_inspeccion` WRITE;
 /*!40000 ALTER TABLE `tb_detalle_inspeccion` DISABLE KEYS */;
-INSERT INTO `tb_detalle_inspeccion` VALUES (1,1,1,_binary '',5,'Daño crítico que requiere atención inmediata.'),(2,2,1,_binary '',4,'Deterioro severo que requiere intervención.'),(3,3,1,_binary '',4,'Deterioro severo que requiere intervención.'),(4,4,1,_binary '',4,'Deterioro severo que requiere intervención.'),(5,5,1,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(6,6,1,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(7,7,1,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(8,8,1,_binary '',2,'Deterioro menor observado.'),(9,9,1,_binary '',2,'Deterioro menor observado.'),(10,10,1,_binary '',2,'Deterioro menor observado.'),(11,1,2,_binary '',5,'Daño crítico que requiere atención inmediata.'),(12,2,2,_binary '',4,'Deterioro severo que requiere intervención.'),(13,3,2,_binary '',4,'Deterioro severo que requiere intervención.'),(14,4,2,_binary '',4,'Deterioro severo que requiere intervención.'),(15,5,2,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(16,6,2,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(17,7,2,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(18,8,2,_binary '',2,'Deterioro menor observado.'),(19,9,2,_binary '',2,'Deterioro menor observado.'),(20,10,2,_binary '',2,'Deterioro menor observado.'),(21,1,3,_binary '',5,'Daño crítico que requiere atención inmediata.'),(22,2,3,_binary '',4,'Deterioro severo que requiere intervención.'),(23,3,3,_binary '',4,'Deterioro severo que requiere intervención.'),(24,4,3,_binary '',4,'Deterioro severo que requiere intervención.'),(25,5,3,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(26,6,3,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(27,7,3,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(28,8,3,_binary '',2,'Deterioro menor observado.'),(29,9,3,_binary '',2,'Deterioro menor observado.'),(30,10,3,_binary '',1,'Elemento en buenas condiciones.'),(31,1,4,_binary '',5,'Daño crítico que requiere atención inmediata.'),(32,2,4,_binary '',4,'Deterioro severo que requiere intervención.'),(33,3,4,_binary '',4,'Deterioro severo que requiere intervención.'),(34,4,4,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(35,5,4,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(36,6,4,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(37,7,4,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(38,8,4,_binary '',2,'Deterioro menor observado.'),(39,9,4,_binary '',2,'Deterioro menor observado.'),(40,10,4,_binary '',1,'Elemento en buenas condiciones.'),(41,1,5,_binary '',5,'Daño crítico que requiere atención inmediata.'),(42,2,5,_binary '',4,'Deterioro severo que requiere intervención.'),(43,3,5,_binary '',4,'Deterioro severo que requiere intervención.'),(44,4,5,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(45,5,5,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(46,6,5,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(47,7,5,_binary '',2,'Deterioro menor observado.'),(48,8,5,_binary '',2,'Deterioro menor observado.'),(49,9,5,_binary '',2,'Deterioro menor observado.'),(50,10,5,_binary '',1,'Elemento en buenas condiciones.'),(51,1,6,_binary '',5,'Daño crítico que requiere atención inmediata.'),(52,2,6,_binary '',4,'Deterioro severo que requiere intervención.'),(53,3,6,_binary '',4,'Deterioro severo que requiere intervención.'),(54,4,6,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(55,5,6,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(56,6,6,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(57,7,6,_binary '',2,'Deterioro menor observado.'),(58,8,6,_binary '',2,'Deterioro menor observado.'),(59,9,6,_binary '',2,'Deterioro menor observado.'),(60,10,6,_binary '',1,'Elemento en buenas condiciones.'),(61,1,7,_binary '',5,'Daño crítico que requiere atención inmediata.'),(62,2,7,_binary '',4,'Deterioro severo que requiere intervención.'),(63,3,7,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(64,4,7,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(65,5,7,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(66,6,7,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(67,7,7,_binary '',2,'Deterioro menor observado.'),(68,8,7,_binary '',2,'Deterioro menor observado.'),(69,9,7,_binary '',1,'Elemento en buenas condiciones.'),(70,10,7,_binary '',1,'Elemento en buenas condiciones.'),(71,1,8,_binary '',5,'Daño crítico que requiere atención inmediata.'),(72,2,8,_binary '',4,'Deterioro severo que requiere intervención.'),(73,3,8,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(74,4,8,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(75,5,8,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(76,6,8,_binary '',2,'Deterioro menor observado.'),(77,7,8,_binary '',2,'Deterioro menor observado.'),(78,8,8,_binary '',2,'Deterioro menor observado.'),(79,9,8,_binary '',1,'Elemento en buenas condiciones.'),(80,10,8,_binary '',1,'Elemento en buenas condiciones.'),(81,1,9,_binary '',4,'Deterioro severo que requiere intervención.'),(82,2,9,_binary '',4,'Deterioro severo que requiere intervención.'),(83,3,9,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(84,4,9,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(85,5,9,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(86,6,9,_binary '',2,'Deterioro menor observado.'),(87,7,9,_binary '',2,'Deterioro menor observado.'),(88,8,9,_binary '',2,'Deterioro menor observado.'),(89,9,9,_binary '',1,'Elemento en buenas condiciones.'),(90,10,9,_binary '',1,'Elemento en buenas condiciones.'),(91,1,10,_binary '',4,'Deterioro severo que requiere intervención.'),(92,2,10,_binary '',4,'Deterioro severo que requiere intervención.'),(93,3,10,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(94,4,10,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(95,5,10,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(96,6,10,_binary '',2,'Deterioro menor observado.'),(97,7,10,_binary '',2,'Deterioro menor observado.'),(98,8,10,_binary '',2,'Deterioro menor observado.'),(99,9,10,_binary '',1,'Elemento en buenas condiciones.'),(100,10,10,_binary '',1,'Elemento en buenas condiciones.'),(101,1,11,_binary '',4,'Deterioro severo que requiere intervención.'),(102,2,11,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(103,3,11,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(104,4,11,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(105,5,11,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(106,6,11,_binary '',2,'Deterioro menor observado.'),(107,7,11,_binary '',2,'Deterioro menor observado.'),(108,8,11,_binary '',2,'Deterioro menor observado.'),(109,9,11,_binary '',1,'Elemento en buenas condiciones.'),(110,10,11,_binary '',1,'Elemento en buenas condiciones.'),(111,1,12,_binary '',4,'Deterioro severo que requiere intervención.'),(112,2,12,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(113,3,12,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(114,4,12,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(115,5,12,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(116,6,12,_binary '',2,'Deterioro menor observado.'),(117,7,12,_binary '',2,'Deterioro menor observado.'),(118,8,12,_binary '',2,'Deterioro menor observado.'),(119,9,12,_binary '',1,'Elemento en buenas condiciones.'),(120,10,12,_binary '',1,'Elemento en buenas condiciones.'),(121,1,13,_binary '',4,'Deterioro severo que requiere intervención.'),(122,2,13,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(123,3,13,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(124,4,13,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(125,5,13,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(126,6,13,_binary '',2,'Deterioro menor observado.'),(127,7,13,_binary '',2,'Deterioro menor observado.'),(128,8,13,_binary '',2,'Deterioro menor observado.'),(129,9,13,_binary '',1,'Elemento en buenas condiciones.'),(130,10,13,_binary '',1,'Elemento en buenas condiciones.'),(131,1,14,_binary '',4,'Deterioro severo que requiere intervención.'),(132,2,14,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(133,3,14,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(134,4,14,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(135,5,14,_binary '',3,'Deterioro moderado que requiere seguimiento.'),(136,6,14,_binary '',2,'Deterioro menor observado.'),(137,7,14,_binary '',2,'Deterioro menor observado.'),(138,8,14,_binary '',2,'Deterioro menor observado.'),(139,9,14,_binary '',1,'Elemento en buenas condiciones.'),(140,10,14,_binary '',1,'Elemento en buenas condiciones.');
+INSERT INTO `tb_detalle_inspeccion` VALUES (1,1,1,_binary '',4,'Se observa deterioro severo en la superficie de rodamiento, con pérdida localizada de material y desgaste significativo.','/Proyecto_Grupo1/View/Uploads/Inspecciones/SB-004_superficie_rodamiento.png'),(2,1,2,_binary '',4,'Las juntas de expansión presentan deterioro severo, pérdida de material y separación visible en algunos sectores.','/Proyecto_Grupo1/View/Uploads/Inspecciones/SB-004_juntas_expansion.png'),(3,1,3,_binary '',4,'Se identifican zonas de corrosión y deformación localizada en las barandas del puente.','/Proyecto_Grupo1/View/Uploads/Inspecciones/SB-004_barandas.png'),(4,1,4,_binary '',3,'El sistema de drenaje presenta obstrucciones parciales y acumulación de sedimentos.',NULL),(5,1,5,_binary '',3,'Se observan fisuras moderadas y desgaste superficial en la losa.',NULL),(6,1,6,_binary '',3,'Las vigas principales presentan deterioro moderado y signos localizados de humedad.',NULL),(7,1,7,_binary '',3,'Se identifican signos de deterioro moderado en las vigas secundarias.',NULL),(8,1,8,_binary '',3,'Los diafragmas presentan deterioro moderado y desgaste localizado.',NULL),(9,1,9,_binary '',3,'Los apoyos presentan desgaste y deterioro moderado que requiere seguimiento.',NULL),(10,1,10,_binary '',3,'Se observan fisuras menores y deterioro superficial en los bastiones.',NULL),(11,1,11,_binary '',3,'Las pilas presentan deterioro moderado sin evidencia visual de falla crítica.',NULL),(12,1,12,_binary '',3,'Se observa deterioro moderado en las zonas visibles de las cimentaciones.',NULL),(13,1,13,_binary '',3,'Se identifica erosión moderada en los taludes y pérdida localizada de material de protección.',NULL),(14,1,14,_binary '',3,'Se observa acumulación moderada de sedimentos y material vegetal en el cauce.',NULL),(15,2,1,_binary '',2,'Desgaste superficial leve en la capa de rodamiento.',NULL),(16,2,2,_binary '',2,'Se observa deterioro menor en las juntas de expansión.',NULL),(17,2,3,_binary '',2,'Se observan signos menores de corrosión superficial.',NULL),(18,2,4,_binary '',2,'Se observa acumulación menor de sedimentos.',NULL),(19,2,10,_binary '',2,'Se observan fisuras superficiales menores.',NULL),(20,2,11,_binary '',3,'Se observa deterioro superficial localizado.',NULL),(21,2,12,_binary '',2,'No se identifican daños severos en las zonas visibles.',NULL),(22,2,13,_binary '',2,'Se observa erosión superficial menor.',NULL),(23,2,14,_binary '',2,'Se observa acumulación menor de sedimentos.',NULL),(24,2,5,_binary '',2,'Se identifican fisuras superficiales menores.',NULL),(25,2,6,_binary '',4,'Se observa deterioro severo con desprendimiento del concreto, exposición del acero de refuerzo y signos de corrosión.','/Proyecto_Grupo1/View/Uploads/Inspecciones/inspeccion_2_elemento_6.png'),(26,2,7,_binary '',3,'Se observa deterioro moderado y fisuración localizada.',NULL),(27,2,8,_binary '',3,'Se identifican fisuras y deterioro moderado.',NULL),(28,2,9,_binary '',3,'Los apoyos presentan desgaste y deterioro moderado.',NULL),(29,3,1,_binary '',3,'Se observan fisuras y desgaste moderado en la superficie de rodamiento.',NULL),(30,3,2,_binary '',4,'Se observa deterioro severo y pérdida de material en las juntas de expansión.','/Proyecto_Grupo1/View/Uploads/Inspecciones/SB-007_juntas_expansion.png'),(31,3,3,_binary '',3,'Se observa corrosión superficial y desprendimiento localizado de pintura en las barandas.',NULL),(32,3,4,_binary '',2,'Se observa acumulación menor de sedimentos en algunos puntos del sistema de drenaje.',NULL),(33,3,5,_binary '',3,'Se observan fisuras moderadas y desgaste localizado en la losa.',NULL),(34,3,6,_binary '',5,'Se observa corrosión avanzada en elementos de las vigas principales de la cercha de acero, con pérdida localizada de sección y deterioro del sistema de protección.','/Proyecto_Grupo1/View/Uploads/Inspecciones/SB-007_vigas_principales.png'),(35,3,7,_binary '',3,'Se observa corrosión moderada en elementos secundarios de acero y deterioro localizado del recubrimiento protector.',NULL),(36,3,8,_binary '',2,'Se observa corrosión superficial localizada sin evidencia de pérdida significativa de sección.',NULL),(37,3,9,_binary '',3,'Los apoyos presentan desgaste moderado, acumulación de residuos y signos localizados de corrosión.',NULL),(38,3,10,_binary '',2,'Se observan fisuras superficiales menores en los bastiones.',NULL),(39,3,11,_binary '',2,'Se observa deterioro superficial menor en las zonas visibles de las pilas.',NULL),(40,3,12,_binary '',2,'No se observan daños significativos en las zonas visibles asociadas con las cimentaciones.',NULL),(41,3,13,_binary '',3,'Se observa erosión moderada y crecimiento de vegetación en las zonas de protección.',NULL),(42,3,14,_binary '',2,'Se observa acumulación ligera de sedimentos y material vegetal en el cauce.',NULL),(43,4,1,_binary '',4,'Se observa deterioro severo de la superficie de rodamiento, con pérdida localizada de material, agrietamiento y desgaste avanzado.','/Proyecto_Grupo1/View/Uploads/Inspecciones/SB-009_superficie_rodamiento.png'),(44,4,2,_binary '',4,'Las juntas de expansión presentan deterioro severo, separación irregular y pérdida localizada de material.','/Proyecto_Grupo1/View/Uploads/Inspecciones/SB-009_juntas_expansion.png'),(45,4,3,_binary '',3,'Las barandas presentan corrosión moderada y deterioro localizado del sistema de protección.',NULL),(46,4,4,_binary '',3,'El sistema de drenaje presenta obstrucciones parciales y acumulación moderada de residuos.',NULL),(47,4,5,_binary '',3,'La losa presenta fisuración moderada y deterioro superficial localizado.',NULL),(48,4,6,_binary '',3,'Las vigas principales presentan signos de deterioro moderado y corrosión superficial localizada.',NULL),(49,4,7,_binary '',3,'Las vigas secundarias presentan deterioro moderado del recubrimiento protector.',NULL),(50,4,8,_binary '',3,'Los diafragmas presentan corrosión moderada sin evidencia de pérdida significativa de sección.',NULL),(51,4,9,_binary '',2,'Los apoyos presentan desgaste menor y acumulación localizada de residuos.',NULL),(52,4,10,_binary '',2,'Los bastiones presentan fisuración superficial menor.',NULL),(53,4,11,_binary '',2,'Las pilas presentan deterioro superficial menor en las zonas visibles.',NULL),(54,4,12,_binary '',2,'No se observan deterioros importantes en las zonas visibles de las cimentaciones.',NULL),(55,4,13,_binary '',2,'Se observa erosión superficial menor en los taludes y zonas de protección.',NULL),(56,4,14,_binary '',2,'Se observa acumulación menor de sedimentos sin obstrucción significativa del cauce.',NULL),(57,5,1,_binary '',3,'La superficie de rodamiento presenta desgaste moderado y fisuración localizada.',NULL),(58,5,2,_binary '',3,'Las juntas de expansión presentan deterioro moderado y acumulación de residuos.',NULL),(59,5,3,_binary '',3,'Las barandas presentan corrosión moderada y deterioro localizado del recubrimiento.',NULL),(60,5,4,_binary '',2,'El sistema de drenaje presenta acumulación menor de sedimentos.',NULL),(61,5,5,_binary '',2,'La losa presenta fisuración superficial menor.',NULL),(62,5,6,_binary '',2,'Las vigas principales presentan deterioro superficial menor.',NULL),(63,5,7,_binary '',2,'Las vigas secundarias presentan desgaste localizado menor.',NULL),(64,5,8,_binary '',2,'Los diafragmas presentan deterioro superficial menor.',NULL),(65,5,9,_binary '',2,'Los apoyos presentan desgaste menor sin evidencia de deterioro severo.',NULL),(66,5,10,_binary '',2,'Los bastiones presentan fisuración superficial menor.',NULL),(67,5,11,_binary '',2,'Las pilas presentan deterioro superficial localizado.',NULL),(68,5,12,_binary '',2,'Las zonas visibles de las cimentaciones presentan deterioro menor.',NULL),(69,5,13,_binary '',2,'Se observa erosión superficial menor en los taludes.',NULL),(70,5,14,_binary '',2,'Se observa acumulación menor de sedimentos en el cauce.',NULL),(71,6,1,_binary '',2,'La superficie de rodamiento presenta desgaste superficial menor.',NULL),(72,6,2,_binary '',2,'Las juntas de expansión presentan deterioro menor.',NULL),(73,6,3,_binary '',2,'Las barandas presentan desgaste superficial del sistema de protección.',NULL),(74,6,4,_binary '',2,'El sistema de drenaje presenta acumulación menor de sedimentos.',NULL),(75,6,5,_binary '',2,'La losa presenta fisuras superficiales menores.',NULL),(76,6,6,_binary '',2,'Las vigas principales presentan deterioro superficial menor.',NULL),(77,6,7,_binary '',1,NULL,NULL),(78,6,8,_binary '',1,NULL,NULL),(79,6,9,_binary '',1,NULL,NULL),(80,6,10,_binary '',1,NULL,NULL),(81,6,11,_binary '',1,NULL,NULL),(82,6,12,_binary '',1,NULL,NULL),(83,6,13,_binary '',1,NULL,NULL),(84,6,14,_binary '',1,NULL,NULL);
 /*!40000 ALTER TABLE `tb_detalle_inspeccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +142,7 @@ CREATE TABLE `tb_inspeccion` (
   KEY `idx_inspeccion_inspector` (`ConsecutivoInspector`),
   CONSTRAINT `fk_inspeccion_inspector` FOREIGN KEY (`ConsecutivoInspector`) REFERENCES `tb_usuario` (`Consecutivo`),
   CONSTRAINT `fk_inspeccion_puente` FOREIGN KEY (`CodigoPuente`) REFERENCES `registrarpuente` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +151,7 @@ CREATE TABLE `tb_inspeccion` (
 
 LOCK TABLES `tb_inspeccion` WRITE;
 /*!40000 ALTER TABLE `tb_inspeccion` DISABLE KEYS */;
-INSERT INTO `tb_inspeccion` VALUES (1,'SB-001',1,'2026-01-10','Inspección detallada de los elementos del puente.',64,14,4.57,'Critica','2026-07-27 21:45:59',_binary ''),(2,'SB-002',1,'2026-01-12','Inspección detallada de los elementos del puente.',52,14,3.71,'Critica','2026-07-27 21:45:59',_binary ''),(3,'SB-003',1,'2026-01-15','Inspección detallada de los elementos del puente.',48,14,3.43,'Deficiente','2026-07-27 21:45:59',_binary ''),(4,'SB-004',1,'2026-01-18','Inspección detallada de los elementos del puente.',45,14,3.21,'Deficiente','2026-07-27 21:45:59',_binary ''),(5,'SB-005',1,'2026-01-20','Inspección detallada de los elementos del puente.',42,14,3.00,'Deficiente','2026-07-27 21:45:59',_binary ''),(6,'SB-006',1,'2026-01-22','Inspección detallada de los elementos del puente.',35,14,2.50,'Regular','2026-07-27 21:45:59',_binary ''),(7,'SB-007',1,'2026-01-25','Inspección detallada de los elementos del puente.',32,14,2.29,'Regular','2026-07-27 21:45:59',_binary ''),(8,'SB-008',1,'2026-01-27','Inspección detallada de los elementos del puente.',28,14,2.00,'Regular','2026-07-27 21:45:59',_binary ''),(9,'SB-009',1,'2026-01-29','Inspección detallada de los elementos del puente.',20,14,1.43,'Buena','2026-07-27 21:45:59',_binary ''),(10,'SB-010',1,'2026-02-01','Inspección detallada de los elementos del puente.',16,14,1.14,'Buena','2026-07-27 21:45:59',_binary '');
+INSERT INTO `tb_inspeccion` VALUES (1,'SB-004',1,'2026-08-10','Inspección visual detallada de los elementos del puente. Se identificaron deterioros localizados que requieren seguimiento e intervención.',45,14,3.21,'Deficiente','2026-08-10 20:51:17',_binary ''),(2,'SB-006',1,'2026-08-11','Inspección visual general del puente. Se identificaron deterioros menores y moderados en varios elementos, así como deterioro severo localizado en las vigas principales, con desprendimiento de concreto, exposición del acero de refuerzo y presencia de corrosión. Se recomienda seguimiento del elemento afectado.',34,14,2.43,'Regular','2026-08-10 21:08:05',_binary ''),(3,'SB-007',1,'2026-08-13','Inspección visual del puente de cercha de acero. Se identificó deterioro severo en las juntas de expansión y deterioro muy severo localizado en las vigas principales de la cercha. También se observaron deterioros menores y moderados en otros elementos.',39,14,2.79,'Regular','2026-08-10 21:21:30',_binary ''),(4,'SB-009',1,'2026-08-14','Inspección visual del puente. Aunque la condición general presenta deterioro moderado, se identificaron daños severos localizados en la superficie de rodamiento y las juntas de expansión. Debido a la importancia estratégica del puente, se recomienda mantener seguimiento prioritario.',38,14,2.71,'Regular','2026-08-10 21:25:24',_binary ''),(5,'SB-001',1,'2026-08-15','Inspección visual general del puente. Se identificaron deterioros moderados en algunos accesorios y deterioros menores en los demás elementos. No se observaron daños severos.',31,14,2.21,'Regular','2026-08-10 21:27:04',_binary ''),(6,'SB-003',1,'2026-08-16','Inspección visual general del puente. La estructura presenta una condición favorable, con deterioros menores principalmente en accesorios. Debido a su importancia estratégica se recomienda conservar un programa de seguimiento preventivo.',20,14,1.43,'Buena','2026-08-10 21:27:04',_binary '');
 /*!40000 ALTER TABLE `tb_inspeccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,6 +254,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spConsultarPriorizacionPuentes`(
     IN pMetodo VARCHAR(50)
 )
 BEGIN
+
     SELECT
         p.codigo,
         p.nombre,
@@ -304,7 +306,7 @@ BEGIN
                         WHEN LOWER(i.CondicionPreliminar) = 'buena'
                             THEN 1
                         ELSE 0
-                    END * 0.70
+                    END * 0.50
                 )
                 +
                 (
@@ -318,7 +320,7 @@ BEGIN
                         WHEN LOWER(p.importancia) = 'otro puente'
                             THEN 1
                         ELSE 0
-                    END * 0.30
+                    END * 0.50
                 )
 
             ELSE
@@ -342,7 +344,6 @@ BEGIN
         AND i.Estado = 1
 
     WHERE p.codigo <> ''
-
 
       AND i.ConsecutivoInspeccion = (
             SELECT i2.ConsecutivoInspeccion
@@ -370,7 +371,7 @@ BEGIN
                         WHEN LOWER(i.CondicionPreliminar) = 'buena'
                             THEN 1
                         ELSE 0
-                    END * 0.70
+                    END * 0.50
                 )
                 +
                 (
@@ -384,7 +385,7 @@ BEGIN
                         WHEN LOWER(p.importancia) = 'otro puente'
                             THEN 1
                         ELSE 0
-                    END * 0.30
+                    END * 0.50
                 )
 
             ELSE
@@ -596,11 +597,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spRegistrarDetalleInspeccion`(
     IN pConsecutivoElemento INT,
     IN pEsAplicable TINYINT,
     IN pCalificacion TINYINT,
-    IN pObservacion TEXT
+    IN pObservacion TEXT,
+    IN pImagen VARCHAR(255)
 )
 BEGIN
-
-
 
     IF NOT EXISTS
     (
@@ -613,8 +613,6 @@ BEGIN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'La inspección indicada no existe';
     END IF;
-
-
 
 
     IF NOT EXISTS
@@ -630,8 +628,6 @@ BEGIN
     END IF;
 
 
-
-
     IF pEsAplicable IS NULL
        OR pEsAplicable NOT IN (0, 1)
     THEN
@@ -643,8 +639,6 @@ BEGIN
     IF pEsAplicable = 1
     THEN
 
-
-
         IF pCalificacion IS NULL
            OR pCalificacion < 1
            OR pCalificacion > 5
@@ -652,7 +646,6 @@ BEGIN
             SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'La calificación debe estar entre 1 y 5';
         END IF;
-
 
 
         IF pCalificacion > 1
@@ -667,13 +660,28 @@ BEGIN
                 'Debe ingresar una observación para calificaciones mayores a 1';
         END IF;
 
+
+        IF (
+            pCalificacion = 4
+            OR pCalificacion = 5
+        )
+        AND
+        (
+            pImagen IS NULL
+            OR TRIM(pImagen) = ''
+        )
+        THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT =
+                'Debe agregar una imagen para calificaciones 4 o 5';
+        END IF;
+
     ELSE
 
-
         SET pCalificacion = NULL;
+        SET pImagen = NULL;
 
     END IF;
-
 
 
     INSERT INTO tb_detalle_inspeccion
@@ -682,7 +690,8 @@ BEGIN
         ConsecutivoElemento,
         EsAplicable,
         Calificacion,
-        Observacion
+        Observacion,
+        Imagen
     )
     VALUES
     (
@@ -690,7 +699,8 @@ BEGIN
         pConsecutivoElemento,
         pEsAplicable,
         pCalificacion,
-        NULLIF(TRIM(pObservacion), '')
+        NULLIF(TRIM(pObservacion), ''),
+        NULLIF(TRIM(pImagen), '')
     );
 
 END ;;
@@ -956,4 +966,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-27 21:55:33
+-- Dump completed on 2026-08-10 21:37:48
