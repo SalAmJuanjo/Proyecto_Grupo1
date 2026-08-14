@@ -53,8 +53,33 @@ CREATE TABLE `registrarpuente` (
 
 LOCK TABLES `registrarpuente` WRITE;
 /*!40000 ALTER TABLE `registrarpuente` DISABLE KEYS */;
-INSERT INTO `registrarpuente` VALUES ('SB-001','Puente sobre río Cedro',1,'nacional primaria','San José','Pérez Zeledón',9.365420,'vigas','concreto preesforzado',92.50,3,2,'1994-04-15','otro puente','electricidad,telecomunicaciones',10.5,5.20,'/Proyecto_Grupo1/View/Uploads/SB-001.png'),('SB-002','Puente sobre río Diamante',2,'nacional primaria','Cartago','El Guarco',9.788310,'marco rígido','concreto reforzado',68.40,2,2,'2002-08-21','puente convencional','agua potable,electricidad',9.8,4.90,'/Proyecto_Grupo1/View/Uploads/SB-002.png'),('SB-003','Puente sobre río Esmeralda',27,'nacional primaria','San José','Escazú',9.934120,'vigas','concreto preesforzado',105.75,4,3,'1998-11-10','puente crítico','agua potable,electricidad,telecomunicaciones',14.2,5.50,'/Proyecto_Grupo1/View/Uploads/SB-003.png'),('SB-004','Puente sobre río Fortuna',32,'nacional primaria','Limón','Limón',9.991840,'cercha','acero',130.60,4,2,'1989-02-18','puente esencial','electricidad,telecomunicaciones',11.7,5.10,'/Proyecto_Grupo1/View/Uploads/SB-004.png'),('SB-005','Puente sobre quebrada Granada',118,'nacional secundaria','Alajuela','Grecia',10.072350,'vigas','concreto reforzado',45.80,2,2,'2008-06-12','puente esencial','agua potable',9.4,4.60,'/Proyecto_Grupo1/View/Uploads/SB-005.png'),('SB-006','Puente sobre río Horizonte',4,'nacional primaria','Heredia','Sarapiquí',10.412680,'arco','concreto reforzado',88.90,3,2,'1996-09-27','puente crítico','electricidad,telecomunicaciones',10.8,5.00,'/Proyecto_Grupo1/View/Uploads/SB-006.png'),('SB-007','Puente sobre quebrada Ilusión',804,'cantonal','Guanacaste','Santa Cruz',10.267540,'modular provisional','acero',29.70,1,1,'2017-03-05','otro puente','ninguno',4.8,3.80,'/Proyecto_Grupo1/View/Uploads/SB-007.png'),('SB-008','Puente sobre río Jacaranda',141,'nacional secundaria','Alajuela','San Carlos',10.355740,'vigas','concreto preesforzado',76.30,3,2,'2011-12-14','puente esencial','agua potable,electricidad',9.9,4.70,'/Proyecto_Grupo1/View/Uploads/SB-008.png'),('SB-009','Puente sobre río Kandela',21,'nacional primaria','Puntarenas','Esparza',9.998630,'colgante','acero',112.40,3,2,'2005-01-29','puente crítico','electricidad,telecomunicaciones',10.6,5.30,'/Proyecto_Grupo1/View/Uploads/SB-009.png'),('SB-010','Puente sobre quebrada Luna',301,'cantonal','Cartago','Paraíso',9.838970,'vigas','concreto reforzado',36.20,2,1,'2019-07-16','otro puente','agua potable',5.5,4.10,'/Proyecto_Grupo1/View/Uploads/SB-010.png');
+INSERT INTO `registrarpuente` VALUES ('Prueba1','Santa',123,'nacional primaria','Cartago','coronado',7.850000,'vigas','acero',0.08,6,1,'2026-08-10','puente esencial','alcantarillado',0.1,0.17,'/Proyecto_Grupo1/View/Uploads/puentes-ebridge-tec-7.png'),('SB-001','Puente sobre río Cedro',1,'nacional primaria','San José','Pérez Zeledón',9.365420,'vigas','concreto preesforzado',92.50,3,2,'1994-04-15','otro puente','electricidad,telecomunicaciones',10.5,5.20,'/Proyecto_Grupo1/View/Uploads/SB-001.png'),('SB-002','Puente sobre río Diamante',2,'nacional primaria','Cartago','El Guarco',9.788310,'marco rígido','concreto reforzado',68.40,2,2,'2002-08-21','puente convencional','agua potable,electricidad',9.8,4.90,'/Proyecto_Grupo1/View/Uploads/SB-002.png'),('SB-003','Puente sobre río Esmeralda',27,'nacional primaria','San José','Escazú',9.934120,'vigas','concreto preesforzado',105.75,4,3,'1998-11-10','puente crítico','agua potable,electricidad,telecomunicaciones',14.2,5.50,'/Proyecto_Grupo1/View/Uploads/SB-003.png'),('SB-004','Puente sobre río Fortuna',32,'nacional primaria','Limón','Limón',9.991840,'cercha','acero',130.60,4,2,'1989-02-18','puente esencial','electricidad,telecomunicaciones',11.7,5.10,'/Proyecto_Grupo1/View/Uploads/SB-004.png'),('SB-005','Puente sobre quebrada Granada',118,'nacional secundaria','Alajuela','Grecia',10.072350,'vigas','concreto reforzado',45.80,2,2,'2008-06-12','puente esencial','agua potable',9.4,4.60,'/Proyecto_Grupo1/View/Uploads/SB-005.png'),('SB-006','Puente sobre río Horizonte',4,'nacional primaria','Heredia','Sarapiquí',10.412680,'arco','concreto reforzado',88.90,3,2,'1996-09-27','puente crítico','electricidad,telecomunicaciones',10.8,5.00,'/Proyecto_Grupo1/View/Uploads/SB-006.png'),('SB-007','Puente sobre quebrada Ilusión',804,'cantonal','Guanacaste','Santa Cruz',10.267540,'modular provisional','acero',29.70,1,1,'2017-03-05','otro puente','ninguno',4.8,3.80,'/Proyecto_Grupo1/View/Uploads/SB-007.png'),('SB-008','Puente sobre río Jacaranda',141,'nacional secundaria','Alajuela','San Carlos',10.355740,'vigas','concreto preesforzado',76.30,3,2,'2011-12-14','puente esencial','agua potable,electricidad',9.9,4.70,'/Proyecto_Grupo1/View/Uploads/SB-008.png'),('SB-009','Puente sobre río Kandela',21,'nacional primaria','Puntarenas','Esparza',9.998630,'colgante','acero',112.40,3,2,'2005-01-29','puente crítico','electricidad,telecomunicaciones',10.6,5.30,'/Proyecto_Grupo1/View/Uploads/SB-009.png'),('SB-010','Puente sobre quebrada Luna',301,'cantonal','Cartago','Paraíso',9.838970,'vigas','concreto reforzado',36.20,2,1,'2019-07-16','otro puente','agua potable',5.5,4.10,'/Proyecto_Grupo1/View/Uploads/SB-010.png');
 /*!40000 ALTER TABLE `registrarpuente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_clasificacion_ruta`
+--
+
+DROP TABLE IF EXISTS `tb_clasificacion_ruta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_clasificacion_ruta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_clasificacion_ruta`
+--
+
+LOCK TABLES `tb_clasificacion_ruta` WRITE;
+/*!40000 ALTER TABLE `tb_clasificacion_ruta` DISABLE KEYS */;
+INSERT INTO `tb_clasificacion_ruta` VALUES (4,'cantonal'),(1,'nacional primaria'),(2,'nacional secundaria'),(3,'nacional terciaria'),(5,'otra');
+/*!40000 ALTER TABLE `tb_clasificacion_ruta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -119,6 +144,31 @@ INSERT INTO `tb_elemento` VALUES (1,'Accesorios','Superficie de rodamiento',_bin
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_importancia`
+--
+
+DROP TABLE IF EXISTS `tb_importancia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_importancia` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_importancia`
+--
+
+LOCK TABLES `tb_importancia` WRITE;
+/*!40000 ALTER TABLE `tb_importancia` DISABLE KEYS */;
+INSERT INTO `tb_importancia` VALUES (4,'otro puente'),(3,'puente convencional'),(1,'puente crítico'),(2,'puente esencial');
+/*!40000 ALTER TABLE `tb_importancia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_inspeccion`
 --
 
@@ -156,6 +206,130 @@ INSERT INTO `tb_inspeccion` VALUES (1,'SB-004',1,'2026-08-10','Inspección visua
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_material_principal`
+--
+
+DROP TABLE IF EXISTS `tb_material_principal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_material_principal` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_material_principal`
+--
+
+LOCK TABLES `tb_material_principal` WRITE;
+/*!40000 ALTER TABLE `tb_material_principal` DISABLE KEYS */;
+INSERT INTO `tb_material_principal` VALUES (3,'acero'),(2,'concreto preesforzado'),(1,'concreto reforzado'),(4,'madera'),(5,'mampostería'),(6,'mixto');
+/*!40000 ALTER TABLE `tb_material_principal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_provincia`
+--
+
+DROP TABLE IF EXISTS `tb_provincia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_provincia` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_provincia`
+--
+
+LOCK TABLES `tb_provincia` WRITE;
+/*!40000 ALTER TABLE `tb_provincia` DISABLE KEYS */;
+INSERT INTO `tb_provincia` VALUES (2,'Alajuela'),(3,'Cartago'),(5,'Guanacaste'),(4,'Heredia'),(7,'Limón'),(6,'Puntarenas'),(1,'San José');
+/*!40000 ALTER TABLE `tb_provincia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_rol`
+--
+
+DROP TABLE IF EXISTS `tb_rol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_rol` (
+  `Consecutivo` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`Consecutivo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_rol`
+--
+
+LOCK TABLES `tb_rol` WRITE;
+/*!40000 ALTER TABLE `tb_rol` DISABLE KEYS */;
+INSERT INTO `tb_rol` VALUES (1,'Administrador'),(2,'Inspector');
+/*!40000 ALTER TABLE `tb_rol` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_servicio_publico`
+--
+
+DROP TABLE IF EXISTS `tb_servicio_publico`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_servicio_publico` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_servicio_publico`
+--
+
+LOCK TABLES `tb_servicio_publico` WRITE;
+/*!40000 ALTER TABLE `tb_servicio_publico` DISABLE KEYS */;
+INSERT INTO `tb_servicio_publico` VALUES (1,'agua potable'),(2,'alcantarillado'),(3,'electricidad'),(7,'ninguno'),(6,'otros'),(4,'telecomunicaciones'),(5,'tubería de combustible');
+/*!40000 ALTER TABLE `tb_servicio_publico` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_tipo_estructura`
+--
+
+DROP TABLE IF EXISTS `tb_tipo_estructura`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_tipo_estructura` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_tipo_estructura`
+--
+
+LOCK TABLES `tb_tipo_estructura` WRITE;
+/*!40000 ALTER TABLE `tb_tipo_estructura` DISABLE KEYS */;
+INSERT INTO `tb_tipo_estructura` VALUES (3,'arco'),(6,'atirantado'),(2,'cercha'),(5,'colgante'),(4,'marco rígido'),(7,'modular provisional'),(8,'otra'),(1,'vigas');
+/*!40000 ALTER TABLE `tb_tipo_estructura` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_usuario`
 --
 
@@ -168,8 +342,11 @@ CREATE TABLE `tb_usuario` (
   `CorreoElectronico` varchar(100) NOT NULL,
   `Contrasenna` varchar(45) NOT NULL,
   `Estado` bit(1) NOT NULL,
-  PRIMARY KEY (`Consecutivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `ConsecutivoRol` int(11) NOT NULL DEFAULT 2,
+  PRIMARY KEY (`Consecutivo`),
+  KEY `fk_usuario_rol` (`ConsecutivoRol`),
+  CONSTRAINT `fk_usuario_rol` FOREIGN KEY (`ConsecutivoRol`) REFERENCES `tb_rol` (`Consecutivo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +355,7 @@ CREATE TABLE `tb_usuario` (
 
 LOCK TABLES `tb_usuario` WRITE;
 /*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
-INSERT INTO `tb_usuario` VALUES (1,'SERGIO GABRIEL ALVAREZ GONZALEZ','sergio.ag1993@gmail.com','620100',_binary '');
+INSERT INTO `tb_usuario` VALUES (1,'SERGIO GABRIEL ALVAREZ GONZALEZ','sergio.ag1993@gmail.com','620100',_binary '',2),(2,'Juan Jose','admin@correo.com','123456',_binary '',1),(3,'Sofía Vargas','inspector@correo.com','123456',_binary '',2);
 /*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -582,6 +759,44 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spListarPuentes` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spListarPuentes`()
+BEGIN
+    SELECT
+        codigo,
+        nombre,
+        numero_ruta,
+        clasificacion_ruta,
+        provincia,
+        canton,
+        coordenadas,
+        tipo_estructura,
+        material_principal,
+        longitud_total,
+        numero_tramos,
+        numero_superestructuras,
+        fecha_construccion,
+        importancia,
+        servicios_publicos,
+        restriccion_peso,
+        restriccion_altura,
+        imagen
+    FROM registrarpuente;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `spRegistrarDetalleInspeccion` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -966,4 +1181,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-10 21:37:48
+-- Dump completed on 2026-08-14 16:32:08

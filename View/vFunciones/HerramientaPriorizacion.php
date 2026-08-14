@@ -43,7 +43,7 @@ $puentes =
         </div>
 
 
-        <?php aside(); ?>
+        <?php Sidebar(); ?>
 
 
         <div class="admin-main">

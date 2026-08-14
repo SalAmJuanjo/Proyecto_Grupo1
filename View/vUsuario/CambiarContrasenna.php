@@ -14,7 +14,7 @@ ImportCSS();
     <div class="admin-shell">
         <div class="sidebar-backdrop" data-sidebar-close></div>
 
-        <?php aside(); ?>
+        <?php Sidebar(); ?>
         <div class="admin-main">
             <?php navbar(); ?>
             <main class="dashboard-content">

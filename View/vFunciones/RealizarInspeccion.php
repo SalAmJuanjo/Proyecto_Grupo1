@@ -73,7 +73,7 @@ $elementos =
             data-sidebar-close>
         </div>
 
-        <?php aside(); ?>
+        <?php Sidebar(); ?>
 
         <div class="admin-main">
 

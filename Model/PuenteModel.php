@@ -55,34 +55,14 @@
         return false;
     }
 }
-
 function ListarPuentesModel() {
     try {
         $conn = OpenDB();
-
-        $sql = "SELECT 
-                    codigo,
-                    nombre,
-                    numero_ruta,
-                    clasificacion_ruta,
-                    provincia,
-                    canton,
-                    coordenadas,
-                    tipo_estructura,
-                    material_principal,
-                    longitud_total,
-                    numero_tramos,
-                    numero_superestructuras,
-                    fecha_construccion,
-                    importancia,
-                    servicios_publicos,
-                    restriccion_peso,
-                    restriccion_altura,
-                    imagen
-                FROM registrarpuente";
-
+ 
+        $sql = "CALL spListarPuentes()";
+ 
         $response = $conn->query($sql);
-
+ 
         CloseDB($conn);
         return $response;
     } catch (Exception $e) {

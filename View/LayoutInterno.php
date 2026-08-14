@@ -1,6 +1,53 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/InicioController.php';
 
+function ValidarSesionInterna()
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['ConsecutivoUsuario']) || !isset($_SESSION['NombreUsuario'])) {
+        header('Location: ../vInicio/IniciarSesion.php');
+        exit();
+    }
+}
+
+function ObtenerRolActual()
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    $rol = $_SESSION['ConsecutivoRol'] ?? $_SESSION['NombreRol'] ?? 0;
+
+    if (is_numeric($rol)) {
+        return (int) $rol;
+    }
+
+    if (is_string($rol)) {
+        $rolNormalizado = strtolower(trim($rol));
+
+        if ($rolNormalizado === 'administrador' || $rolNormalizado === 'admin' || $rolNormalizado === '1') {
+            return 1;
+        }
+
+        if ($rolNormalizado === 'inspector' || $rolNormalizado === '2') {
+            return 2;
+        }
+    }
+
+    return 0;
+}
+
+function TienePermiso($rolesPermitidos)
+{
+    $rolActual = ObtenerRolActual();
+    return in_array($rolActual, $rolesPermitidos, true);
+}
+
+ValidarSesionInterna();
+
 function ImportCSS()
 {
     echo '
@@ -75,8 +122,14 @@ function navbar()
         ';
 }
 
-function aside()
+function Sidebar()
 {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    $rolActual = ObtenerRolActual();
+
     echo '
         <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
             <div class="sidebar-header">
@@ -84,11 +137,27 @@ function aside()
             </div>
             <nav class="sidebar-nav">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="../vInicio/Principal.php">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../vInicio/Principal.php">Inicio</a></li>';
+
+    if (TienePermiso([1])) {
+        echo '
                     <li class="nav-item"><a class="nav-link" href="../vFunciones/RegistrarPuente.php">Registrar puente</a></li>
                     <li class="nav-item"><a class="nav-link" href="../vFunciones/RealizarInspeccion.php">Nueva inspección</a></li>
                     <li class="nav-item"><a class="nav-link" href="../vFunciones/DashboardGeneral.php">Dashboard general</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../vFunciones/HerramientaPriorizacion.php">Herramientas de priorización</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../vFunciones/HerramientaPriorizacion.php">Herramientas de priorización</a></li>';
+    } elseif (TienePermiso([2])) {
+        echo '
+                    <li class="nav-item"><a class="nav-link" href="../vFunciones/RealizarInspeccion.php">Nueva inspección</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../vFunciones/HerramientaPriorizacion.php">Herramientas de priorización</a></li>';
+    } else {
+        echo '
+                    <li class="nav-item"><a class="nav-link" href="../vFunciones/RegistrarPuente.php">Registrar puente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../vFunciones/RealizarInspeccion.php">Nueva inspección</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../vFunciones/DashboardGeneral.php">Dashboard general</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../vFunciones/HerramientaPriorizacion.php">Herramientas de priorización</a></li>';
+    }
+
+    echo '
                 </ul>
              </nav>
             <div class="sidebar-user">

@@ -3,6 +3,16 @@
         session_start();
     }
  include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Model/PuenteModel.php';
+ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Model/CatalogoModel.php';
+
+// Se cargan siempre (GET y POST) porque la vista los necesita
+// para pintar los <select> del formulario.
+$provincias           = ListarProvinciasModel();
+$clasificacionesRuta  = ListarClasificacionRutaModel();
+$tiposEstructura      = ListarTipoEstructuraModel();
+$materialesPrincipal  = ListarMaterialPrincipalModel();
+$importancias         = ListarImportanciaModel();
+$serviciosPublicosCat = ListarServiciosPublicosModel();
 
 
 if(isset($_POST["btnRegistrarPuente"]))
@@ -33,15 +43,15 @@ if(isset($_POST["btnRegistrarPuente"]))
         $destino = $_SERVER['DOCUMENT_ROOT'] . $imagen;
         move_uploaded_file($origen, $destino);
     }
-     
-     
-    
-   
+
+
+
+
     $serviciosPublicos = isset($_POST["serviciosPublicos"]) ? implode(', ', $_POST["serviciosPublicos"]) : '';
 
-    
 
-   
+
+
     $datos = RegistrarPuenteModel(
         $codigo, 
         $nombre, 

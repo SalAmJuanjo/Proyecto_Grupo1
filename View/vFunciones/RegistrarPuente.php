@@ -13,7 +13,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
     <div class="admin-shell">
         <div class="sidebar-backdrop" data-sidebar-close></div>
 
-        <?php aside(); ?>
+        <?php Sidebar(); ?>
         <div class="admin-main">
             <?php navbar(); ?>
 
@@ -52,11 +52,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     <label class="form-label" for="clasificacionRuta">Clasificación de ruta</label>
                                     <select class="form-control" id="clasificacionRuta" name="clasificacionRuta">
                                         <option value="">Seleccione...</option>
-                                        <option value="nacional primaria">Nacional primaria</option>
-                                        <option value="nacional secundaria">Nacional secundaria</option>
-                                        <option value="nacional terciaria">Nacional terciaria</option>
-                                        <option value="cantonal">Cantonal</option>
-                                        <option value="otra">Otra</option>
+                                        <?php if ($clasificacionesRuta): while ($row = $clasificacionesRuta->fetch_assoc()): ?>
+                                            <option value="<?= htmlspecialchars($row['nombre']) ?>">
+                                                <?= htmlspecialchars(ucfirst($row['nombre'])) ?>
+                                            </option>
+                                        <?php endwhile; endif; ?>
                                     </select>
                                 </div>
 
@@ -65,13 +65,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     <label class="form-label" for="provincia">Provincia</label>
                                     <select class="form-control" id="provincia" name="provincia">
                                         <option value="">Seleccione...</option>
-                                        <option value="San José">San José</option>
-                                        <option value="Alajuela">Alajuela</option>
-                                        <option value="Cartago">Cartago</option>
-                                        <option value="Heredia">Heredia</option>
-                                        <option value="Guanacaste">Guanacaste</option>
-                                        <option value="Puntarenas">Puntarenas</option>
-                                        <option value="Limón">Limón</option>
+                                        <?php if ($provincias): while ($row = $provincias->fetch_assoc()): ?>
+                                            <option value="<?= htmlspecialchars($row['nombre']) ?>">
+                                                <?= htmlspecialchars($row['nombre']) ?>
+                                            </option>
+                                        <?php endwhile; endif; ?>
                                     </select>
                                 </div>
 
@@ -92,14 +90,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     <label class="form-label" for="tipoEstructura">Tipo de estructura</label>
                                     <select class="form-control" id="tipoEstructura" name="tipoEstructura">
                                         <option value="">Seleccione...</option>
-                                        <option value="vigas">Vigas</option>
-                                        <option value="cercha">Cercha</option>
-                                        <option value="arco">Arco</option>
-                                        <option value="marco rígido">Marco rígido</option>
-                                        <option value="colgante">Colgante</option>
-                                        <option value="atirantado">Atirantado</option>
-                                        <option value="modular provisional">Modular provisional</option>
-                                        <option value="otra">Otra</option>
+                                        <?php if ($tiposEstructura): while ($row = $tiposEstructura->fetch_assoc()): ?>
+                                            <option value="<?= htmlspecialchars($row['nombre']) ?>">
+                                                <?= htmlspecialchars(ucfirst($row['nombre'])) ?>
+                                            </option>
+                                        <?php endwhile; endif; ?>
                                     </select>
                                 </div>
 
@@ -108,12 +103,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     <label class="form-label" for="materialPrincipal">Material principal</label>
                                     <select class="form-control" id="materialPrincipal" name="materialPrincipal">
                                         <option value="">Seleccione...</option>
-                                        <option value="concreto reforzado">Concreto reforzado</option>
-                                        <option value="concreto preesforzado">Concreto preesforzado</option>
-                                        <option value="acero">Acero</option>
-                                        <option value="madera">Madera</option>
-                                        <option value="mampostería">Mampostería</option>
-                                        <option value="mixto">Mixto</option>
+                                        <?php if ($materialesPrincipal): while ($row = $materialesPrincipal->fetch_assoc()): ?>
+                                            <option value="<?= htmlspecialchars($row['nombre']) ?>">
+                                                <?= htmlspecialchars(ucfirst($row['nombre'])) ?>
+                                            </option>
+                                        <?php endwhile; endif; ?>
                                     </select>
                                 </div>
 
@@ -151,10 +145,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     <label class="form-label" for="importancia">Importancia</label>
                                     <select class="form-control" id="importancia" name="importancia">
                                         <option value="">Seleccione...</option>
-                                        <option value="puente crítico">Puente crítico</option>
-                                        <option value="puente esencial">Puente esencial</option>
-                                        <option value="puente convencional">Puente convencional</option>
-                                        <option value="otro puente">Otro puente</option>
+                                        <?php if ($importancias): while ($row = $importancias->fetch_assoc()): ?>
+                                            <option value="<?= htmlspecialchars($row['nombre']) ?>">
+                                                <?= htmlspecialchars(ucfirst($row['nombre'])) ?>
+                                            </option>
+                                        <?php endwhile; endif; ?>
                                     </select>
                                 </div>
 
@@ -163,12 +158,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     <label class="form-label" for="serviciosPublicos">Servicios públicos</label>
                                     <select class="form-control" id="serviciosPublicos" name="serviciosPublicos[]"
                                         multiple>
-                                        <option value="agua potable">Agua potable</option>
-                                        <option value="alcantarillado">Alcantarillado</option>
-                                        <option value="electricidad">Electricidad</option>
-                                        <option value="telecomunicaciones">Telecomunicaciones</option>
-                                        <option value="tubería de combustible">Tubería de combustible</option>
-                                        <option value="otros">Otros</option>
+                                        <?php if ($serviciosPublicosCat): while ($row = $serviciosPublicosCat->fetch_assoc()): ?>
+                                            <option value="<?= htmlspecialchars($row['nombre']) ?>">
+                                                <?= htmlspecialchars(ucfirst($row['nombre'])) ?>
+                                            </option>
+                                        <?php endwhile; endif; ?>
                                     </select>
                                 </div>
                                 <!-- Restricción de Peso -->
@@ -209,7 +203,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
         </div>
     </div>
     <?php ImportJS(); ?>
-    
+
     <script src="../../View/js/RegistrarPuente.js"></script>
 </body>
 

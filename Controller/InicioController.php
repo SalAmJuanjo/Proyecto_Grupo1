@@ -20,20 +20,26 @@ if (isset($_POST["btnRegistrar"])) {
 
     $_POST["Mensaje"] = "No se ha podido registrar su información correctamente";
 }
-
 if (isset($_POST["btnIniciarSesion"])) {
-    $correoElectronico = $_POST["correoElectronico"];
-    $contrasenna = $_POST["contrasenna"];
+    $correoElectronico = trim($_POST["correoElectronico"] ?? '');
+    $contrasenna = $_POST["contrasenna"] ?? '';
 
-    $datos = IniciarSesionModel($correoElectronico, $contrasenna);
+    if ($correoElectronico !== '' && $contrasenna !== '') {
+        $datos = IniciarSesionModel($correoElectronico, $contrasenna);
 
-    if ($datos) {
-        $_SESSION["NombreUsuario"] = $datos["Nombre"];
-        $_SESSION["ConsecutivoUsuario"] = $datos["Consecutivo"];
-        $_SESSION["CorreoElectronicoUsuario"] = $datos["CorreoElectronico"];
+        if ($datos) {
+            // Datos generales del usuario
+            $_SESSION["NombreUsuario"] = $datos["Nombre"];
+            $_SESSION["ConsecutivoUsuario"] = $datos["Consecutivo"];
+            $_SESSION["CorreoElectronicoUsuario"] = $datos["CorreoElectronico"];
 
-        header("Location: ../../View/vInicio/Principal.php");
-        exit();
+            // Nuevas variables de sesión para los roles
+            $_SESSION["ConsecutivoRol"] = $datos["ConsecutivoRol"]; // Ej: 1 para Admin, 2 para Inspector
+            $_SESSION["NombreRol"] = $datos["NombreRol"];           // Ej: "Administrador", "Inspector"
+
+            header("Location: ../../View/vInicio/Principal.php");
+            exit();
+        }
     }
 
     $_POST["Mensaje"] = "No se ha podido autenticar su información correctamente";

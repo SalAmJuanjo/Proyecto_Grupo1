@@ -32,7 +32,7 @@ $errorDashboard = $dashboard["error"];
         <div class="sidebar-backdrop" data-sidebar-close>
         </div>
 
-        <?php aside(); ?>
+        <?php Sidebar(); ?>
 
         <div class="admin-main">
 
