@@ -377,3 +377,52 @@ function FinalizarInspeccionModel(
         return array();
     }
 }
+
+function ConsultarCalificacionesInspeccionModel()
+{
+    $conn = null;
+
+    try {
+
+        $conn = OpenDB();
+
+        $sql =
+            "CALL spConsultarCalificacionesInspeccion()";
+
+        $response =
+            $conn->query($sql);
+
+        $calificaciones =
+            array();
+
+        if ($response) {
+
+            while (
+                $fila =
+                $response->fetch_assoc()
+            ) {
+
+                $calificaciones[] =
+                    $fila;
+            }
+
+            $response->free();
+        }
+
+        LimpiarResultadosInspeccionModel(
+            $conn
+        );
+
+        CloseDB($conn);
+
+        return $calificaciones;
+
+    } catch (Exception $e) {
+
+        if ($conn) {
+            CloseDB($conn);
+        }
+
+        return array();
+    }
+}

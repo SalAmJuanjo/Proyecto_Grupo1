@@ -3,6 +3,19 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/LayoutInterno.php';
+
+include_once $_SERVER['DOCUMENT_ROOT']
+    . '/Proyecto_Grupo1/Controller/PuenteController.php';
+
+ $puentes = array();
+
+if (isset($_POST["btnmostrarpuentes"])) {
+
+    $puentes =
+        ListarPuentesController();
+}
+   
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -54,9 +67,383 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/View/LayoutInterno.ph
                                 <button type="submit" id="btnmostrarpuentes" name="btnmostrarpuentes" class="btn btn-secondary float-end">
                                     <i class="bi bi-eye" aria-hidden="true"></i> Mostrar
                                 </button>
-                                <div id="puentesList">
-                                    <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteController.php'; ?>
-                                </div>
+                                    <div id="puentesList" class="mt-4">
+
+                                        <?php
+                                        if (
+                                            isset($_POST["btnmostrarpuentes"])
+                                            && empty($puentes)
+                                        ) {
+                                        ?>
+
+                                            <p class="text-muted">
+                                                No hay puentes registrados.
+                                            </p>
+
+                                        <?php
+                                        }
+                                        ?>
+
+
+                                        <?php
+                                        foreach ($puentes as $puente) {
+
+                                            $inspecciones =
+                                                ConsultarInspeccionesPuenteController(
+                                                    $puente["codigo"]
+                                                );
+                                        ?>
+
+                                            <div class="card mb-3">
+
+                                                <div
+                                                    class="card-body"
+                                                    style="
+                                                        display: flex;
+                                                        gap: 20px;
+                                                        align-items: flex-start;
+                                                    "
+                                                >
+
+                                                    <div style="flex: 1;">
+
+                                                        <p class="card-text">
+
+                                                            <strong>Código:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["codigo"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Nombre:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["nombre"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Número de ruta:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["numero_ruta"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Clasificación de ruta:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["clasificacion_ruta"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Provincia:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["provincia"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Cantón:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["canton"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Coordenadas:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["coordenadas"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Tipo de estructura:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["tipo_estructura"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Material principal:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["material_principal"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Longitud total:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["longitud_total"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            m
+
+                                                            <br>
+
+
+                                                            <strong>Número de tramos:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["numero_tramos"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Número de superestructuras:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["numero_superestructuras"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Fecha construcción:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["fecha_construccion"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Importancia:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["importancia"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Servicios públicos:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["servicios_publicos"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            <br>
+
+
+                                                            <strong>Restricción de peso:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["restriccion_peso"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            t
+
+                                                            <br>
+
+
+                                                            <strong>Restricción de altura:</strong>
+
+                                                            <?php
+                                                            echo htmlspecialchars(
+                                                                $puente["restriccion_altura"],
+                                                                ENT_QUOTES,
+                                                                "UTF-8"
+                                                            );
+                                                            ?>
+
+                                                            m
+
+                                                        </p>
+
+
+                                                        <div class="mt-3">
+
+                                                            <strong>
+                                                                Inspecciones registradas:
+                                                            </strong>
+
+
+                                                            <div class="mt-2 d-flex flex-wrap gap-2">
+
+                                                                <?php
+                                                                if (empty($inspecciones)) {
+                                                                ?>
+
+                                                                    <span class="text-muted">
+
+                                                                        Sin inspecciones registradas
+
+                                                                    </span>
+
+                                                                <?php
+                                                                } else {
+
+                                                                    foreach (
+                                                                        $inspecciones
+                                                                        as $inspeccion
+                                                                    ) {
+                                                                ?>
+
+                                                                        <a
+                                                                            href="/Proyecto_Grupo1/View/vFunciones/DetalleInspeccion.php?id=<?php
+                                                                            echo
+                                                                                (int)
+                                                                                $inspeccion[
+                                                                                    "ConsecutivoInspeccion"
+                                                                                ];
+                                                                            ?>"
+                                                                            class="btn btn-outline-primary btn-sm"
+                                                                        >
+
+                                                                            <i class="bi bi-calendar3 me-1"></i>
+
+
+                                                                            <?php
+                                                                            echo date(
+                                                                                "d/m/Y",
+                                                                                strtotime(
+                                                                                    $inspeccion[
+                                                                                        "FechaInspeccion"
+                                                                                    ]
+                                                                                )
+                                                                            );
+                                                                            ?>
+
+                                                                        </a>
+
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <?php
+                                                    if (
+                                                        !empty(
+                                                            $puente["imagen"]
+                                                        )
+                                                    ) {
+                                                    ?>
+
+                                                        <div style="flex: 0 0 auto;">
+
+                                                            <img
+                                                                src="<?php
+                                                                echo htmlspecialchars(
+                                                                    $puente["imagen"],
+                                                                    ENT_QUOTES,
+                                                                    "UTF-8"
+                                                                );
+                                                                ?>"
+                                                                alt="Imagen del puente"
+                                                                style="
+                                                                    max-width: 200px;
+                                                                    max-height: 200px;
+                                                                    object-fit: cover;
+                                                                "
+                                                            >
+
+                                                        </div>
+
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                </div>
+
+                                            </div>
+
+                                        <?php
+                                        }
+                                        ?>
+
+                                    </div>
                             </form>
                             <table class="table table-striped">
 

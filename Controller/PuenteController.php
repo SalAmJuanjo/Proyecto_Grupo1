@@ -15,6 +15,7 @@ $importancias         = ListarImportanciaModel();
 $serviciosPublicosCat = ListarServiciosPublicosModel();
 
 
+
 if(isset($_POST["btnRegistrarPuente"]))
 {
     // Datos recuperados del formulario
@@ -83,47 +84,79 @@ if(isset($_POST["btnRegistrarPuente"]))
     $_POST["Mensaje"] = "No se ha podido registrar la información correctamente";
 }
 
-if (isset($_POST["btnmostrarpuentes"])) {
-    $puentes = ListarPuentesModel();
 
-    if ($puentes && $puentes->num_rows > 0) {
-        while ($row = $puentes->fetch_assoc()) {
-            $imagen_html = '';
-            if (!empty($row['imagen'])) {
-                $imagen_html = "<img src='{$row['imagen']}' alt='Imagen del puente' style='max-width: 200px; max-height: 200px; object-fit: cover;'>";
-            }
-            echo "
-            <div class='card mb-3'>
-                <div class='card-body' style='display: flex; gap: 20px; align-items: flex-start;'>
-                    <div style='flex: 1;'>
-                        <p class='card-text'>
-                            <strong>Código:</strong> {$row['codigo']}<br>
-                            <strong>Nombre:</strong> {$row['nombre']}<br>
-                            <strong>Número de ruta:</strong> {$row['numero_ruta']}<br>
-                            <strong>Clasificación de ruta:</strong> {$row['clasificacion_ruta']}<br>
-                            <strong>Provincia:</strong> {$row['provincia']}<br>
-                            <strong>Cantón:</strong> {$row['canton']}<br>
-                            <strong>Coordenadas:</strong> {$row['coordenadas']}<br>
-                            <strong>Tipo de estructura:</strong> {$row['tipo_estructura']}<br>
-                            <strong>Material principal:</strong> {$row['material_principal']}<br>
-                            <strong>Longitud total:</strong> {$row['longitud_total']} m<br>
-                            <strong>Número de tramos:</strong> {$row['numero_tramos']}<br>
-                            <strong>Número de superestructuras:</strong> {$row['numero_superestructuras']}<br>
-                            <strong>Fecha construcción:</strong> {$row['fecha_construccion']}<br>
-                            <strong>Importancia:</strong> {$row['importancia']}<br>
-                            <strong>Servicios públicos:</strong> {$row['servicios_publicos']}<br>
-                            <strong>Restricción de peso:</strong> {$row['restriccion_peso']} t<br>
-                            <strong>Restricción de altura:</strong> {$row['restriccion_altura']} m
-                        </p>
-                    </div>
-                    <div style='flex: 0 0 auto;'>
-                        {$imagen_html}
-                    </div>
-                </div>
-            </div>";
+function ListarPuentesController()
+{
+    $resultado =
+        ListarPuentesModel();
+
+    $puentes =
+        array();
+
+
+    if (
+        $resultado
+        && $resultado->num_rows > 0
+    ) {
+
+        while (
+            $fila =
+            $resultado->fetch_assoc()
+        ) {
+
+            $puentes[] =
+                $fila;
         }
-    } else {
-        echo "<p>No hay puentes registrados.</p>";
     }
+
+
+    return $puentes;
 }
+
+
+
+function ConsultarInspeccionesPuenteController(
+    $codigoPuente
+) {
+    $datos =
+        ConsultarInspeccionesPuenteModel(
+            $codigoPuente
+        );
+
+    return $datos;
+}
+
+
+
+function ConsultarDetalleInspeccionController(
+    $consecutivoInspeccion
+) {
+    $datos =
+        ConsultarDetalleInspeccionModel(
+            $consecutivoInspeccion
+        );
+
+    return $datos;
+}
+
+
+function ConsultarDetalleInspeccionFormularioController()
+{
+    $consecutivoInspeccion =
+        isset($_GET["id"])
+            ? (int) $_GET["id"]
+            : 0;
+
+    if ($consecutivoInspeccion <= 0) {
+        return array();
+    }
+
+    $datos =
+        ConsultarDetalleInspeccionController(
+            $consecutivoInspeccion
+        );
+
+    return $datos;
+}
+
 ?>

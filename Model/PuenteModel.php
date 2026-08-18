@@ -70,3 +70,146 @@ function ListarPuentesModel() {
         return false;
     }
 }
+
+function ConsultarInspeccionesPuenteModel(
+    $codigoPuente
+) {
+    $conn = null;
+    $stmt = null;
+
+    try {
+
+        $conn = OpenDB();
+
+        $sql =
+            "CALL spConsultarInspeccionesPuente(?)";
+
+        $stmt =
+            $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "s",
+            $codigoPuente
+        );
+
+        $stmt->execute();
+
+        $response =
+            $stmt->get_result();
+
+        $inspecciones =
+            array();
+
+        while (
+            $fila =
+            $response->fetch_assoc()
+        ) {
+            $inspecciones[] =
+                $fila;
+        }
+
+        $response->free();
+
+        $stmt->close();
+
+        while (
+            $conn->more_results()
+            && $conn->next_result()
+        ) {
+            $resultadoPendiente =
+                $conn->store_result();
+
+            if ($resultadoPendiente) {
+                $resultadoPendiente->free();
+            }
+        }
+
+        CloseDB($conn);
+
+        return $inspecciones;
+
+    } catch (Exception $e) {
+
+        if ($stmt) {
+            $stmt->close();
+        }
+
+        if ($conn) {
+            CloseDB($conn);
+        }
+
+        return array();
+    }
+}
+
+
+function ConsultarDetalleInspeccionModel(
+    $consecutivoInspeccion
+) {
+    $conn = null;
+    $stmt = null;
+
+    try {
+
+        $conn = OpenDB();
+
+        $sql =
+            "CALL spConsultarDetalleInspeccion(?)";
+
+        $stmt =
+            $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "i",
+            $consecutivoInspeccion
+        );
+
+        $stmt->execute();
+
+        $response =
+            $stmt->get_result();
+
+        $detalles =
+            array();
+
+        while (
+            $fila =
+            $response->fetch_assoc()
+        ) {
+            $detalles[] =
+                $fila;
+        }
+
+        $response->free();
+
+        $stmt->close();
+
+        while (
+            $conn->more_results()
+            && $conn->next_result()
+        ) {
+            $resultadoPendiente =
+                $conn->store_result();
+
+            if ($resultadoPendiente) {
+                $resultadoPendiente->free();
+            }
+        }
+
+        CloseDB($conn);
+
+        return $detalles;
+
+    } catch (Exception $e) {
+
+        if ($stmt) {
+            $stmt->close();
+        }
+
+        if ($conn) {
+            CloseDB($conn);
+        }
+
+        return array();
+    }
+}

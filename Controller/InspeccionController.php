@@ -26,6 +26,12 @@ function ConsultarPuentesInspeccionController()
     return $datos;
 }
 
+function ConsultarCalificacionesInspeccionController()
+{
+    return ConsultarCalificacionesInspeccionModel();
+}
+
+
 
 function RegistrarInspeccionController(
     $codigoPuente,

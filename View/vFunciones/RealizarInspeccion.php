@@ -57,6 +57,9 @@ $puentes =
 $elementos =
     ConsultarElementosInspeccionController();
 
+$calificaciones =
+    ConsultarCalificacionesInspeccionController();
+
 ?>
 
 <!DOCTYPE html>
@@ -132,6 +135,12 @@ $elementos =
 
                         <div class="alert alert-warning">
                             No se encontraron elementos activos para realizar la inspección.
+                        </div>
+
+                    <?php } elseif (empty($calificaciones)) { ?>
+
+                        <div class="alert alert-warning">
+                            No se encontraron calificaciones activas para realizar la inspección.
                         </div>
 
                     <?php } else { ?>
@@ -418,16 +427,19 @@ $elementos =
 
 
                                                                 <?php
-                                                                for (
-                                                                    $calificacion = 1;
-                                                                    $calificacion <= 5;
-                                                                    $calificacion++
+                                                                foreach (
+                                                                    $calificaciones
+                                                                    as $calificacion
                                                                 ) {
                                                                 ?>
 
                                                                     <option
                                                                         value="<?php
-                                                                        echo $calificacion;
+                                                                        echo htmlspecialchars(
+                                                                            $calificacion["Valor"],
+                                                                            ENT_QUOTES,
+                                                                            "UTF-8"
+                                                                        );
                                                                         ?>"
                                                                         <?php
                                                                         echo
@@ -435,19 +447,25 @@ $elementos =
                                                                             $calificacionSeleccionada
                                                                             ==
                                                                             (string)
-                                                                            $calificacion
+                                                                            $calificacion["Valor"]
                                                                                 ? "selected"
                                                                                 : "";
                                                                         ?>
                                                                     >
 
                                                                         <?php
-                                                                        echo $calificacion;
+                                                                        echo htmlspecialchars(
+                                                                            $calificacion["Valor"],
+                                                                            ENT_QUOTES,
+                                                                            "UTF-8"
+                                                                        );
                                                                         ?>
 
                                                                     </option>
 
-                                                                <?php } ?>
+                                                                <?php
+                                                                }
+                                                                ?>
 
 
                                                             </select>
@@ -488,7 +506,7 @@ $elementos =
                                                                 disabled>
 
                                                             <small class="text-muted">
-                                                                Requerida para calificación 4 o 5.
+                                                                Requerida para daños severos.
                                                             </small>
 
                                                         </td>
