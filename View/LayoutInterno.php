@@ -46,6 +46,16 @@ function TienePermiso($rolesPermitidos)
     return in_array($rolActual, $rolesPermitidos, true);
 }
 
+function ValidarRol($rolesPermitidos)
+{
+    ValidarSesionInterna();
+
+    if (!TienePermiso($rolesPermitidos)) {
+        http_response_code(403);
+        exit('No tiene permisos para acceder a esta sección.');
+    }
+}
+
 ValidarSesionInterna();
 
 function ImportCSS()
@@ -147,14 +157,8 @@ function Sidebar()
                     <li class="nav-item"><a class="nav-link" href="../vFunciones/HerramientaPriorizacion.php">Herramientas de priorización</a></li>';
     } elseif (TienePermiso([2])) {
         echo '
-                    <li class="nav-item"><a class="nav-link" href="../vFunciones/RealizarInspeccion.php">Nueva inspección</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../vFunciones/HerramientaPriorizacion.php">Herramientas de priorización</a></li>';
-    } else {
-        echo '
                     <li class="nav-item"><a class="nav-link" href="../vFunciones/RegistrarPuente.php">Registrar puente</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../vFunciones/RealizarInspeccion.php">Nueva inspección</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../vFunciones/DashboardGeneral.php">Dashboard general</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../vFunciones/HerramientaPriorizacion.php">Herramientas de priorización</a></li>';
+                    <li class="nav-item"><a class="nav-link" href="../vFunciones/RealizarInspeccion.php">Nueva inspección</a></li>';
     }
 
     echo '

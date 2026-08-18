@@ -904,14 +904,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spIniciarSesionUsuario`(
 )
 BEGIN
 
-    SELECT  Consecutivo,
-            Nombre,
-            CorreoElectronico,
-            Estado
-    FROM tb_usuario
-    WHERE CorreoElectronico = pCorreoElectronico
-      AND Contrasenna = pContrasenna
-      AND Estado = 1;
+ SELECT 
+    u.Consecutivo,
+    u.Nombre,
+    u.CorreoElectronico,
+    u.Estado,
+    u.ConsecutivoRol,
+    r.Nombre AS NombreRol
+FROM tb_usuario u
+INNER JOIN tb_rol r
+    ON r.Consecutivo = u.ConsecutivoRol
+WHERE u.CorreoElectronico = pCorreoElectronico
+  AND u.Contrasenna = pContrasenna
+  AND u.Estado = 1;
 
 END ;;
 DELIMITER ;
@@ -1341,4 +1346,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-17 22:24:26
+-- Dump completed on 2026-08-18 17:57:38

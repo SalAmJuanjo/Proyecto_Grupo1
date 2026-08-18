@@ -28,14 +28,16 @@ if (isset($_POST["btnIniciarSesion"])) {
         $datos = IniciarSesionModel($correoElectronico, $contrasenna);
 
         if ($datos) {
+            session_regenerate_id(true);
+
             // Datos generales del usuario
             $_SESSION["NombreUsuario"] = $datos["Nombre"];
             $_SESSION["ConsecutivoUsuario"] = $datos["Consecutivo"];
             $_SESSION["CorreoElectronicoUsuario"] = $datos["CorreoElectronico"];
 
             // Nuevas variables de sesión para los roles
-            $_SESSION["ConsecutivoRol"] = $datos["ConsecutivoRol"]; // Ej: 1 para Admin, 2 para Inspector
-            $_SESSION["NombreRol"] = $datos["NombreRol"];           // Ej: "Administrador", "Inspector"
+            $_SESSION["ConsecutivoRol"] = (int) $datos["ConsecutivoRol"];
+            $_SESSION["NombreRol"] = $datos["NombreRol"];
 
             header("Location: ../../View/vInicio/Principal.php");
             exit();
