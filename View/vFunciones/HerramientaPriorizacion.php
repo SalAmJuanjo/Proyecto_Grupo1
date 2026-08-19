@@ -15,27 +15,83 @@ $datosPriorizacion =
 
 
 $metodoSeleccionado =
-    isset($datosPriorizacion["metodo"])
-        ? $datosPriorizacion["metodo"]
+    isset(
+        $datosPriorizacion[
+            "metodo"
+        ]
+    )
+        ? $datosPriorizacion[
+            "metodo"
+        ]
         : "condicion";
 
 
 $puentes =
-    isset($datosPriorizacion["puentes"])
-    && is_array($datosPriorizacion["puentes"])
-        ? $datosPriorizacion["puentes"]
+    isset(
+        $datosPriorizacion[
+            "puentes"
+        ]
+    )
+    && is_array(
+        $datosPriorizacion[
+            "puentes"
+        ]
+    )
+        ? $datosPriorizacion[
+            "puentes"
+        ]
         : array();
+
+
+$pesoCondicion =
+    isset(
+        $datosPriorizacion[
+            "pesoCondicion"
+        ]
+    )
+        ? (float)
+            $datosPriorizacion[
+                "pesoCondicion"
+            ]
+        : 0;
+
+
+$pesoImportancia =
+    isset(
+        $datosPriorizacion[
+            "pesoImportancia"
+        ]
+    )
+        ? (float)
+            $datosPriorizacion[
+                "pesoImportancia"
+            ]
+        : 0;
+
+
+$porcentajeCondicion =
+    $pesoCondicion
+    * 100;
+
+
+$porcentajeImportancia =
+    $pesoImportancia
+    * 100;
 
 ?>
 
 <!DOCTYPE html>
+
 <html lang="es">
 
 <?php ImportCSS(); ?>
 
+
 <body>
 
+
     <div class="admin-shell">
+
 
         <div
             class="sidebar-backdrop"
@@ -48,47 +104,71 @@ $puentes =
 
         <div class="admin-main">
 
+
             <?php navbar(); ?>
 
 
             <main class="dashboard-content">
 
-                <div class="container-fluid px-3 px-lg-4 py-4">
+
+                <div
+                    class="container-fluid px-3 px-lg-4 py-4"
+                >
 
 
-                    <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div
+                        class="d-flex justify-content-between align-items-center mb-4"
+                    >
+
 
                         <div>
 
+
                             <h1 class="h3 mb-1">
+
                                 Priorización de puentes
+
                             </h1>
 
+
                             <p class="text-muted mb-0">
-                                Orden de atención de los puentes según el método seleccionado.
+
+                                Orden de atención de los puentes
+                                según el método seleccionado.
+
                             </p>
 
+
                         </div>
+
 
                     </div>
 
 
                     <div class="card mb-4">
 
+
                         <div class="card-body">
+
 
                             <form
                                 action=""
-                                method="GET">
+                                method="GET"
+                            >
 
-                                <div class="row align-items-end">
+
+                                <div
+                                    class="row align-items-end"
+                                >
 
 
                                     <div class="col-md-6">
 
+
                                         <label
                                             for="metodo"
-                                            class="form-label">
+                                            class="form-label"
+                                        >
 
                                             Método de priorización
 
@@ -98,14 +178,16 @@ $puentes =
                                         <select
                                             class="form-select"
                                             id="metodo"
-                                            name="metodo">
+                                            name="metodo"
+                                        >
 
 
                                             <option
                                                 value="condicion"
                                                 <?php
                                                 echo
-                                                    $metodoSeleccionado == "condicion"
+                                                    $metodoSeleccionado
+                                                    == "condicion"
                                                         ? "selected"
                                                         : "";
                                                 ?>
@@ -120,91 +202,143 @@ $puentes =
                                                 value="condicion_importancia"
                                                 <?php
                                                 echo
-                                                    $metodoSeleccionado == "condicion_importancia"
+                                                    $metodoSeleccionado
+                                                    == "condicion_importancia"
                                                         ? "selected"
                                                         : "";
                                                 ?>
                                             >
 
-                                                Condición estructural e importancia
+                                                Condición estructural
+                                                e importancia
 
                                             </option>
 
 
                                         </select>
 
+
                                     </div>
 
 
-                                    <div class="col-md-3 mt-3 mt-md-0">
+                                    <div
+                                        class="col-md-3 mt-3 mt-md-0"
+                                    >
+
 
                                         <button
                                             type="submit"
                                             id="btnAplicarPriorizacion"
                                             name="btnAplicarPriorizacion"
-                                            class="btn btn-primary w-100">
+                                            class="btn btn-primary w-100"
+                                        >
 
                                             Aplicar método
 
                                         </button>
+
 
                                     </div>
 
 
                                 </div>
 
+
                             </form>
 
 
                             <div class="mt-3">
 
+
                                 <?php
+
                                 if (
                                     $metodoSeleccionado
                                     == "condicion_importancia"
                                 ) {
+
                                 ?>
 
-                                    <div class="alert alert-info mb-0">
+
+                                    <div
+                                        class="alert alert-info mb-0"
+                                    >
 
                                         Este método combina
-                                        50 % de condición estructural
-                                        y 50 % de importancia.
-                                        El puntaje de prioridad representa
-                                        el resultado combinado utilizado
-                                        para ordenar los puentes.
+
+                                        <?php
+                                        echo number_format(
+                                            $porcentajeCondicion,
+                                            0
+                                        );
+                                        ?>
+
+                                        % de condición estructural
+                                        y
+
+                                        <?php
+                                        echo number_format(
+                                            $porcentajeImportancia,
+                                            0
+                                        );
+                                        ?>
+
+                                        % de importancia.
+
+                                        El puntaje de prioridad
+                                        representa el resultado
+                                        combinado utilizado para
+                                        ordenar los puentes.
 
                                     </div>
 
+
                                 <?php
+
                                 } else {
+
                                 ?>
 
-                                    <div class="alert alert-info mb-0">
 
-                                        Este método prioriza los puentes
-                                        según su condición estructural.
+                                    <div
+                                        class="alert alert-info mb-0"
+                                    >
+
+                                        Este método prioriza
+                                        los puentes según su
+                                        condición estructural.
 
                                     </div>
 
+
                                 <?php
+
                                 }
+
                                 ?>
+
 
                             </div>
 
+
                         </div>
+
 
                     </div>
 
 
                     <div class="card">
 
+
                         <div class="card-header">
 
+
                             <h5 class="mb-0">
+
                                 Resultado de priorización
+
                             </h5>
+
 
                         </div>
 
@@ -213,28 +347,46 @@ $puentes =
 
 
                             <?php
-                            if (empty($puentes)) {
+
+                            if (
+                                empty(
+                                    $puentes
+                                )
+                            ) {
+
                             ?>
 
-                                <div class="alert alert-warning mb-0">
 
-                                    No se encontraron puentes con inspecciones
-                                    registradas para realizar la priorización.
+                                <div
+                                    class="alert alert-warning mb-0"
+                                >
+
+                                    No se encontraron puentes
+                                    con inspecciones registradas
+                                    para realizar la priorización.
 
                                 </div>
 
+
                             <?php
+
                             } else {
+
                             ?>
 
 
-                                <div class="table-responsive">
+                                <div
+                                    class="table-responsive"
+                                >
 
 
-                                    <table class="table table-hover align-middle">
+                                    <table
+                                        class="table table-hover align-middle"
+                                    >
 
 
                                         <thead>
+
 
                                             <tr>
 
@@ -280,11 +432,14 @@ $puentes =
 
 
                                                 <?php
+
                                                 if (
                                                     $metodoSeleccionado
                                                     == "condicion_importancia"
                                                 ) {
+
                                                 ?>
+
 
                                                     <th>
                                                         Importancia
@@ -295,12 +450,16 @@ $puentes =
                                                         Puntaje de prioridad
                                                     </th>
 
+
                                                 <?php
+
                                                 }
+
                                                 ?>
 
 
                                             </tr>
+
 
                                         </thead>
 
@@ -310,70 +469,143 @@ $puentes =
 
                                             <?php
 
-                                            $posicion = 1;
+
+                                            $posicion =
+                                                1;
 
 
-                                            foreach ($puentes as $puente) {
+                                            foreach (
+                                                $puentes
+                                                as $puente
+                                            ) {
 
 
                                                 $codigo =
-                                                    isset($puente["codigo"])
-                                                        ? $puente["codigo"]
+                                                    isset(
+                                                        $puente[
+                                                            "codigo"
+                                                        ]
+                                                    )
+                                                        ? $puente[
+                                                            "codigo"
+                                                        ]
                                                         : "";
 
 
                                                 $nombre =
-                                                    isset($puente["nombre"])
-                                                        ? $puente["nombre"]
+                                                    isset(
+                                                        $puente[
+                                                            "nombre"
+                                                        ]
+                                                    )
+                                                        ? $puente[
+                                                            "nombre"
+                                                        ]
                                                         : "";
 
 
                                                 $numeroRuta =
-                                                    isset($puente["numero_ruta"])
-                                                        ? $puente["numero_ruta"]
+                                                    isset(
+                                                        $puente[
+                                                            "numero_ruta"
+                                                        ]
+                                                    )
+                                                        ? $puente[
+                                                            "numero_ruta"
+                                                        ]
                                                         : "";
 
 
                                                 $provincia =
-                                                    isset($puente["provincia"])
-                                                        ? $puente["provincia"]
+                                                    isset(
+                                                        $puente[
+                                                            "provincia"
+                                                        ]
+                                                    )
+                                                        ? $puente[
+                                                            "provincia"
+                                                        ]
                                                         : "";
 
 
                                                 $canton =
-                                                    isset($puente["canton"])
-                                                        ? $puente["canton"]
+                                                    isset(
+                                                        $puente[
+                                                            "canton"
+                                                        ]
+                                                    )
+                                                        ? $puente[
+                                                            "canton"
+                                                        ]
                                                         : "";
 
 
                                                 $fechaInspeccion =
-                                                    isset($puente["fecha_inspeccion"])
-                                                        ? $puente["fecha_inspeccion"]
+                                                    isset(
+                                                        $puente[
+                                                            "fecha_inspeccion"
+                                                        ]
+                                                    )
+                                                        ? $puente[
+                                                            "fecha_inspeccion"
+                                                        ]
                                                         : "";
 
 
                                                 $indiceDeterioro =
-                                                    isset($puente["indice_deterioro"])
-                                                        ? (float) $puente["indice_deterioro"]
+                                                    isset(
+                                                        $puente[
+                                                            "indice_deterioro"
+                                                        ]
+                                                    )
+                                                        ? (float)
+                                                            $puente[
+                                                                "indice_deterioro"
+                                                            ]
                                                         : 0;
 
 
                                                 $condicion =
-                                                    isset($puente["condicion"])
-                                                    && trim($puente["condicion"]) != ""
-                                                        ? $puente["condicion"]
+                                                    isset(
+                                                        $puente[
+                                                            "condicion"
+                                                        ]
+                                                    )
+                                                    &&
+                                                    trim(
+                                                        $puente[
+                                                            "condicion"
+                                                        ]
+                                                    )
+                                                    != ""
+                                                        ? $puente[
+                                                            "condicion"
+                                                        ]
                                                         : "Sin clasificar";
 
 
                                                 $importancia =
-                                                    isset($puente["importancia"])
-                                                        ? $puente["importancia"]
+                                                    isset(
+                                                        $puente[
+                                                            "importancia"
+                                                        ]
+                                                    )
+                                                        ? $puente[
+                                                            "importancia"
+                                                        ]
                                                         : "";
 
 
                                                 $puntajePrioridad =
-                                                    isset($puente["puntaje_prioridad"])
-                                                        ? (float) $puente["puntaje_prioridad"]
+                                                    isset(
+                                                        $puente[
+                                                            "puntaje_prioridad"
+                                                        ]
+                                                    )
+                                                        ? (float)
+                                                            $puente[
+                                                                "puntaje_prioridad"
+                                                            ]
                                                         : 0;
 
 
@@ -397,9 +629,12 @@ $puentes =
                                                     <td>
 
                                                         <strong>
+
                                                             <?php
-                                                            echo $posicion;
+                                                            echo
+                                                                $posicion;
                                                             ?>
+
                                                         </strong>
 
                                                     </td>
@@ -486,6 +721,7 @@ $puentes =
 
                                                     <td>
 
+
                                                         <span
                                                             class="badge <?php
                                                             echo htmlspecialchars(
@@ -496,6 +732,7 @@ $puentes =
                                                             ?>"
                                                         >
 
+
                                                             <?php
                                                             echo htmlspecialchars(
                                                                 $condicion,
@@ -504,16 +741,20 @@ $puentes =
                                                             );
                                                             ?>
 
+
                                                         </span>
+
 
                                                     </td>
 
 
                                                     <?php
+
                                                     if (
                                                         $metodoSeleccionado
                                                         == "condicion_importancia"
                                                     ) {
+
                                                     ?>
 
 
@@ -547,7 +788,9 @@ $puentes =
 
 
                                                     <?php
+
                                                     }
+
                                                     ?>
 
 
@@ -556,8 +799,12 @@ $puentes =
 
                                             <?php
 
+
                                                 $posicion++;
+
+
                                             }
+
 
                                             ?>
 
@@ -572,16 +819,20 @@ $puentes =
 
 
                             <?php
+
                             }
+
                             ?>
 
 
                         </div>
 
+
                     </div>
 
 
                 </div>
+
 
             </main>
 
@@ -590,6 +841,7 @@ $puentes =
 
 
         </div>
+
 
     </div>
 

@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `proyectogrupo1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `proyectogrupo1`;
--- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.46, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: proyectogrupo1
 -- ------------------------------------------------------
@@ -107,6 +107,32 @@ LOCK TABLES `tb_clasificacion_ruta` WRITE;
 /*!40000 ALTER TABLE `tb_clasificacion_ruta` DISABLE KEYS */;
 INSERT INTO `tb_clasificacion_ruta` VALUES (4,'cantonal'),(1,'nacional primaria'),(2,'nacional secundaria'),(3,'nacional terciaria'),(5,'otra');
 /*!40000 ALTER TABLE `tb_clasificacion_ruta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_configuracion_priorizacion`
+--
+
+DROP TABLE IF EXISTS `tb_configuracion_priorizacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_configuracion_priorizacion` (
+  `Consecutivo` int(11) NOT NULL AUTO_INCREMENT,
+  `PesoCondicion` decimal(5,4) NOT NULL,
+  `PesoImportancia` decimal(5,4) NOT NULL,
+  `Estado` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`Consecutivo`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_configuracion_priorizacion`
+--
+
+LOCK TABLES `tb_configuracion_priorizacion` WRITE;
+/*!40000 ALTER TABLE `tb_configuracion_priorizacion` DISABLE KEYS */;
+INSERT INTO `tb_configuracion_priorizacion` VALUES (1,0.4000,0.6000,_binary '');
+/*!40000 ALTER TABLE `tb_configuracion_priorizacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -526,6 +552,37 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spConsultarConfiguracionPriorizacion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spConsultarConfiguracionPriorizacion`()
+BEGIN
+
+    SELECT
+        PesoCondicion,
+        PesoImportancia
+
+    FROM tb_configuracion_priorizacion
+
+    WHERE Estado = b'1'
+
+    ORDER BY Consecutivo DESC
+
+    LIMIT 1;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `spConsultarDetalleInspeccion` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -703,156 +760,233 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spConsultarPriorizacionPuentes`(
 )
 BEGIN
 
+    DECLARE vPesoCondicion DECIMAL(5,4);
+    DECLARE vPesoImportancia DECIMAL(5,4);
+
+
     SELECT
-        p.codigo,
-        p.nombre,
-        p.numero_ruta,
-        p.clasificacion_ruta,
-        p.provincia,
-        p.canton,
-        p.importancia,
+        PesoCondicion,
+        PesoImportancia
+    INTO
+        vPesoCondicion,
+        vPesoImportancia
 
-        i.ConsecutivoInspeccion AS consecutivo_inspeccion,
-        i.FechaInspeccion AS fecha_inspeccion,
-        i.IndiceDeterioro AS indice_deterioro,
-        i.CondicionPreliminar AS condicion,
+    FROM tb_configuracion_priorizacion
 
-        CASE
-            WHEN LOWER(i.CondicionPreliminar) = 'critica'
-                THEN 4
-            WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
-                THEN 3
-            WHEN LOWER(i.CondicionPreliminar) = 'regular'
-                THEN 2
-            WHEN LOWER(i.CondicionPreliminar) = 'buena'
-                THEN 1
-            ELSE 0
-        END AS puntaje_condicion,
+    WHERE Estado = b'1'
 
-        CASE
-            WHEN LOWER(p.importancia) = 'puente crítico'
-                THEN 4
-            WHEN LOWER(p.importancia) = 'puente esencial'
-                THEN 3
-            WHEN LOWER(p.importancia) = 'puente convencional'
-                THEN 2
-            WHEN LOWER(p.importancia) = 'otro puente'
-                THEN 1
-            ELSE 0
-        END AS puntaje_importancia,
+    ORDER BY Consecutivo DESC
+
+    LIMIT 1;
+
+
+    SELECT
+
+        datos.codigo,
+        datos.nombre,
+        datos.numero_ruta,
+        datos.clasificacion_ruta,
+        datos.provincia,
+        datos.canton,
+        datos.importancia,
+
+        datos.consecutivo_inspeccion,
+        datos.fecha_inspeccion,
+        datos.indice_deterioro,
+        datos.condicion,
+
+        datos.puntaje_condicion,
+        datos.puntaje_importancia,
 
         CASE
-            WHEN pMetodo = 'condicion_importancia' THEN
+
+            WHEN pMetodo = 'condicion_importancia'
+            THEN
                 (
-                    CASE
-                        WHEN LOWER(i.CondicionPreliminar) = 'critica'
-                            THEN 4
-                        WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
-                            THEN 3
-                        WHEN LOWER(i.CondicionPreliminar) = 'regular'
-                            THEN 2
-                        WHEN LOWER(i.CondicionPreliminar) = 'buena'
-                            THEN 1
-                        ELSE 0
-                    END * 0.50
+                    datos.puntaje_condicion
+                    * vPesoCondicion
                 )
                 +
                 (
-                    CASE
-                        WHEN LOWER(p.importancia) = 'puente crítico'
-                            THEN 4
-                        WHEN LOWER(p.importancia) = 'puente esencial'
-                            THEN 3
-                        WHEN LOWER(p.importancia) = 'puente convencional'
-                            THEN 2
-                        WHEN LOWER(p.importancia) = 'otro puente'
-                            THEN 1
-                        ELSE 0
-                    END * 0.50
+                    datos.puntaje_importancia
+                    * vPesoImportancia
                 )
 
             ELSE
-                CASE
-                    WHEN LOWER(i.CondicionPreliminar) = 'critica'
-                        THEN 4
-                    WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
-                        THEN 3
-                    WHEN LOWER(i.CondicionPreliminar) = 'regular'
-                        THEN 2
-                    WHEN LOWER(i.CondicionPreliminar) = 'buena'
-                        THEN 1
-                    ELSE 0
-                END
+                datos.puntaje_condicion
+
         END AS puntaje_prioridad
 
-    FROM registrarpuente p
 
-    INNER JOIN tb_inspeccion i
-        ON i.CodigoPuente = p.codigo
-        AND i.Estado = 1
+    FROM
+    (
+        SELECT
 
-    WHERE p.codigo <> ''
+            p.codigo,
+            p.nombre,
+            p.numero_ruta,
+            p.clasificacion_ruta,
+            p.provincia,
+            p.canton,
+            p.importancia,
 
-      AND i.ConsecutivoInspeccion = (
-            SELECT i2.ConsecutivoInspeccion
-            FROM tb_inspeccion i2
-            WHERE i2.CodigoPuente = p.codigo
-              AND i2.Estado = 1
-            ORDER BY
-                i2.FechaInspeccion DESC,
-                i2.ConsecutivoInspeccion DESC
-            LIMIT 1
-      )
+            i.ConsecutivoInspeccion
+                AS consecutivo_inspeccion,
+
+            i.FechaInspeccion
+                AS fecha_inspeccion,
+
+            i.IndiceDeterioro
+                AS indice_deterioro,
+
+            i.CondicionPreliminar
+                AS condicion,
+
+
+            CASE
+
+                WHEN
+                    LOWER(
+                        REPLACE(
+                            i.CondicionPreliminar,
+                            'í',
+                            'i'
+                        )
+                    ) = 'critica'
+                    THEN 4
+
+                WHEN
+                    LOWER(
+                        REPLACE(
+                            i.CondicionPreliminar,
+                            'í',
+                            'i'
+                        )
+                    ) = 'deficiente'
+                    THEN 3
+
+                WHEN
+                    LOWER(
+                        REPLACE(
+                            i.CondicionPreliminar,
+                            'í',
+                            'i'
+                        )
+                    ) = 'regular'
+                    THEN 2
+
+                WHEN
+                    LOWER(
+                        REPLACE(
+                            i.CondicionPreliminar,
+                            'í',
+                            'i'
+                        )
+                    ) = 'buena'
+                    THEN 1
+
+                ELSE 0
+
+            END AS puntaje_condicion,
+
+
+            CASE
+
+                WHEN
+                    LOWER(
+                        REPLACE(
+                            p.importancia,
+                            'í',
+                            'i'
+                        )
+                    ) = 'puente critico'
+                    THEN 4
+
+                WHEN
+                    LOWER(
+                        REPLACE(
+                            p.importancia,
+                            'í',
+                            'i'
+                        )
+                    ) = 'puente esencial'
+                    THEN 3
+
+                WHEN
+                    LOWER(
+                        REPLACE(
+                            p.importancia,
+                            'í',
+                            'i'
+                        )
+                    ) = 'puente convencional'
+                    THEN 2
+
+                WHEN
+                    LOWER(
+                        REPLACE(
+                            p.importancia,
+                            'í',
+                            'i'
+                        )
+                    ) = 'otro puente'
+                    THEN 1
+
+                ELSE 0
+
+            END AS puntaje_importancia
+
+
+        FROM registrarpuente p
+
+
+        INNER JOIN tb_inspeccion i
+
+            ON i.CodigoPuente =
+                p.codigo
+
+            AND i.Estado =
+                b'1'
+
+
+        WHERE
+
+            p.codigo <> ''
+
+
+            AND i.ConsecutivoInspeccion =
+            (
+                SELECT
+                    i2.ConsecutivoInspeccion
+
+                FROM tb_inspeccion i2
+
+                WHERE
+                    i2.CodigoPuente =
+                        p.codigo
+
+                    AND i2.Estado =
+                        b'1'
+
+                ORDER BY
+                    i2.FechaInspeccion DESC,
+                    i2.ConsecutivoInspeccion DESC
+
+                LIMIT 1
+            )
+
+    ) AS datos
+
 
     ORDER BY
 
-        CASE
-            WHEN pMetodo = 'condicion_importancia' THEN
-                (
-                    CASE
-                        WHEN LOWER(i.CondicionPreliminar) = 'critica'
-                            THEN 4
-                        WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
-                            THEN 3
-                        WHEN LOWER(i.CondicionPreliminar) = 'regular'
-                            THEN 2
-                        WHEN LOWER(i.CondicionPreliminar) = 'buena'
-                            THEN 1
-                        ELSE 0
-                    END * 0.50
-                )
-                +
-                (
-                    CASE
-                        WHEN LOWER(p.importancia) = 'puente crítico'
-                            THEN 4
-                        WHEN LOWER(p.importancia) = 'puente esencial'
-                            THEN 3
-                        WHEN LOWER(p.importancia) = 'puente convencional'
-                            THEN 2
-                        WHEN LOWER(p.importancia) = 'otro puente'
-                            THEN 1
-                        ELSE 0
-                    END * 0.50
-                )
+        puntaje_prioridad DESC,
 
-            ELSE
-                CASE
-                    WHEN LOWER(i.CondicionPreliminar) = 'critica'
-                        THEN 4
-                    WHEN LOWER(i.CondicionPreliminar) = 'deficiente'
-                        THEN 3
-                    WHEN LOWER(i.CondicionPreliminar) = 'regular'
-                        THEN 2
-                    WHEN LOWER(i.CondicionPreliminar) = 'buena'
-                        THEN 1
-                    ELSE 0
-                END
-        END DESC,
+        datos.indice_deterioro DESC,
 
-        i.IndiceDeterioro DESC,
-        i.FechaInspeccion DESC,
-        p.nombre ASC;
+        datos.fecha_inspeccion DESC,
+
+        datos.nombre ASC;
 
 END ;;
 DELIMITER ;
@@ -1536,4 +1670,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-18 20:52:51
+-- Dump completed on 2026-08-19  9:50:08

@@ -6,14 +6,27 @@ include_once $_SERVER['DOCUMENT_ROOT']
 
 function ValidarAccesoPriorizacionController()
 {
-    if (session_status() == PHP_SESSION_NONE) {
+    if (
+        session_status()
+        == PHP_SESSION_NONE
+    ) {
+
         session_start();
     }
 
-    if (!isset($_SESSION["ConsecutivoUsuario"])) {
+
+    if (
+        !isset(
+            $_SESSION[
+                "ConsecutivoUsuario"
+            ]
+        )
+    ) {
+
         header(
             "Location: /Proyecto_Grupo1/View/vInicio/IniciarSesion.php"
         );
+
         exit();
     }
 }
@@ -21,28 +34,89 @@ function ValidarAccesoPriorizacionController()
 
 function ConsultarPriorizacionController()
 {
-    $metodo = "condicion";
+    $metodo =
+        "condicion";
 
-    if (isset($_GET["metodo"])) {
-        $metodoRecibido = trim($_GET["metodo"]);
+
+    if (
+        isset(
+            $_GET["metodo"]
+        )
+    ) {
+
+        $metodoRecibido =
+            trim(
+                $_GET["metodo"]
+            );
+
 
         if (
-            $metodoRecibido == "condicion"
-            || $metodoRecibido == "condicion_importancia"
+            $metodoRecibido
+                == "condicion"
+
+            || $metodoRecibido
+                == "condicion_importancia"
         ) {
-            $metodo = $metodoRecibido;
+
+            $metodo =
+                $metodoRecibido;
         }
     }
+
 
     $puentes =
         ConsultarPriorizacionModel(
             $metodo
         );
 
-    $datos = array(
-        "metodo" => $metodo,
-        "puentes" => $puentes
-    );
+
+    $configuracion =
+        ConsultarConfiguracionPriorizacionModel();
+
+
+    $pesoCondicion =
+        isset(
+            $configuracion[
+                "PesoCondicion"
+            ]
+        )
+            ? (float)
+                $configuracion[
+                    "PesoCondicion"
+                ]
+            : 0;
+
+
+    $pesoImportancia =
+        isset(
+            $configuracion[
+                "PesoImportancia"
+            ]
+        )
+            ? (float)
+                $configuracion[
+                    "PesoImportancia"
+                ]
+            : 0;
+
+
+    $datos =
+        array(
+
+            "metodo" =>
+                $metodo,
+
+            "puentes" =>
+                $puentes,
+
+            "pesoCondicion" =>
+                $pesoCondicion,
+
+            "pesoImportancia" =>
+                $pesoImportancia
+
+        );
+
 
     return $datos;
 }
@@ -51,30 +125,53 @@ function ConsultarPriorizacionController()
 function ObtenerClaseCondicionPriorizacionController(
     $condicion
 ) {
-    $condicionNormalizada = strtolower(
-        str_replace(
-            array("í", "Í"),
-            "i",
-            trim($condicion)
-        )
-    );
+    $condicionNormalizada =
+        strtolower(
+            str_replace(
+                array(
+                    "í",
+                    "Í"
+                ),
+                "i",
+                trim(
+                    $condicion
+                )
+            )
+        );
 
-    switch ($condicionNormalizada) {
+
+    switch (
+        $condicionNormalizada
+    ) {
 
         case "buena":
-            return "dashboard-badge-buena";
+
+            return
+                "dashboard-badge-buena";
+
 
         case "regular":
-            return "dashboard-badge-regular";
+
+            return
+                "dashboard-badge-regular";
+
 
         case "deficiente":
-            return "dashboard-badge-deficiente";
+
+            return
+                "dashboard-badge-deficiente";
+
 
         case "critica":
-            return "dashboard-badge-critica";
+
+            return
+                "dashboard-badge-critica";
+
 
         default:
-            return "dashboard-badge-neutral";
+
+            return
+                "dashboard-badge-neutral";
     }
 }
 
@@ -82,19 +179,36 @@ function ObtenerClaseCondicionPriorizacionController(
 function FormatearFechaPriorizacionController(
     $fecha
 ) {
-    if (empty($fecha)) {
-        return "Sin fecha";
+    if (
+        empty(
+            $fecha
+        )
+    ) {
+
+        return
+            "Sin fecha";
     }
+
 
     $marcaTiempo =
-        strtotime($fecha);
+        strtotime(
+            $fecha
+        );
 
-    if (!$marcaTiempo) {
-        return $fecha;
+
+    if (
+        !$marcaTiempo
+    ) {
+
+        return
+            $fecha;
     }
+
 
     return date(
         "d/m/Y",
         $marcaTiempo
     );
 }
+
+?>
