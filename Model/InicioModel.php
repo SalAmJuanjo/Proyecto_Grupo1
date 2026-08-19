@@ -27,14 +27,14 @@
         $conn = OpenDB();
         if(!$conn) return null;
 
-        // Se usa la consulta preparada o llamada directa
+        
         $sql = "CALL spIniciarSesionUsuario('$correoElectronico', '$contrasenna')";
         $response = $conn->query($sql);
 
         $datos = null;
         if($response && $fila = $response->fetch_assoc())
         {
-            $datos = $fila; // Contendrá ConsecutivoRol y NombreRol
+            $datos = $fila; 
         }
 
         CloseDB($conn);
@@ -56,7 +56,7 @@
             $sql = "CALL spValidarCorreo('$correoElectronico')";
             $response = $conn -> query($sql);
 
-            //Se guarda el resultado en una variable nueva
+            
             $datos = null;
             while($fila = $response -> fetch_assoc())
             {

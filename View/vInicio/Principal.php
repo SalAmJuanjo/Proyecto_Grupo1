@@ -44,7 +44,7 @@ if (isset($_POST["btnmostrarpuentes"])) {
                         </div>
                     </div>
 
-                    <!-- Acciones principales -->
+                    
                     <div class="row my-4">
                         <div class="col-md-4">
                             <a href="/Proyecto_Grupo1/View/vFunciones/RegistrarPuente.php"
@@ -61,7 +61,7 @@ if (isset($_POST["btnmostrarpuentes"])) {
                             </div>
                         <?php } ?>
                     </div>
-                    <!-- Tabla de puentes -->
+                    
                     <div class="card">
                         <div class="card-header">Puentes registrados recientemente</div>
                         <div class="card-body position-relative">

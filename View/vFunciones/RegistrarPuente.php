@@ -29,25 +29,23 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                         información en el sistema.</p>
                                 </div>
 
-                                <!-- Código -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="CodigoPuente">Código del puente</label>
                                     <input class="form-control" id="CodigoPuente" name="CodigoPuente" type="text">
                                 </div>
 
-                                <!-- Nombre -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="nombrePuente">Nombre del puente</label>
                                     <input class="form-control" id="nombrePuente" name="nombrePuente" type="text">
                                 </div>
 
-                                <!-- Número de ruta -->
+                                
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="numeroRuta">Número de ruta</label>
                                     <input class="form-control" id="numeroRuta" name="numeroRuta" type="number">
                                 </div>
 
-                                <!-- Clasificación de ruta -->
+                               
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="clasificacionRuta">Clasificación de ruta</label>
                                     <select class="form-control" id="clasificacionRuta" name="clasificacionRuta">
@@ -60,7 +58,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     </select>
                                 </div>
 
-                                <!-- Provincia -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="provincia">Provincia</label>
                                     <select class="form-control" id="provincia" name="provincia">
@@ -73,19 +70,18 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     </select>
                                 </div>
 
-                                <!-- Cantón -->
+                                
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="canton">Cantón</label>
                                     <input class="form-control" id="canton" name="canton" type="text">
                                 </div>
 
-                                <!-- Coordenadas -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="coordenadas">Coordenadas (grados decimales)</label>
                                     <input class="form-control" id="coordenadas" name="coordenadas" type="text">
                                 </div>
 
-                                <!-- Tipo de estructura -->
+                                
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="tipoEstructura">Tipo de estructura</label>
                                     <select class="form-control" id="tipoEstructura" name="tipoEstructura">
@@ -98,7 +94,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     </select>
                                 </div>
 
-                                <!-- Material principal -->
+                                
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="materialPrincipal">Material principal</label>
                                     <select class="form-control" id="materialPrincipal" name="materialPrincipal">
@@ -112,20 +108,18 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                 </div>
 
 
-                                <!-- Longitud total -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="longitudTotal">Longitud total (m)</label>
                                     <input class="form-control" id="longitudTotal" name="longitudTotal" type="number"
                                         step="0.01">
                                 </div>
 
-                                <!-- Número de tramos -->
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="numeroTramos">Número de tramos</label>
                                     <input class="form-control" id="numeroTramos" name="numeroTramos" type="number">
                                 </div>
 
-                                <!-- Número de superestructuras -->
+                                
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="numeroSuperestructuras">Número de
                                         superestructuras</label>
@@ -133,14 +127,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                         name="numeroSuperestructuras" type="number">
                                 </div>
 
-                                <!-- Fecha de construcción -->
+                                
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="fechaConstruccion">Fecha de construcción</label>
                                     <input class="form-control" id="fechaConstruccion" name="fechaConstruccion"
                                         type="date">
                                 </div>
 
-                                <!-- Importancia -->
+                                
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="importancia">Importancia</label>
                                     <select class="form-control" id="importancia" name="importancia">
@@ -153,7 +147,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                     </select>
                                 </div>
 
-                                <!-- Servicios públicos -->
+                         
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label" for="serviciosPublicos">Servicios públicos</label>
                                     <select class="form-control" id="serviciosPublicos" name="serviciosPublicos[]"
@@ -165,7 +159,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                         <?php endwhile; endif; ?>
                                     </select>
                                 </div>
-                                <!-- Restricción de Peso -->
+                                
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="restriccionPeso">Restricción de peso
                                         (toneladas)</label>
@@ -173,7 +167,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Controller/PuenteCont
                                         type="number" step="0.01">
                                 </div>
 
-                                <!-- Restricción de Altura -->
+                               
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="restriccionAltura">Restricción de altura (m)</label>
                                     <input class="form-control" id="restriccionAltura" name="restriccionAltura"

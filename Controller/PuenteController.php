@@ -5,8 +5,7 @@
  include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Model/PuenteModel.php';
  include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Model/CatalogoModel.php';
 
-// Se cargan siempre (GET y POST) porque la vista los necesita
-// para pintar los <select> del formulario.
+
 $provincias           = ListarProvinciasModel();
 $clasificacionesRuta  = ListarClasificacionRutaModel();
 $tiposEstructura      = ListarTipoEstructuraModel();
@@ -18,7 +17,6 @@ $serviciosPublicosCat = ListarServiciosPublicosModel();
 
 if(isset($_POST["btnRegistrarPuente"]))
 {
-    // Datos recuperados del formulario
     $codigo = $_POST["CodigoPuente"];
     $nombre = $_POST["nombrePuente"];
     $numeroRuta = $_POST["numeroRuta"];

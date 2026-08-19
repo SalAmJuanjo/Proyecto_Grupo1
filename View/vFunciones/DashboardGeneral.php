@@ -42,7 +42,7 @@ $errorDashboard = $dashboard["error"];
 
                 <div class="container-fluid px-3 px-lg-4 py-4">
 
-                    <!-- Encabezado -->
+                   
 
                     <div class="page-heading">
 
@@ -81,7 +81,7 @@ $errorDashboard = $dashboard["error"];
 
                     </div>
 
-                    <!-- Mensaje de error -->
+                   
 
                     <?php if ($errorDashboard !== "") { ?>
 
@@ -99,7 +99,7 @@ $errorDashboard = $dashboard["error"];
 
                     <?php } ?>
 
-                    <!-- Mensaje cuando no hay inspecciones -->
+                   
 
                     <?php if ($resumen["totalInspecciones"] === 0) { ?>
 
@@ -113,11 +113,11 @@ $errorDashboard = $dashboard["error"];
 
                     <?php } ?>
 
-                    <!-- Tarjetas de indicadores -->
+                    
 
                     <div class="row g-3 mb-4">
 
-                        <!-- Total de puentes -->
+                       
 
                         <div class="col-12 col-sm-6 col-xl-3">
 
@@ -153,7 +153,7 @@ $errorDashboard = $dashboard["error"];
 
                         </div>
 
-                        <!-- Total de inspecciones -->
+                      
 
                         <div class="col-12 col-sm-6 col-xl-3">
 
@@ -189,7 +189,6 @@ $errorDashboard = $dashboard["error"];
 
                         </div>
 
-                        <!-- Puentes críticos -->
 
                         <div class="col-12 col-sm-6 col-xl-3">
 
@@ -225,7 +224,6 @@ $errorDashboard = $dashboard["error"];
 
                         </div>
 
-                        <!-- Rutas afectadas -->
 
                         <div class="col-12 col-sm-6 col-xl-3">
 
@@ -263,11 +261,11 @@ $errorDashboard = $dashboard["error"];
 
                     </div>
 
-                    <!-- Primera fila de gráficos -->
+                   
 
                     <div class="row g-4 mb-4">
 
-                        <!-- Condición de los puentes -->
+                       
 
                         <div class="col-12 col-xl-5">
 
@@ -304,7 +302,7 @@ $errorDashboard = $dashboard["error"];
 
                         </div>
 
-                        <!-- Rutas afectadas -->
+                        
 
                         <div class="col-12 col-xl-7">
 
@@ -342,11 +340,11 @@ $errorDashboard = $dashboard["error"];
 
                     </div>
 
-                    <!-- Segunda fila de gráficos -->
+                    
 
                     <div class="row g-4 mb-4">
 
-                        <!-- Calificaciones -->
+                       
 
                         <div class="col-12 col-xl-7">
 
@@ -382,7 +380,7 @@ $errorDashboard = $dashboard["error"];
 
                         </div>
 
-                        <!-- Importancia -->
+                        
 
                         <div class="col-12 col-xl-5">
 
@@ -421,7 +419,7 @@ $errorDashboard = $dashboard["error"];
 
                     </div>
 
-                    <!-- Tabla de puentes prioritarios -->
+                   
 
                     <section class="panel">
 

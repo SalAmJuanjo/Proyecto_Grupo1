@@ -1,8 +1,7 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Proyecto_Grupo1/Model/UtilitarioModel.php';
 
-    // Cada función devuelve un mysqli_result con una columna "nombre",
-    // igual al patrón ya usado en ListarPuentesModel().
+   
 
     function ListarProvinciasModel() {
         try {

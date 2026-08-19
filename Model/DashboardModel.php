@@ -65,11 +65,7 @@ function ConsultarDashboardModel()
     try {
         $conn = OpenDB();
 
-        /*
-         * Obtiene únicamente la inspección más reciente de cada puente.
-         * Cuando existen dos inspecciones en la misma fecha, se toma
-         * la que tenga el consecutivo más alto.
-         */
+        
         $ultimaInspeccion = "
             SELECT i.*
             FROM tb_inspeccion i

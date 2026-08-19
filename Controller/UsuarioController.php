@@ -45,10 +45,6 @@ if (isset($_POST["btnCambiarContrasenna"])) {
     }
 }
 
-// =====================================================
-// GESTIÓN DE INSPECTORES
-// SOLO ADMINISTRADORES
-// =====================================================
 
 
 function EsAdministradorUsuarioController()
@@ -97,9 +93,6 @@ function ConsultarInspectorController($consecutivo)
 }
 
 
-// =====================================================
-// ACTUALIZAR INSPECTOR
-// =====================================================
 
 if (isset($_POST["btnActualizarInspector"])) {
 
@@ -206,9 +199,7 @@ if (isset($_POST["btnActualizarInspector"])) {
 }
 
 
-// =====================================================
-// ACTIVAR / DESACTIVAR INSPECTOR
-// =====================================================
+
 
 if (isset($_POST["btnCambiarEstadoInspector"])) {
 

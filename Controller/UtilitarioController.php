@@ -25,7 +25,7 @@ function EnviarCorreo($asunto, $contenido, $destinatario)
         $contrasennaSalida = "sqcg ioan pbtg lyxq";
 
         if ($contrasennaSalida == "") {
-            return true; // Simulación de envío exitoso
+            return true; 
         }
 
         $mail = new PHPMailer();
