@@ -12,17 +12,7 @@ function ListarInspectoresModel()
     try {
         $conn = OpenDB();
 
-        $sql = "
-            SELECT
-                Consecutivo,
-                Nombre,
-                CorreoElectronico,
-                Estado + 0 AS Estado,
-                ConsecutivoRol
-            FROM tb_usuario
-            WHERE ConsecutivoRol = 2
-            ORDER BY Nombre ASC
-        ";
+        $sql = "CALL spListarInspectores()";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -64,18 +54,7 @@ function ConsultarInspectorModel($consecutivo)
     try {
         $conn = OpenDB();
 
-        $sql = "
-            SELECT
-                Consecutivo,
-                Nombre,
-                CorreoElectronico,
-                Estado + 0 AS Estado,
-                ConsecutivoRol
-            FROM tb_usuario
-            WHERE Consecutivo = ?
-              AND ConsecutivoRol = 2
-            LIMIT 1
-        ";
+                $sql = "CALL spConsultarInspector(?)";
 
         $stmt = $conn->prepare($sql);
 
@@ -125,13 +104,7 @@ function ExisteCorreoUsuarioModel(
     try {
         $conn = OpenDB();
 
-        $sql = "
-            SELECT Consecutivo
-            FROM tb_usuario
-            WHERE CorreoElectronico = ?
-              AND Consecutivo <> ?
-            LIMIT 1
-        ";
+                $sql = "CALL spExisteCorreoUsuario(?, ? )";
 
         $stmt = $conn->prepare($sql);
 
@@ -180,24 +153,16 @@ function ActualizarInspectorModel(
     try {
         $conn = OpenDB();
 
-        $sql = "
-            UPDATE tb_usuario
-            SET
-                Nombre = ?,
-                CorreoElectronico = ?,
-                Estado = ?
-            WHERE Consecutivo = ?
-              AND ConsecutivoRol = 2
-        ";
+        $sql = "CALL spActualizarInspector(?, ?, ?, ?)";
 
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            "ssii",
+            "issi",
+            $consecutivo,
             $nombre,
             $correoElectronico,
-            $estado,
-            $consecutivo
+            $estado
         );
 
         $resultado = $stmt->execute();
@@ -232,19 +197,14 @@ function CambiarEstadoInspectorModel(
     try {
         $conn = OpenDB();
 
-        $sql = "
-            UPDATE tb_usuario
-            SET Estado = ?
-            WHERE Consecutivo = ?
-              AND ConsecutivoRol = 2
-        ";
+                $sql = "CALL spCambiarEstadoInspector(?, ?)";
 
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
             "ii",
-            $estado,
-            $consecutivo
+            $consecutivo,
+            $estado
         );
 
         $resultado = $stmt->execute();
