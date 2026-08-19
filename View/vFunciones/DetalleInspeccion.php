@@ -10,7 +10,7 @@ include_once $_SERVER['DOCUMENT_ROOT']
 include_once $_SERVER['DOCUMENT_ROOT']
     . '/Proyecto_Grupo1/Controller/PuenteController.php';
 
-ValidarRol([1]);
+ValidarRol([1, 2]);
 
 $detalles =
     ConsultarDetalleInspeccionFormularioController();
