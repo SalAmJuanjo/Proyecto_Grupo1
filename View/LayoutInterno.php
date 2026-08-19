@@ -154,7 +154,8 @@ function Sidebar()
                     <li class="nav-item"><a class="nav-link" href="../vFunciones/RegistrarPuente.php">Registrar puente</a></li>
                     <li class="nav-item"><a class="nav-link" href="../vFunciones/RealizarInspeccion.php">Nueva inspección</a></li>
                     <li class="nav-item"><a class="nav-link" href="../vFunciones/DashboardGeneral.php">Dashboard general</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../vFunciones/HerramientaPriorizacion.php">Herramientas de priorización</a></li>';
+                    <li class="nav-item"><a class="nav-link" href="../vFunciones/HerramientaPriorizacion.php">Herramientas de priorización</a></li>
+                    <li class="nav-item"><aclass="nav-link"href="../vUsuario/GestionInspectores.php">Gestión de inspectores</a></li>';
     } elseif (TienePermiso([2])) {
         echo '
                     <li class="nav-item"><a class="nav-link" href="../vFunciones/RegistrarPuente.php">Registrar puente</a></li>
