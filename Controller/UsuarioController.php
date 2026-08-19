@@ -6,6 +6,16 @@
         session_start();
     }
 
+    function ObtenerDatosUsuario()
+    {
+        return [
+            "Consecutivo" => $_SESSION["ConsecutivoUsuario"] ?? "",
+            "Nombre" => $_SESSION["NombreUsuario"] ?? "",
+            "CorreoElectronico" => $_SESSION["CorreoElectronicoUsuario"] ?? "",
+            "Rol" => $_SESSION["NombreRol"] ?? ""
+        ];
+    }
+
     if(isset($_POST["btnCambiarContrasenna"]))
     {
         $nuevaContrasenna = $_POST["nuevaContrasenna"];
