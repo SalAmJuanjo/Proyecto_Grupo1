@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `proyectogrupo1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `proyectogrupo1`;
--- MySQL dump 10.13  Distrib 8.0.46, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: proyectogrupo1
 -- ------------------------------------------------------
@@ -168,6 +168,32 @@ LOCK TABLES `tb_elemento` WRITE;
 /*!40000 ALTER TABLE `tb_elemento` DISABLE KEYS */;
 INSERT INTO `tb_elemento` VALUES (1,'Accesorios','Superficie de rodamiento',_binary ''),(2,'Accesorios','Juntas de expansión',_binary ''),(3,'Accesorios','Barandas',_binary ''),(4,'Accesorios','Sistemas de drenaje',_binary ''),(5,'Superestructura','Losa',_binary ''),(6,'Superestructura','Vigas principales',_binary ''),(7,'Superestructura','Vigas secundarias',_binary ''),(8,'Superestructura','Diafragmas',_binary ''),(9,'Superestructura','Apoyos',_binary ''),(10,'Subestructura','Bastiones',_binary ''),(11,'Subestructura','Pilas',_binary ''),(12,'Subestructura','Cimentaciones',_binary ''),(13,'Subestructura','Taludes y protección',_binary ''),(14,'Subestructura','Cauce bajo el puente',_binary '');
 /*!40000 ALTER TABLE `tb_elemento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_error`
+--
+
+DROP TABLE IF EXISTS `tb_error`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_error` (
+  `Consecutivo` int(11) NOT NULL AUTO_INCREMENT,
+  `Mensaje` varchar(8000) NOT NULL,
+  `FechaHora` datetime NOT NULL,
+  `Accion` varchar(100) NOT NULL,
+  `ConsecutivoUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`Consecutivo`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_error`
+--
+
+LOCK TABLES `tb_error` WRITE;
+/*!40000 ALTER TABLE `tb_error` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_error` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -373,7 +399,7 @@ CREATE TABLE `tb_usuario` (
   PRIMARY KEY (`Consecutivo`),
   KEY `fk_usuario_rol` (`ConsecutivoRol`),
   CONSTRAINT `fk_usuario_rol` FOREIGN KEY (`ConsecutivoRol`) REFERENCES `tb_rol` (`Consecutivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,7 +408,7 @@ CREATE TABLE `tb_usuario` (
 
 LOCK TABLES `tb_usuario` WRITE;
 /*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
-INSERT INTO `tb_usuario` VALUES (1,'SERGIO GABRIEL ALVAREZ GONZALEZ','sergio.ag1993@gmail.com','620100',_binary '',2),(2,'Juan Jose','admin@correo.com','123456',_binary '',1),(3,'Sofía Vargas','inspector@correo.com','123456',_binary '',2),(4,'GLADYS MARIA HINSON MENDEZ','gladys@ucr.ac.cr','620100',_binary '',2);
+INSERT INTO `tb_usuario` VALUES (1,'SERGIO GABRIEL ALVAREZ GONZALEZ','sergio.ag1993@gmail.com','123456',_binary '',1),(2,'Juan Jose','admin@correo.com','123456',_binary '',1),(3,'Sofía Vargas','inspector@correo.com','123456',_binary '',2),(4,'GLADYS MARIA HINSON MENDEZ','gladys@ucr.ac.cr','620100',_binary '',2),(5,'Juan José Salas Amador','jsalas80222@ufide.ac.cr','123456',_binary '',2);
 /*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1089,6 +1115,32 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spRegistrarError` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spRegistrarError`(
+	pMensaje 			varchar(8000), 
+    pAccion				varchar(100), 
+    pConsecutivoUsuario	int(11)
+)
+BEGIN
+
+	INSERT INTO tb_error (Mensaje,FechaHora,Accion,ConsecutivoUsuario)
+	VALUES (pMensaje, NOW(), pAccion, pConsecutivoUsuario);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `spRegistrarInspeccion` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1346,4 +1398,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-18 17:57:38
+-- Dump completed on 2026-08-18 20:04:34
