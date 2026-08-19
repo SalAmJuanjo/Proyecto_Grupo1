@@ -66,11 +66,11 @@ if (isset($_POST["btnRecuperarAcceso"])) {
                 exit();
             }
 
-            $_SESSION["Mensaje"] = "No se pudo enviar el correo para recuperar el acceso.";
+            $_POST["Mensaje"] = "No se pudo enviar el correo para recuperar el acceso.";
         }
     }
 
-    $_SESSION["Mensaje"] = "No se ha podido recuperar su acceso correctamente";
+    $_POST["Mensaje"] = "No se ha podido recuperar su acceso correctamente";
 }
 
 if (isset($_POST["btnSalir"])) {
