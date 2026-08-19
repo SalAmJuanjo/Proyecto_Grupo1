@@ -366,7 +366,7 @@ if (isset($_POST["btnmostrarpuentes"])) {
                                                                     ) {
                                                                 ?>
 
-                                                                        <?php if (TienePermiso([1])) { ?>
+                                                                        <?php if (TienePermiso([1, 2])) { ?>
                                                                             <a
                                                                                 href="/Proyecto_Grupo1/View/vFunciones/DetalleInspeccion.php?id=<?php
                                                                                 echo
