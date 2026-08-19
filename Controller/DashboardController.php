@@ -43,7 +43,7 @@ function ObtenerClaseCondicionDashboardController($condicion)
             return "dashboard-badge-critica";
 
         default:
-            return "dashboard-badge-neutral";
+            return "dashboard-badge-neutral"; 
     }
 }
 
