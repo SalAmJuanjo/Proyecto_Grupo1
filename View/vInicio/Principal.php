@@ -54,10 +54,12 @@ if (isset($_POST["btnmostrarpuentes"])) {
                             <a href="/Proyecto_Grupo1/View/vFunciones/RealizarInspeccion.php"
                                 class="btn btn-info w-100">Realizar inspección</a>
                         </div>
-                        <div class="col-md-4">
-                            <a href="/Proyecto_Grupo1/View/vFunciones/HerramientaPriorizacion.php"
-                                class="btn btn-warning w-100">Herramienta de priorización</a>
-                        </div>
+                        <?php if (TienePermiso([1])) { ?>
+                            <div class="col-md-4">
+                                <a href="/Proyecto_Grupo1/View/vFunciones/HerramientaPriorizacion.php"
+                                    class="btn btn-warning w-100">Herramienta de priorización</a>
+                            </div>
+                        <?php } ?>
                     </div>
                     <!-- Tabla de puentes -->
                     <div class="card">
@@ -364,16 +366,17 @@ if (isset($_POST["btnmostrarpuentes"])) {
                                                                     ) {
                                                                 ?>
 
-                                                                        <a
-                                                                            href="/Proyecto_Grupo1/View/vFunciones/DetalleInspeccion.php?id=<?php
-                                                                            echo
-                                                                                (int)
-                                                                                $inspeccion[
-                                                                                    "ConsecutivoInspeccion"
-                                                                                ];
-                                                                            ?>"
-                                                                            class="btn btn-outline-primary btn-sm"
-                                                                        >
+                                                                        <?php if (TienePermiso([1])) { ?>
+                                                                            <a
+                                                                                href="/Proyecto_Grupo1/View/vFunciones/DetalleInspeccion.php?id=<?php
+                                                                                echo
+                                                                                    (int)
+                                                                                    $inspeccion[
+                                                                                        "ConsecutivoInspeccion"
+                                                                                    ];
+                                                                                ?>"
+                                                                                class="btn btn-outline-primary btn-sm"
+                                                                            >
 
                                                                             <i class="bi bi-calendar3 me-1"></i>
 
@@ -389,7 +392,8 @@ if (isset($_POST["btnmostrarpuentes"])) {
                                                                             );
                                                                             ?>
 
-                                                                        </a>
+                                                                            </a>
+                                                                        <?php } ?>
 
                                                                 <?php
                                                                     }

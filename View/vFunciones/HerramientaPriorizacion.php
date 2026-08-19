@@ -7,7 +7,7 @@ include_once $_SERVER['DOCUMENT_ROOT']
     . '/Proyecto_Grupo1/Controller/PriorizacionController.php';
 
 
-ValidarAccesoPriorizacionController();
+ValidarRol([1]);
 
 
 $datosPriorizacion =
